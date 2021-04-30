@@ -1,5 +1,7 @@
 package com.sapient.entity;
 
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data
@@ -26,7 +28,7 @@ public class Order{
     private Integer order_id;
     private Integer user_id;
     private Integer service_id;
-	private DateTime timestamp;
+	private LocalDateTime timestamp;
 	private Order_Status order_status;
 	private Payment_Mode payment_mode;
 	private Payment_Status payment_status;

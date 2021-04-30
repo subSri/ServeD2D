@@ -21,4 +21,10 @@ public final class DbUtil {
 		return DriverManager.getConnection(url, username, password);
 	}
 
+
+	// public static void main(String[] args) throws SQLException, ClassNotFoundException{
+	// 	System.out.println("Connection is : "+ DbUtil.createConnection());
+		
+	// }
+
 }
