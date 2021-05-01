@@ -1,18 +1,20 @@
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
-import static org.junit.Assert.assertNotNull;
 import com.sapient.utils.DbUtil;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-public class MyTest {
-    Connection connection;
 
-    @Before
-    public void before() {
+public class DbConnTest {
+    static Connection connection;
+
+    @BeforeAll
+    public static void before() {
         try {
             connection = DbUtil.createConnection();
         } catch (Exception e) {
@@ -21,9 +23,12 @@ public class MyTest {
         
     }
 
-    @After
+    @AfterAll
     public void after() throws SQLException,ClassNotFoundException {
-        connection.close();
+        if (connection != null){
+            connection.close();
+        }
+        
     }
 
     @Test

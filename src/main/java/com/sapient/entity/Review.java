@@ -1,0 +1,14 @@
+package com.sapient.entity;
+
+import lombok.Data;
+
+@Data
+public class Review {
+	private Integer userId;
+    private Integer serviceId;
+    private Integer providerId;
+    private Integer rating; 
+    private String comment; 
+    
+	
+}

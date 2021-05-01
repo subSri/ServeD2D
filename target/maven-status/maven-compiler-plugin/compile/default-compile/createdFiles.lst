@@ -1,6 +1,9 @@
+com\sapient\entity\Review.class
 com\sapient\entity\Order$Payment_Mode.class
 com\sapient\entity\Order$Payment_Status.class
 com\sapient\entity\User.class
+com\sapient\entity\UserWallet.class
 com\sapient\utils\DbUtil.class
 com\sapient\entity\Order.class
+com\sapient\entity\Message.class
 com\sapient\entity\Order$Order_Status.class
