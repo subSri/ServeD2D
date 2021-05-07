@@ -26,3 +26,9 @@ hs_err_pid*
 
 #Removing target folder
 target/
+
+.metadata/
+
+.factorypath
+
+.classpath
