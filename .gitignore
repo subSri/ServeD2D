@@ -25,15 +25,15 @@ jdbc-data.properties
 hs_err_pid*
 
 #Removing target folder
-target/
+target/**
 
-.metadata/
+.metadata/**
 
 .factorypath
 
 .classpath
 
-.vscode/
+.vscode/**
 
 
-.settings/
+.settings/**
