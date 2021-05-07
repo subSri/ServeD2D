@@ -34,3 +34,6 @@ target/
 .classpath
 
 .vscode/
+
+
+.settings/
