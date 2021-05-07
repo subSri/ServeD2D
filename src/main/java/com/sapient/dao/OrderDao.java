@@ -1,6 +1,5 @@
 package com.sapient.dao;
 
-import com.sapient.entity.Address;
 import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.DbUtil;
 
@@ -27,9 +26,9 @@ public class OrderDao {
             stmt.setInt(3, order.getServiceId());
             stmt.setInt(4, order.getAdressId());
 			stmt.setDate(5, (Date) order.getTimestamp());
-			stmt.setInt(6, order.getOrderStatus().ordinal());
-			stmt.setFloat(7, order.getAmount());
-			stmt.setInt(8, order.getPayment_status().ordinal());
+			stmt.setInt(6, order.getOrderStatus());
+			stmt.setDouble(7, order.getAmount());
+			stmt.setInt(8, order.getPayment_status());
 
 			stmt.executeUpdate();
 			System.out.println("new order added");
@@ -215,7 +214,7 @@ public class OrderDao {
 			try(ResultSet rs = stmt.executeQuery();)
 			{
 				if(rs.next()) {
-					continue;
+					
 				}
 				else
 				{

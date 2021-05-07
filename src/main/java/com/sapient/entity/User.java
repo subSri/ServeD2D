@@ -6,6 +6,7 @@ import lombok.Data;
 public class User{
     private Integer id;
 	private String name;
+	private String password;
 	private String email;
 	private Boolean isProvider;
 	private Float walletBalance;

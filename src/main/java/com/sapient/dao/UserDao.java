@@ -9,16 +9,16 @@ public class UserDao {
 
 	public Boolean addNewUser(User user)
 			throws DaoException {
-		String sql = "INSERT INTO users (NAME, EMAIL, PASSWORD, BALANCE) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO users (NAME, EMAIL, PASSWORD, ISPROVIDER, BALANCE) VALUES (?,?,?,?,?)";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			) {
 			stmt.setString(1, user.getName());
-			stmt.setString(2, email);
-			stmt.setString(3, password);
-			stmt.setInt(4, isProvider);
-			stmt.setDouble(5, balance);
+			stmt.setString(2, user.getEmail());
+			stmt.setString(3, user.getPassword());
+			stmt.setBoolean(4, user.getIsProvider());
+			stmt.setDouble(5, user.getWalletBalance());
 
 			stmt.executeUpdate();
 			System.out.println("new user added");
