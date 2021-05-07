@@ -2,11 +2,33 @@ package com.sapient.dao;
 
 import java.sql.*;
 
+<<<<<<< HEAD
+
+import com.sapient.utils.*;
+=======
+>>>>>>> 627ed63ad2f80c4b60610a30ea546842af5810d8
 import com.sapient.entity.User;
 import com.sapient.utils.DbUtil;
 
 public class UserDao {
 
+<<<<<<< HEAD
+	public  Boolean addNewUser(User u)
+			throws DaoException {
+		String name = u.getName();
+		String email = u.getEmail();
+		String password = u.getPassword();
+		Boolean isProvider = u.isProvider;
+		Double balance = u.getBalance();
+		String sql = "INSERT INTO users (NAME, EMAIL,PASSWORD,BALANCE) VALUES (?,?,?,?)";
+		//what to do about user id generation?
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setString(1, name);
+			stmt.setString(2, email);
+			stmt.setString(3, password);
+			stmt.setBoolean(4, isProvider);
+			stmt.setDouble(5, balance);
+=======
 	public Boolean addNewUser(User user)
 			throws DaoException {
 		String sql = "INSERT INTO users (NAME, EMAIL, PASSWORD, ISPROVIDER, BALANCE) VALUES (?,?,?,?,?)";
@@ -20,6 +42,7 @@ public class UserDao {
 			stmt.setBoolean(4, user.getIsProvider());
 			stmt.setDouble(5, user.getWalletBalance());
 
+>>>>>>> 627ed63ad2f80c4b60610a30ea546842af5810d8
 			stmt.executeUpdate();
 			System.out.println("new user added");
 			return true;
@@ -31,7 +54,7 @@ public class UserDao {
 
 	public double getBalance(Integer userId) throws DaoException, ClassNotFoundException, SQLException {
 		Double myBalance = 0.0;
-		String sql = "SELECT * FROM users WHERE ID = ?";
+		String sql = "SELECT BALANCE FROM users WHERE ID = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, userId);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -139,5 +162,139 @@ public class UserDao {
 		return null;
 		
 	}
+	
+	public Boolean rateService(Integer userId, Integer serviceId, String review, Integer rating) throws DaoException
+	{
+		String sql = "INSERT INTO review (user_id, service_id,rating,review) VALUES (?,?,?,?)";
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setInt(1, userId);
+			stmt.setInt(2, serviceId);
+			stmt.setString(3, review);
+			stmt.setInt(4, rating);
+			
+			stmt.executeUpdate();
+			System.out.println("review added");
+			return true;
+		}
+		catch (Exception e) 
+		{
+			throw new DaoException(e);
+		}
+		
+		// making changes in service table -> changes in provider rating and service rating
+		
+		
+	}
+	
+	public Boolean getTopNProviders(String serviceName, Integer n) throws DaoException
+	{
+		String sql = "SELECT name FROM user WHERE id IN (SELECT provider_id FROM service WHERE service_name = ? ORDER BY rating DESC LIMIT ?)";
+		
+		try(
+				Connection conn = DbUtil.createConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				){
+			stmt.setString(1, serviceName);
+			stmt.setInt(2, n);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("name of provider :" + rs.getString("name"));
+			}
+			return true;
+		}
+		catch (Exception e) 
+		{
+			throw new DaoException(e);
+		}
+	}
+	
+	public Boolean getPastOrders(Integer userId, Integer n) throws DaoException
+	{
+		String sql = "SELECT * FROM orders WHERE user_id = ? LIMIT = ?";
+		try(
+				Connection conn = DbUtil.createConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				){
+			
+			stmt.setInt(1,userId);
+			stmt.setInt(2,n);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("name of provider :" + rs.getString("name"));
+			}
+			return true;
+		}
+		catch (Exception e) 
+		{
+			throw new DaoException(e);
+		}
+	}
+	
+  public Boolean cancelOrder(Integer orderId) throws DaoException
+  {
+	  String sql = "DELETE FROM orders WHERE order_id = ?";
+	  try(
+				Connection conn = DbUtil.createConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				){
+			stmt.setInt(1,orderId);
+			stmt.executeQuery();
+			return true;
+	  }
+	  catch (Exception e) 
+		{
+			throw new DaoException(e);
+		}
+  }
+  
+  public Boolean placeNewOrder(String serviceName, Integer providerId)
+  {
+	  return null;
+  }
+  
+  public Boolean rescheduleService(String serviceName)
+  {
+	  return null;
+  }
+  
+  public Boolean findNearByProviders(String serviceName)
+  {
+	  return null;
+  }
+  
+  public Boolean raiseComplaint(Integer orderId)
+  {
+	  return null;
+  }
+  
+  
+ 
+	
+	
+	
+	
+	
+	
+	// for testing purpose 
+//	public static void main(String[] args) throws DaoException {
+//		String name = KeyboardUtil.getString("Enter name:");
+//		String email = KeyboardUtil.getString("Enter email:");
+//		String password = KeyboardUtil.getString("Enter password:");
+//		double balance = KeyboardUtil.getDouble("Enter amount to add in wallet:");
+//		Integer isProvider = KeyboardUtil.getInt("are you a provider?[0/1] : ");
+//		
+//		User newUser = new User();
+//		newUser.setName(name);
+//		newUser.setEmail(email);
+//		newUser.setPassword(password);
+//		newUser.setBalance(balance);
+//		newUser.setIsProvider(isProvider);
+//		
+//		UserDao userDao = new UserDao();
+//		if(userDao.addNewUser(newUser)) {
+//			System.out.println("new user added --> inside main()");
+//		}
+//	}
+//	
 	
 }
