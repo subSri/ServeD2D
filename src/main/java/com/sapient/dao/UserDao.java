@@ -2,16 +2,19 @@ package com.sapient.dao;
 
 import java.sql.*;
 
+import com.sapient.entity.User;
 import com.sapient.utils.DbUtil;
 
 public class UserDao {
 
-	public Boolean addNewUser(String name, String email, String password, Integer isProvider, Double balance)
+	public Boolean addNewUser(User user)
 			throws DaoException {
-		String sql = "INSERT INTO users (NAME, EMAIL,PASSWORD,BALANCE) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO users (NAME, EMAIL, PASSWORD, BALANCE) VALUES (?,?,?,?)";
 		//what to do about user id generation?
-		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
-			stmt.setString(1, name);
+		try (Connection conn = DbUtil.createConnection(); 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			) {
+			stmt.setString(1, user.getName());
 			stmt.setString(2, email);
 			stmt.setString(3, password);
 			stmt.setInt(4, isProvider);

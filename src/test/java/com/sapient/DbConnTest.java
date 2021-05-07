@@ -1,3 +1,5 @@
+package com.sapient;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Connection;
@@ -24,7 +26,7 @@ public class DbConnTest {
     }
 
     @AfterAll
-    public void after() throws SQLException,ClassNotFoundException {
+    public static void after() throws SQLException,ClassNotFoundException {
         if (connection != null){
             connection.close();
         }

@@ -1,0 +1,42 @@
+
+Host : http://example.com
+
+
+============================================
+POST
+============================================
+Login  : /api/login
+Content-Type : json
+{
+    Email : "subham@ss",
+    Password : "sfdfadafa"
+}
+
+SignUp : /api/signup
+Content-Type : json
+{
+    Email : "subham@ss",
+    Password : "sfdfadafa",
+    isProvider : True
+}
+
+=======================================================
+GET
+=======================================================
+HOME
+HomePage : /api/homepage
+Carousel Image : /api/home/carousel/{slug}
+
+SERVICE
+N Trending Services : /api/services/trending/{n}
+All Services of a Category : /api/services/{category}
+Top N Services of a Category : /api/services/{category}/{n}
+N Top Rated Services : /api/services/toprated/{n}
+
+ORDERS
+Current Orders : /api/orders/current - orderId through JWT
+Past N Orders : /api/orders/past/{n}
+
+
+
+

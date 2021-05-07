@@ -6,7 +6,6 @@ import lombok.Data;
 public class Review {
 	private Integer userId;
     private Integer serviceId;
-    private Integer providerId;
     private Integer rating; 
     private String comment; 
     

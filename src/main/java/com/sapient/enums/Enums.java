@@ -4,19 +4,19 @@ public final class Enums {
     
     public enum OrderStatus {
         CONFIRMED,
-        ON_THE_WAY,
         COMPLETED,
-        CANCELLED
+        CANCELLED,
+        REJECTED
     }
 
     public enum PaymentStatus {
         CONFIRMED,
-        FAILED
+        PENDING
     }
 
-    public enum PaymentMode {
-        CASH,
-        CARD,
-        UPI
-    }
+    // public enum PaymentMode {
+    //     CASH,
+    //     CARD,
+    //     UPI
+    // }
 }

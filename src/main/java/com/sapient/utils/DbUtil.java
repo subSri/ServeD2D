@@ -7,10 +7,16 @@ import java.util.ResourceBundle;
 
 public final class DbUtil {
 
+	static Connection connection;
 	private DbUtil() {
 	}
 
 	public static Connection createConnection() throws SQLException, ClassNotFoundException {
+
+		if (connection != null){
+			return connection;
+		}
+
 		ResourceBundle rb = ResourceBundle.getBundle("jdbc-data");
 		String driverClassName = rb.getString("jdbc.driverClassName");
 		String url = rb.getString("jdbc.url");
@@ -18,7 +24,8 @@ public final class DbUtil {
 		String password = rb.getString("jdbc.password");
 
 		Class.forName(driverClassName);
-		return DriverManager.getConnection(url, username, password);
+		connection = DriverManager.getConnection(url, username, password);
+		return connection;
 	}
 
 
