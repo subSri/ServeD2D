@@ -2,33 +2,11 @@ package com.sapient.dao;
 
 import java.sql.*;
 
-<<<<<<< HEAD
-
-import com.sapient.utils.*;
-=======
->>>>>>> 627ed63ad2f80c4b60610a30ea546842af5810d8
 import com.sapient.entity.User;
 import com.sapient.utils.DbUtil;
 
 public class UserDao {
 
-<<<<<<< HEAD
-	public  Boolean addNewUser(User u)
-			throws DaoException {
-		String name = u.getName();
-		String email = u.getEmail();
-		String password = u.getPassword();
-		Boolean isProvider = u.isProvider;
-		Double balance = u.getBalance();
-		String sql = "INSERT INTO users (NAME, EMAIL,PASSWORD,BALANCE) VALUES (?,?,?,?)";
-		//what to do about user id generation?
-		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
-			stmt.setString(1, name);
-			stmt.setString(2, email);
-			stmt.setString(3, password);
-			stmt.setBoolean(4, isProvider);
-			stmt.setDouble(5, balance);
-=======
 	public Boolean addNewUser(User user)
 			throws DaoException {
 		String sql = "INSERT INTO users (NAME, EMAIL, PASSWORD, ISPROVIDER, BALANCE) VALUES (?,?,?,?,?)";
@@ -42,7 +20,6 @@ public class UserDao {
 			stmt.setBoolean(4, user.getIsProvider());
 			stmt.setDouble(5, user.getWalletBalance());
 
->>>>>>> 627ed63ad2f80c4b60610a30ea546842af5810d8
 			stmt.executeUpdate();
 			System.out.println("new user added");
 			return true;
