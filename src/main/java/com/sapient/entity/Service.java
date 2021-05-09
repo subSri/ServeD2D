@@ -5,16 +5,16 @@ import lombok.Data;
 @Data
 public class Service {
 
-    Integer serviceId;
-    Integer providerId;
-    Integer addressId;
-    Boolean isApproved;
-    String category;
-    String description;
-    String imageUrl;
-    Double serviceRadius;
-    Double price;
-    Integer ratingCount;
-    Integer completedOrders;
+    private Integer serviceId;
+    private Integer providerId;
+    private Integer addressId;
+    private Boolean isApproved;
+    private String category;
+    private String description;
+    private String imageUrl;
+    private Double serviceRadius;
+    private Double price;
+    private Integer ratingCount;
+    private Integer completedOrders;
     
 }
