@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.sapient.entity.Review;
 import com.sapient.utils.DbUtil;
 
@@ -26,6 +25,7 @@ public class ReviewDao {
 
         stmt.executeUpdate();
         System.out.println("review added");
+        updateRatingCount(review.getRating(), review.getServiceId());
         return true;
 
     } catch (Exception e) {
@@ -106,4 +106,24 @@ public class ReviewDao {
 		return review;
 
 	}
+  
+	public Boolean updateRatingCount(Integer rating, Integer serviceId) throws DaoException {
+        //how to authenticate the provider here
+        String sql = "UPDATE service SET rating = rating + ? WHERE service_id = ?";
+        //what to do about user id generation?
+        try (Connection conn = DbUtil.createConnection(); 
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ) {
+            stmt.setInt(1, rating);
+            stmt.setInt(2, serviceId);
+
+            stmt.executeUpdate();
+            System.out.println("rating count updated in service");
+            return true;
+
+        } catch (Exception e) {
+            throw new DaoException(e);
+        }
+    }
+
 }

@@ -11,8 +11,7 @@ import com.sapient.utils.DbUtil;
 
 public class UserDao {
 
-	public Boolean addNewUser(User user)
-			throws DaoException {
+	public Boolean addNewUser(User user) throws DaoException {
 		String sql = "INSERT INTO users (ID, NAME, EMAIL, PASSWORD, is_provider, wallet_balance) VALUES (?,?,?,?,?,?)";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
@@ -94,8 +93,7 @@ public class UserDao {
 		
 	}
 	
-	public Boolean withdrawFromWallet(Integer userId, Double amount) throws DaoException
-	{
+	public Boolean withdrawFromWallet(Integer userId, Double amount) throws DaoException {
 		Double currentBalance = 0.0;
 		String sql = "SELECT * FROM users WHERE ID =  ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
@@ -155,21 +153,26 @@ public class UserDao {
 		){
 			stmt.setString(1, category);
 			stmt.setInt(2, n);
-			ResultSet rs = stmt.executeQuery();
-			while(rs.next()) {
-				Service service = new Service();
-				service.setServiceId(rs.getInt("service_id"));
-				service.setProviderId(rs.getInt("provider_id"));
-				service.setAddressId(rs.getInt("address_id"));
-				service.setIsApproved(rs.getBoolean("is_approved"));
-				service.setCategory(rs.getString("category"));
-				service.setDescription(rs.getString("description"));
-				service.setImageUrl(rs.getString("image_url"));
-				service.setServiceRadius(rs.getDouble("service_radius"));
-				service.setPrice(rs.getDouble("price"));
-				service.setRatingCount(rs.getInt("rating_count"));
-				service.setCompletedOrders(rs.getInt("completed_orders"));
-				topServices.add(service);
+			try(ResultSet rs = stmt.executeQuery();) {
+				while(rs.next()) {
+					Service service = new Service();
+					service.setServiceId(rs.getInt("service_id"));
+					service.setProviderId(rs.getInt("provider_id"));
+					service.setAddressId(rs.getInt("address_id"));
+					service.setIsApproved(rs.getBoolean("is_approved"));
+					service.setCategory(rs.getString("category"));
+					service.setDescription(rs.getString("description"));
+					service.setImageUrl(rs.getString("image_url"));
+					service.setServiceRadius(rs.getDouble("service_radius"));
+					service.setPrice(rs.getDouble("price"));
+					service.setRatingCount(rs.getInt("rating_count"));
+					service.setCompletedOrders(rs.getInt("completed_orders"));
+					topServices.add(service);
+				}
+			}
+			catch (Exception e) 
+			{
+				throw new DaoException(e);
 			}
 		}
 		catch (Exception e) 
@@ -179,8 +182,8 @@ public class UserDao {
 		return topServices;
 	}
 	
-	public List<Service> findNearByServicesSortedByDistance(String category, Integer n, Address userAddress)
-	{	
+	public List<Service> findNearByServicesSortedByDistance(String category, Integer n, Address userAddress) throws DaoException {
+
 		String sql = "SELECT *,(3959 * acos (cos ( radians(?) )* cos( radians( address.lat ) )* cos( radians( address.longi ) - radians(?) )+ sin ( radians(?) )* sin( radians( address.lat ) )))"+
 			"AS distance FROM users,address where users.id = address.user_id AND users.id IN (SELECT provider_id FROM service WHERE category = ? ) ORDER BY distance DESC LIMIT ?";
 		List<Service> topServiceProviders = new ArrayList<Service>();
@@ -195,21 +198,26 @@ public class UserDao {
 			stmt.setDouble(3, userAddress.getLat());
 			stmt.setString(4, category);
 			stmt.setInt(5, n);
-			ResultSet rs = stmt.executeQuery();
-			while(rs.next()) {
-				Service service = new Service();
-				service.setServiceId(rs.getInt("service_id"));
-				service.setProviderId(rs.getInt("provider_id"));
-				service.setAddressId(rs.getInt("address_id"));
-				service.setIsApproved(rs.getBoolean("is_approved"));
-				service.setCategory(rs.getString("category"));
-				service.setDescription(rs.getString("description"));
-				service.setImageUrl(rs.getString("image_url"));
-				service.setServiceRadius(rs.getDouble("service_radius"));
-				service.setPrice(rs.getDouble("price"));
-				service.setRatingCount(rs.getInt("rating_count"));
-				service.setCompletedOrders(rs.getInt("completed_orders"));
-				topServiceProviders.add(service);
+			try(ResultSet rs = stmt.executeQuery();) {
+				while(rs.next()) {
+					Service service = new Service();
+					service.setServiceId(rs.getInt("service_id"));
+					service.setProviderId(rs.getInt("provider_id"));
+					service.setAddressId(rs.getInt("address_id"));
+					service.setIsApproved(rs.getBoolean("is_approved"));
+					service.setCategory(rs.getString("category"));
+					service.setDescription(rs.getString("description"));
+					service.setImageUrl(rs.getString("image_url"));
+					service.setServiceRadius(rs.getDouble("service_radius"));
+					service.setPrice(rs.getDouble("price"));
+					service.setRatingCount(rs.getInt("rating_count"));
+					service.setCompletedOrders(rs.getInt("completed_orders"));
+					topServiceProviders.add(service);
+				}
+			}
+			catch (Exception e) 
+			{
+				throw new DaoException(e);
 			}
 		}
 		catch (Exception e) 
@@ -250,4 +258,3 @@ public class UserDao {
 //	}
 //	
 	
-}

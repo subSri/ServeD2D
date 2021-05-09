@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.sapient.entity.*;
 
+
 public class OrderDao {
     
     public Boolean addNewOrder(Order order)
@@ -289,7 +290,53 @@ public class OrderDao {
 
 	}
 	
-	
+	public void completeOrder(Integer orderId) throws DaoException {
+
+		String sql = "UPDATE orders SET ORDERSTATUS = ? WHERE ORDERID = ?";
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
+		{
+			stmt.setInt(1, OrderStatus.COMPLETED.ordinal());
+			stmt.setInt(2, orderId);
+			try(ResultSet rs = stmt.executeQuery();)
+			{
+				if(rs.next()) {
+					updateCompletedOrders(rs.getInt("service_id"));
+				}
+				else
+				{
+					System.out.println("Order doesnt exist"); 
+				}
+			
+			}
+			catch (Exception e) {
+				throw new DaoException(e);
+			}
+				
+		}
+		catch (Exception e) {
+			throw new DaoException(e);
+		}
+
+	}
+
+	public Boolean updateCompletedOrders(Integer serviceId) throws DaoException {
+
+		String sql = "UPDATE service SET completed_orders = completed_orders + ? WHERE service_id = ?";
+		//what to do about user id generation?
+		try (Connection conn = DbUtil.createConnection(); 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			) {
+			stmt.setInt(1, 1);
+			stmt.setInt(2, serviceId);
+
+			stmt.executeUpdate();
+			System.out.println("Count of completed orders increased");
+			return true;
+
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+}
 
 
 }
