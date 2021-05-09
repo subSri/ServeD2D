@@ -3,6 +3,9 @@ package com.sapient.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.sapient.entity.Address;
+import com.sapient.entity.Service;
 import com.sapient.entity.User;
 import com.sapient.utils.DbUtil;
 
@@ -142,10 +145,10 @@ public class UserDao {
 		
 	}
 	
-	public List<String> getTopNServicesWithinACategory(String category, Integer n) throws DaoException
+	public List<Service> getTopRatedNServicesWithinACategory(String category, Integer n) throws DaoException
 	{
-		String sql = "SELECT name FROM user WHERE id IN (SELECT provider_id FROM service WHERE category = ? ORDER BY (rating/completed_orders) DESC LIMIT ?)";
-		List<String> topServiceProviders = new ArrayList<String>();
+		String sql = "SELECT * FROM user WHERE id IN (SELECT provider_id FROM service WHERE category = ? ORDER BY (rating/completed_orders) DESC LIMIT ?)";
+		List<Service> topServices = new ArrayList<Service>();
 		try(
 		Connection conn = DbUtil.createConnection();
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -154,7 +157,59 @@ public class UserDao {
 			stmt.setInt(2, n);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				topServiceProviders.add(rs.getString("name"));
+				Service service = new Service();
+				service.setServiceId(rs.getInt("service_id"));
+				service.setProviderId(rs.getInt("provider_id"));
+				service.setAddressId(rs.getInt("address_id"));
+				service.setIsApproved(rs.getBoolean("is_approved"));
+				service.setCategory(rs.getString("category"));
+				service.setDescription(rs.getString("description"));
+				service.setImageUrl(rs.getString("image_url"));
+				service.setServiceRadius(rs.getDouble("service_radius"));
+				service.setPrice(rs.getDouble("price"));
+				service.setRatingCount(rs.getInt("rating_count"));
+				service.setCompletedOrders(rs.getInt("completed_orders"));
+				topServices.add(service);
+			}
+		}
+		catch (Exception e) 
+		{
+			throw new DaoException(e);
+		}
+		return topServices;
+	}
+	
+	public List<Service> findNearByServicesSortedByDistance(String category, Integer n, Address userAddress)
+	{	
+		String sql = "SELECT *,(3959 * acos (cos ( radians(?) )* cos( radians( address.lat ) )* cos( radians( address.longi ) - radians(?) )+ sin ( radians(?) )* sin( radians( address.lat ) )))"+
+			"AS distance FROM users,address where users.id = address.user_id AND users.id IN (SELECT provider_id FROM service WHERE category = ? ) ORDER BY distance DESC LIMIT ?";
+		List<Service> topServiceProviders = new ArrayList<Service>();
+		try(
+		Connection conn = DbUtil.createConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		){
+			
+			
+			stmt.setDouble(1, userAddress.getLat());
+			stmt.setDouble(2, userAddress.getLongi());
+			stmt.setDouble(3, userAddress.getLat());
+			stmt.setString(4, category);
+			stmt.setInt(5, n);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				Service service = new Service();
+				service.setServiceId(rs.getInt("service_id"));
+				service.setProviderId(rs.getInt("provider_id"));
+				service.setAddressId(rs.getInt("address_id"));
+				service.setIsApproved(rs.getBoolean("is_approved"));
+				service.setCategory(rs.getString("category"));
+				service.setDescription(rs.getString("description"));
+				service.setImageUrl(rs.getString("image_url"));
+				service.setServiceRadius(rs.getDouble("service_radius"));
+				service.setPrice(rs.getDouble("price"));
+				service.setRatingCount(rs.getInt("rating_count"));
+				service.setCompletedOrders(rs.getInt("completed_orders"));
+				topServiceProviders.add(service);
 			}
 		}
 		catch (Exception e) 
@@ -163,10 +218,6 @@ public class UserDao {
 		}
 		return topServiceProviders;
 	}
-	
-	public Boolean findNearByProviders(String serviceName)
-	{
-		return null;
 	}
   
   
