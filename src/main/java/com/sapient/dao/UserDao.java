@@ -11,6 +11,39 @@ import com.sapient.utils.DbUtil;
 
 public class UserDao {
 
+	public Boolean verifyUserCreds(User user) throws DaoException {
+		String sql = "SELECT password FROM users where id = ?";
+		//what to do about user id generation?
+		try (Connection conn = DbUtil.createConnection(); 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			) {
+
+			stmt.setString(1, user.getEmail());
+			stmt.executeUpdate();
+
+			try (ResultSet rs = stmt.executeQuery();) {
+				if (rs.next()) {
+					String password = rs.getString("password");
+					if (user.getPassword() == password){
+						System.out.println("User Verified");
+						return true;
+					}
+				} else {
+					System.out.println("No such user");
+				}
+
+			} catch (Exception e) {
+				throw new DaoException(e);
+			}
+
+			
+			return false;
+
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+	}
+
 	public Boolean addNewUser(User user) throws DaoException {
 		String sql = "INSERT INTO users (ID, NAME, EMAIL, PASSWORD, is_provider, wallet_balance) VALUES (?,?,?,?,?,?)";
 		//what to do about user id generation?

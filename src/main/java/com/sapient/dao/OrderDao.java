@@ -17,7 +17,7 @@ public class OrderDao {
     
     public Boolean addNewOrder(Order order)
 			throws DaoException {
-		String sql = "INSERT INTO order (ORDERID, USERID, SERVICEID, ADDRESSID, TIMESTAMP, ORDERSTATUS, AMOUNT, PAYMENTSTATUS) VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO order (order_id, user_id, service_id, address_id, timestamp, order_status, amount) VALUES (?,?,?,?,?,?,?)";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -29,7 +29,6 @@ public class OrderDao {
 			stmt.setDate(5, (Date) order.getTimestamp());
 			stmt.setInt(6, order.getOrderStatus());
 			stmt.setDouble(7, order.getAmount());
-			stmt.setInt(8, order.getPayment_status());
 
 			stmt.executeUpdate();
 			System.out.println("new order added");
@@ -43,7 +42,7 @@ public class OrderDao {
 	public List<Order> returnAllOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM orders WHERE USERID =  ?";
+		String sql = "SELECT * FROM orders WHERE user_id =  ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -52,14 +51,13 @@ public class OrderDao {
 				if(rs.next()) {
 					do {
 						Order order = new Order();
-						order.setOrderId(rs.getInt("ORDERID"));
-						order.setUserId(rs.getInt("USERID"));
-						order.setServiceId(rs.getInt("SERVICEID"));
-						order.setAdressId(rs.getInt("ADDRESSID"));
-						order.setAmount(rs.getDouble("AMOUNT"));
-						order.setTimestamp(rs.getDate("TIMESTAMP"));
-						order.setOrderStatus(rs.getInt("ORDERSTATUS"));
-						order.setPayment_status(rs.getInt("PAYMENTSTATUS"));
+						order.setOrderId(rs.getInt("order_id"));
+						order.setUserId(rs.getInt("user_id"));
+						order.setServiceId(rs.getInt("service_id"));
+						order.setAdressId(rs.getInt("address_id"));
+						order.setAmount(rs.getDouble("amount"));
+						order.setTimestamp(rs.getDate("timestamp"));
+						order.setOrderStatus(rs.getInt("order_status"));
 						orders.add(order);
 					} while (rs.next());
 
@@ -85,7 +83,7 @@ public class OrderDao {
 	public List<Order> returnAllIncompleteOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM orders WHERE USERID =  ? AND STATUS = ?";
+		String sql = "SELECT * FROM orders WHERE user_id =  ? AND STATUS = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -95,14 +93,13 @@ public class OrderDao {
 				if(rs.next()) {
 					do {
 						Order order = new Order();
-						order.setOrderId(rs.getInt("ORDERID"));
-						order.setUserId(rs.getInt("USERID"));
-						order.setServiceId(rs.getInt("SERVICEID"));
-						order.setAdressId(rs.getInt("ADDRESSID"));
-						order.setAmount(rs.getDouble("AMOUNT"));
-						order.setTimestamp(rs.getDate("TIMESTAMP"));
-						order.setOrderStatus(rs.getInt("ORDERSTATUS"));
-						order.setPayment_status(rs.getInt("PAYMENTSTATUS"));
+						order.setOrderId(rs.getInt("order_id"));
+						order.setUserId(rs.getInt("user_id"));
+						order.setServiceId(rs.getInt("service_id"));
+						order.setAdressId(rs.getInt("address_id"));
+						order.setAmount(rs.getDouble("amount"));
+						order.setTimestamp(rs.getDate("timestamp"));
+						order.setOrderStatus(rs.getInt("order_status"));
 						orders.add(order);
 					} while (rs.next());
 
@@ -128,7 +125,7 @@ public class OrderDao {
 	public List<Order> returnAllPastOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM orders WHERE USERID =  ? AND STATUS = ?";
+		String sql = "SELECT * FROM orders WHERE user_id =  ? AND STATUS = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -138,14 +135,13 @@ public class OrderDao {
 				if(rs.next()) {
 					do {
 						Order order = new Order();
-						order.setOrderId(rs.getInt("ORDERID"));
-						order.setUserId(rs.getInt("USERID"));
-						order.setServiceId(rs.getInt("SERVICEID"));
-						order.setAdressId(rs.getInt("ADDRESSID"));
-						order.setAmount(rs.getDouble("AMOUNT"));
-						order.setTimestamp(rs.getDate("TIMESTAMP"));
-						order.setOrderStatus(rs.getInt("ORDERSTATUS"));
-						order.setPayment_status(rs.getInt("PAYMENTSTATUS"));
+						order.setOrderId(rs.getInt("order_id"));
+						order.setUserId(rs.getInt("user_id"));
+						order.setServiceId(rs.getInt("service_id"));
+						order.setAdressId(rs.getInt("address_id"));
+						order.setAmount(rs.getDouble("amount"));
+						order.setTimestamp(rs.getDate("timestamp"));
+						order.setOrderStatus(rs.getInt("order_status"));
 						orders.add(order);
 					} while (rs.next());
 
@@ -171,21 +167,20 @@ public class OrderDao {
 	public Order returnSpecificOrder(Integer orderId) throws DaoException {
 		
 		Order order = new Order();
-		String sql = "SELECT * FROM orders WHERE ORDERID = ?";
+		String sql = "SELECT * FROM orders WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, orderId);
 			try(ResultSet rs = stmt.executeQuery();)
 			{
 				if(rs.next()) {
-						order.setOrderId(rs.getInt("ORDERID"));
-						order.setUserId(rs.getInt("USERID"));
-						order.setServiceId(rs.getInt("SERVICEID"));
-						order.setAdressId(rs.getInt("ADDRESSID"));
-						order.setAmount(rs.getDouble("AMOUNT"));
-						order.setTimestamp(rs.getDate("TIMESTAMP"));
-						order.setOrderStatus(rs.getInt("ORDERSTATUS"));
-						order.setPayment_status(rs.getInt("PAYMENTSTATUS"));
+						order.setOrderId(rs.getInt("order_id"));
+						order.setUserId(rs.getInt("user_id"));
+						order.setServiceId(rs.getInt("service_id"));
+						order.setAdressId(rs.getInt("address_id"));
+						order.setAmount(rs.getDouble("amount"));
+						order.setTimestamp(rs.getDate("timestamp"));
+						order.setOrderStatus(rs.getInt("order_status"));
 				}
 				else
 				{
@@ -207,7 +202,7 @@ public class OrderDao {
 
 	public void cancelOrder(Integer orderId) throws DaoException {
 
-		String sql = "UPDATE orders SET ORDERSTATUS = ? WHERE ORDERID = ?";
+		String sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, OrderStatus.CANCELLED.ordinal());
@@ -236,7 +231,7 @@ public class OrderDao {
 
 	public void rejectOrder(Integer orderId) throws DaoException {
 
-		String sql = "UPDATE orders SET ORDERSTATUS = ? WHERE ORDERID = ?";
+		String sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, OrderStatus.REJECTED.ordinal());
@@ -264,7 +259,7 @@ public class OrderDao {
 	
 	public void acceptOrder(Integer orderId) throws DaoException {
 
-		String sql = "UPDATE orders SET ORDERSTATUS = ? WHERE ORDERID = ?";
+		String sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, OrderStatus.CONFIRMED.ordinal());
@@ -292,7 +287,7 @@ public class OrderDao {
 	
 	public void completeOrder(Integer orderId) throws DaoException {
 
-		String sql = "UPDATE orders SET ORDERSTATUS = ? WHERE ORDERID = ?";
+		String sql = "UPDATE orders SET order_status = ? WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, OrderStatus.COMPLETED.ordinal());
