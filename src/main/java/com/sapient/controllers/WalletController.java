@@ -1,22 +1,24 @@
 package com.sapient.controllers;
 
-import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.sapient.dao.*;
-import com.sapient.entity.Order;
 import com.sapient.utils.JwtUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@RequestMapping("/api/wallet")
 public class WalletController {
-	UserDao userDao = new UserDao();
 
-	@GetMapping("/api/wallet/balance")
+	@Autowired
+	private UserDao userDao;
+
+	@GetMapping("/balance")
 	public ResponseEntity<?> getBalanceOfUser(
 			@RequestHeader(name = "Authorization", required = false) String authHeader) {
 		log.info("authHeader = {}", authHeader);
@@ -39,7 +41,7 @@ public class WalletController {
 
 	}
 
-	@PostMapping("/api/wallet/balance/add")
+	@PostMapping("/balance/add")
 	public ResponseEntity<?> addToWallet(@RequestHeader(name = "Authorization", required = false) String authHeader,
 			@RequestBody Double amount) {
 		log.info("authHeader = {}", authHeader);
@@ -63,7 +65,7 @@ public class WalletController {
 		}
 	}
 
-	@PostMapping("/api/wallet/balance/withdraw")
+	@PostMapping("/balance/withdraw")
 	public ResponseEntity<?> withdrawFromWallet(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Double amount) {
 		log.info("authHeader = {}", authHeader);

@@ -5,8 +5,9 @@ import java.util.Map;
 
 import com.sapient.entity.User;
 import com.sapient.utils.JwtUtil;
-import com.sapient.dao.*;
+import com.sapient.dao.UserDao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    UserDao userDao = new UserDao();
+	@Autowired
+    private UserDao userDao;
 
 	@PostMapping("/api/login")
 	public ResponseEntity<?> login(@RequestBody User user) throws Exception {
@@ -40,7 +42,13 @@ public class LoginController {
 	public ResponseEntity<?> register(@RequestBody User user) throws Exception {
 		if (!(userDao.verifyUserCreds(user))) {
 			userDao.addNewUser(user);
-			return ResponseEntity.ok("Successfully registered!");
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("id", user.getId());
+			map.put("fullname", user.getName());
+			
+
+			return ResponseEntity.ok(map);
 		} else {
 			return  ResponseEntity.status(HttpStatus.CONFLICT).body("This account already exists!");
 		}

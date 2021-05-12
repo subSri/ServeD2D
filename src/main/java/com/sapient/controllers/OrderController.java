@@ -149,7 +149,7 @@ public class OrderController {
 			else if (status == OrderStatus.CONFIRMED){
 				orderDao.acceptOrder(orderId);
 			}
-			mod_order = orderDao.returnSpecificOrder(orderId)
+			mod_order = orderDao.returnSpecificOrder(orderId);
 			Map<String, Object> map = new HashMap<>();
 			map.put("success", true);
 			map.put("user_id", userId);
