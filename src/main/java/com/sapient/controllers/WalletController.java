@@ -15,8 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/wallet")
 public class WalletController {
 
-	@Autowired
-	private UserDao userDao;
+	// @Autowired
+	// private UserDao userDao;
+
+	UserDao userDao = new UserDao();
 
 	@GetMapping("/balance")
 	public ResponseEntity<?> getBalanceOfUser(

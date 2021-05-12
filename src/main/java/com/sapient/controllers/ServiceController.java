@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class ServiceController {
 
-    @Autowired
-	private ServiceDao serviceDao;
+    // @Autowired
+	// private ServiceDao serviceDao;
+
+    ServiceDao serviceDao = new ServiceDao();
     
     @GetMapping("/services")
 	public ResponseEntity<?> getAllServices() {

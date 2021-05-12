@@ -3,6 +3,10 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "email": "vinod@vinod.co",
-    "password": "topsecret"
+    "id" : 1,
+    "name" : "Zonnya Lorraine",
+    "isProvider" : "0",
+    "walletBalance" : "5.40",
+    "email": "zlorraine0@devhub.com",
+    "password": "MB86fpAFUS0"
 }

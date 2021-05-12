@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-	@Autowired
-    private UserDao userDao;
+	// @Autowired
+    // private UserDao userDao;
+	UserDao userDao = new UserDao();
 
 	@PostMapping("/api/login")
 	public ResponseEntity<?> login(@RequestBody User user) throws Exception {

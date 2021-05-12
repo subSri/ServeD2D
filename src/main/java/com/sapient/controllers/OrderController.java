@@ -30,10 +30,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
 
-	@Autowired
-	private OrderDao orderDao;
+	// @Autowired
+	// private OrderDao orderDao;
+
+	OrderDao orderDao = new OrderDao();
 	
-	@GetMapping
+	@GetMapping("/user")
 	public ResponseEntity<?> getOrdersForSpecificUser(
 			@RequestHeader(name = "Authorization", required = false) String authHeader) {
 
@@ -163,7 +165,7 @@ public class OrderController {
 		}
 	}
 
-	@PostMapping
+	@PostMapping("/new")
 	public ResponseEntity<?> makeANewOrder(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Order order) {
 

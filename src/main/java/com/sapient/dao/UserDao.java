@@ -12,19 +12,19 @@ import com.sapient.utils.DbUtil;
 public class UserDao {
 
 	public Boolean verifyUserCreds(User user) throws DaoException {
-		String sql = "SELECT password FROM users where id = ?";
+		String sql = "SELECT password FROM USERS where email = ?";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			) {
 
 			stmt.setString(1, user.getEmail());
-			stmt.executeUpdate();
 
 			try (ResultSet rs = stmt.executeQuery();) {
 				if (rs.next()) {
 					String password = rs.getString("password");
-					if (user.getPassword() == password){
+					// System.out.println("Pass " + user.getPassword()+" "+password);
+					if (password.equals(user.getPassword())){
 						System.out.println("User Verified");
 						return true;
 					}
@@ -45,7 +45,7 @@ public class UserDao {
 	}
 
 	public Boolean addNewUser(User user) throws DaoException {
-		String sql = "INSERT INTO users (ID, NAME, EMAIL, PASSWORD, is_provider, wallet_balance) VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO USERS (id, name, email, password, is_provider, wallet_balance) VALUES (?,?,?,?,?,?)";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -68,7 +68,7 @@ public class UserDao {
 
 	public Double getBalance(Integer userId) throws DaoException, ClassNotFoundException, SQLException {
 		Double myBalance = 0.0;
-		String sql = "SELECT wallet_balance FROM users WHERE ID = ?";
+		String sql = "SELECT wallet_balance FROM USERS WHERE id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, userId);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -88,7 +88,7 @@ public class UserDao {
 	
 	public Boolean addToWallet(Integer userId, Double amount) throws DaoException {
 		Double currentBalance = 0.0;
-		String sql = "SELECT * FROM users WHERE ID =  ?";
+		String sql = "SELECT * FROM USERS WHERE id =  ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -110,7 +110,7 @@ public class UserDao {
 			throw new DaoException(e);
 		}
 		
-		String sql2 = "UPDATE users SET wallet_balance = ? WHERE ID = ?";
+		String sql2 = "UPDATE USERS SET wallet_balance = ? WHERE id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql2);) 
 		{
 			stmt.setDouble(1, amount+currentBalance);
@@ -128,7 +128,7 @@ public class UserDao {
 	
 	public Boolean withdrawFromWallet(Integer userId, Double amount) throws DaoException {
 		Double currentBalance = 0.0;
-		String sql = "SELECT * FROM users WHERE ID =  ?";
+		String sql = "SELECT * FROM USERS WHERE id =  ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -152,7 +152,7 @@ public class UserDao {
 		
 		if(currentBalance>=amount)
 		{
-			String sql2 = "UPDATE users SET wallet_balance = ? WHERE ID = ?";
+			String sql2 = "UPDATE USERS SET wallet_balance = ? WHERE id = ?";
 			try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql2);) 
 			{
 				stmt.setDouble(1, currentBalance - amount);
@@ -218,7 +218,7 @@ public class UserDao {
 	public List<Service> findNearByServicesSortedByDistance(String category, Integer n, Address userAddress) throws DaoException {
 
 		String sql = "SELECT *,(3959 * acos (cos ( radians(?) )* cos( radians( address.lat ) )* cos( radians( address.longi ) - radians(?) )+ sin ( radians(?) )* sin( radians( address.lat ) )))"+
-			"AS distance FROM users,address where users.id = address.user_id AND users.id IN (SELECT provider_id FROM service WHERE category = ? ) ORDER BY distance DESC LIMIT ?";
+			"AS distance FROM USERS,address where USERS.id = address.user_id AND USERS.id IN (SELECT provider_id FROM service WHERE category = ? ) ORDER BY distance DESC LIMIT ?";
 		List<Service> topServiceProviders = new ArrayList<Service>();
 		try(
 		Connection conn = DbUtil.createConnection();
