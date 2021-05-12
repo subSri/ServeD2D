@@ -42,7 +42,7 @@ public class LoginController {
 			userDao.addNewUser(user);
 			return ResponseEntity.ok("Successfully registered!");
 		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("This account already exists!");
+			return  ResponseEntity.status(HttpStatus.CONFLICT).body("This account already exists!");
 		}
 
 	}
