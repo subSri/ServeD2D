@@ -122,7 +122,7 @@ public class OrderDao {
 
 	}
 
-	public List<Order> returnAllPastOrders(Integer userId) throws DaoException {
+	public List<Order> returnAllPastCompletedOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
 		String sql = "SELECT * FROM orders WHERE user_id =  ? AND STATUS = ?";
