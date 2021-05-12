@@ -35,5 +35,17 @@ public class LoginController {
 		}
 
 	}
+	
+	@PostMapping("/api/register")
+	public ResponseEntity<?> register(@RequestBody User user) throws Exception {
+		if (!(userDao.verifyUserCreds(user))) {
+			userDao.addNewUser(user);
+			return ResponseEntity.ok("Successfully registered!");
+		} else {
+			return  ResponseEntity.status(HttpStatus.CONFLICT).body("This account already exists!");
+		}
+
+	}
+	
 
 }
