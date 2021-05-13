@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sapient.dao.ServiceDao;
+import com.sapient.dao.UserDao;
 import com.sapient.entity.Service;
 import com.sapient.utils.JwtUtil;
 
@@ -29,13 +30,14 @@ public class ServiceController {
 	// private ServiceDao serviceDao;
 
     ServiceDao serviceDao = new ServiceDao();
+	UserDao userDao = new UserDao();
     
     @GetMapping
 	public ResponseEntity<?> getAllServices() {
 
 		try {
 			
-			List<Service> services = serviceDao.returnAllServices();
+			List<Service> services = serviceDao.returnAllService();
 			
 			Map<String, Object> map = new HashMap<>();
 			map.put("success", true);
@@ -69,7 +71,7 @@ public class ServiceController {
 
 		try {
 			
-			List<Service> services = serviceDao.returnAllServicesOfACategory(category);
+			List<Service> services = serviceDao.returnAllServiceOfACategory(category);
 			
 			Map<String, Object> map = new HashMap<>();
 			map.put("success", true);
@@ -154,6 +156,20 @@ public class ServiceController {
 		}
 		catch(Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
+		}
+	}
+
+     @GetMapping("/categories/service/category={category_name}&top={n}") // not sure of this
+	public ResponseEntity<?> getTopServiceInCategory(@PathVariable("n") Integer n,
+			@PathVariable("category_name") String category) {
+		try {
+			List<Service> service = userDao.getTopRatedNServicesWithinACategory(category, n);
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("service", service);
+			return ResponseEntity.ok(map);
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
 		}
 	}
 

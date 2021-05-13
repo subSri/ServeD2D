@@ -39,7 +39,7 @@ public class ServiceDao {
 		}
 	}
 
-    public List<Service> returnAllServices() throws DaoException {
+    public List<Service> returnAllService() throws DaoException {
 		
 		List<Service> services = new ArrayList<Service>();
 		String sql = "SELECT * FROM SERVICE";
@@ -83,7 +83,7 @@ public class ServiceDao {
 
 	}
 
-    public List<Service> returnAllServicesOfACategory(String category) throws DaoException {
+    public List<Service> returnAllServiceOfACategory(String category) throws DaoException {
 		
 		List<Service> SERVICE = new ArrayList<Service>();
 		String sql = "SELECT * FROM SERVICE WHERE category = ?";
