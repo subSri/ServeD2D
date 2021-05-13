@@ -19,6 +19,7 @@ public class WalletController {
 	// private UserDao userDao;
 
 	UserDao userDao = new UserDao();
+       ServiceDao serviceDao = new ServiceDao();
 
 	@GetMapping("/balance")
 	public ResponseEntity<?> getBalanceOfUser(
@@ -86,6 +87,40 @@ public class WalletController {
 			myBalance = userDao.getBalance(userId);
 			return ResponseEntity.ok(myBalance); // should i check if amount is sufficient bcz it is being checked in
 													// withdraw method?
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.body("Authorization token is invalid or " + ex.getMessage());
+		}
+	}
+
+        @PostMapping("/balance/payment")
+	public ResponseEntity<?> makePayment(
+			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Order order) {
+		log.info("authHeader = {}", authHeader);
+		if (authHeader == null) {
+			// Authorization header is missing
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+		}
+
+		try {
+			String token = authHeader.split(" ")[1];
+			log.info("token = {}", token);
+			Integer userId = JwtUtil.verify(token);
+            Double currentBalance = userDao.getBalance(userId);
+            if(currentBalance>order.getAmount())
+            {
+            	userDao.withdrawFromWallet(userId, (currentBalance-order.getAmount()));
+            	Integer serviceId =order.getServiceId();
+            	Service s = new Service();
+            	s = serviceDao.returnASpecificService(serviceId);
+            	userDao.addToWallet(s.getProviderId(), order.getAmount());
+            	currentBalance = userDao.getBalance(userId);
+            	return ResponseEntity.ok(currentBalance);
+            }
+            else
+            {
+            	return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body("Insufficient balance in your wallet");
+            }
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());

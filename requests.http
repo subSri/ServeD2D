@@ -82,3 +82,82 @@ Content-Type: application/json
 	"orderStatus" : 2,
 	"amount" : 23.43
 }
+
+
+
+
+###
+
+GET /api/wallet/balance
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc1NTQ0LCJpYXQiOjE2MjA5MTU1NDR9.ycCzvX2qpwOT8EMHk4q4dHh930TxaJNaW4gdBbCjCOE
+
+###
+
+POST /api/wallet/balance/add
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc1NTQ0LCJpYXQiOjE2MjA5MTU1NDR9.ycCzvX2qpwOT8EMHk4q4dHh930TxaJNaW4gdBbCjCOE
+Content-Type: application/json
+
+{
+    "orderId" : 21,
+    "userId" : 1,
+    "serviceId" : 2,
+	"adressId" : 1,
+	"timestamp" : "2013-01-20",
+	"orderStatus" : 3,
+	"amount" : 505.67
+}
+
+###
+
+POST /api/wallet/balance/withdraw
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc1NTQ0LCJpYXQiOjE2MjA5MTU1NDR9.ycCzvX2qpwOT8EMHk4q4dHh930TxaJNaW4gdBbCjCOE
+Content-Type: application/json
+
+{
+    "orderId" : 21,
+    "userId" : 1,
+    "serviceId" : 2,
+	"adressId" : 1,
+	"timestamp" : "2013-01-20",
+	"orderStatus" : 3,
+	"amount" : 490.89
+}
+
+###
+
+POST /api/wallet/balance/payment
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc3MDQ4LCJpYXQiOjE2MjA5MTcwNDh9.U1fUoax8VqeJWLUFfGUjEBxVayHsmBJrsmF5knKVqxw
+Content-Type: application/json
+
+{
+    "orderId" : 21,
+    "userId" : 1,
+    "serviceId" : 2,
+	"adressId" : 1,
+	"timestamp" : "2013-01-20",
+	"orderStatus" : 3,
+	"amount" : 30.90
+}
+
+
+###
+GET /api/address
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc3NzM3LCJpYXQiOjE2MjA5MTc3Mzd9.ujyWL2wFwXBI4dAHj2Izh4E0rae5jlfIJG3zDmEwUx0
+
+###
+POST /address/edit
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc5MjEwLCJpYXQiOjE2MjA5MTkyMTB9.hqD91BmW0_6hjxtFzjYFxyHDoqNITz_SYQsEy1Sj8eI
+Content-Type: application/json
+
+{
+  "addressid": 1,
+  "userId": 1,
+  "lat": 50.7557791,
+  "longi": 38.5709037
+}
