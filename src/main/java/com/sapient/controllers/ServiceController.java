@@ -157,4 +157,18 @@ public class ServiceController {
 		}
 	}
 
+     @GetMapping("/categories/SERVICE/Category={category_name}&top={n}") // not sure of this
+	public ResponseEntity<?> getTopSERVICEInCategory(@PathVariable("n") Integer n,
+			@PathVariable("category_name") String category) {
+		try {
+			List<Service> SERVICE = userDao.getTopRatedNSERVICEWithinACategory(category, n);
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("SERVICE", SERVICE);
+			return ResponseEntity.ok(map);
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+		}
+	}
+
 }
