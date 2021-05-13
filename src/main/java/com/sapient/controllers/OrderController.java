@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-// import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/orders")
-// @Slf4j
+@Slf4j
 public class OrderController {
 
 
@@ -35,7 +35,7 @@ public class OrderController {
 
 	OrderDao orderDao = new OrderDao();
 	
-	@GetMapping("/user")
+	@GetMapping
 	public ResponseEntity<?> getOrdersForSpecificUser(
 			@RequestHeader(name = "Authorization", required = false) String authHeader) {
 
@@ -64,8 +64,8 @@ public class OrderController {
 		}
 	}
 
-	@GetMapping
-	public ResponseEntity<?> getOrdersOnStatus(@RequestParam(name="status", required = true, defaultValue = "0") String status,
+	@GetMapping(value="", params = "status")
+	public ResponseEntity<?> getOrdersOnStatus(@RequestParam(name="status", required = true) String status,
 			@RequestHeader(name = "Authorization", required = false) String authHeader) {
 		// log.info("authHeader = {}", authHeader);
 		if(authHeader==null) {
@@ -75,14 +75,24 @@ public class OrderController {
 		
 		try {
 			String token = authHeader.split(" ")[1]; // second element from the header's value
-			// log.info("token = {}", token);
+			// log.info("coming_status = {}", String.valueOf(OrderStatus.CONFIRMED.ordinal()));
 			List<Order> orders = new ArrayList<Order>();
 			Integer userId = JwtUtil.verify(token);
-			if (status == String.valueOf(OrderStatus.CONFIRMED.ordinal())){
+
+			if (status.equals(String.valueOf(OrderStatus.CONFIRMED.ordinal()))){
 				orders = orderDao.returnAllIncompleteOrders(userId);
 			}
-			else if (status == String.valueOf(OrderStatus.COMPLETED.ordinal())){
+			else if (status.equals(String.valueOf(OrderStatus.COMPLETED.ordinal()))){
 				orders = orderDao.returnAllPastCompletedOrders(userId);
+			}
+			else if (status.equals(String.valueOf(OrderStatus.CANCELLED.ordinal()))){
+				orders = orderDao.returnAllCancelledOrders(userId);
+			}
+			else if (status.equals(String.valueOf(OrderStatus.REQUESTED.ordinal()))){
+				orders = orderDao.returnAllRequestedOrders(userId);
+			}
+			else if (status.equals(String.valueOf(OrderStatus.REJECTED.ordinal()))){
+				orders = orderDao.returnAllRejectedOrders(userId);
 			}
 			
 			
@@ -98,7 +108,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/{order_id}")
-	public ResponseEntity<?> getDetailsOfASpecificOrder(@PathVariable("order_id") Integer order_id,
+	public ResponseEntity<?> getDetailsOfASpecificOrder(@PathVariable("order_id") Integer orderId,
 		@RequestHeader(name = "Authorization", required = false) String authHeader) {
 
 	if(authHeader==null) {
@@ -111,22 +121,32 @@ public class OrderController {
 		// log.info("token = {}", token);
 		Integer userId = JwtUtil.verify(token);
 		
-		Order order = orderDao.returnSpecificOrder(userId);
+		Order order = orderDao.returnSpecificOrder(orderId, userId);
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("success", true);
-		map.put("user_id", userId);
-		map.put("order", order); 
-		return ResponseEntity.ok(map);
+		
+		if (order == null){
+			// map.put("success", true);
+			// map.put("user_id", userId);
+			// map.put("order", new Object[] {}); 
+			// return ResponseEntity.ok(map);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No requested Order found for the current User");
+		}
+		else{
+			map.put("success", true);
+			map.put("user_id", userId);
+			map.put("order", order); 
+			return ResponseEntity.ok(map);
+		}
 	}
 	catch(Exception ex) {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
 	}
 }
 
-	@PostMapping
+	@PostMapping(value="", params = "order_id")
 	public ResponseEntity<?> changeOrderStatus(@RequestParam(name="order_id", required = true) Integer orderId, @RequestHeader(name = "Authorization", required = false) String authHeader,
-			@RequestBody OrderStatus status) {
+			@RequestBody Order order) {
 		// log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
 			// Authorization header is missing
@@ -139,19 +159,21 @@ public class OrderController {
 			Integer userId = JwtUtil.verify(token);
 			Order mod_order = new Order();
 
-			if (status == OrderStatus.COMPLETED){
+			Integer status = order.getOrderStatus();
+
+			if (status == OrderStatus.COMPLETED.ordinal()){
 				orderDao.completeOrder(orderId);
 			}
-			else if (status == OrderStatus.CANCELLED){
+			else if (status == OrderStatus.CANCELLED.ordinal()){
 				orderDao.cancelOrder(orderId);
 			}
-			else if (status == OrderStatus.REJECTED){
+			else if (status == OrderStatus.REJECTED.ordinal()){
 				orderDao.rejectOrder(orderId);
 			}
-			else if (status == OrderStatus.CONFIRMED){
+			else if (status == OrderStatus.CONFIRMED.ordinal()){
 				orderDao.acceptOrder(orderId);
 			}
-			mod_order = orderDao.returnSpecificOrder(orderId);
+			mod_order = orderDao.returnSpecificOrder(orderId, userId);
 			Map<String, Object> map = new HashMap<>();
 			map.put("success", true);
 			map.put("user_id", userId);
@@ -165,7 +187,7 @@ public class OrderController {
 		}
 	}
 
-	@PostMapping("/new")
+	@PostMapping
 	public ResponseEntity<?> makeANewOrder(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Order order) {
 

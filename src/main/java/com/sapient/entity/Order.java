@@ -1,7 +1,7 @@
 package com.sapient.entity;
 
 import com.sapient.enums.Enums.*;
-import java.util.Date;
+import java.sql.Date;
 import lombok.Data;
 
 @Data
