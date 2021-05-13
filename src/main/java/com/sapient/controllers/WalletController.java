@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.sapient.dao.*;
 import com.sapient.utils.JwtUtil;
 
@@ -35,7 +38,11 @@ public class WalletController {
 			Integer userId = JwtUtil.verify(token);
 
 			Double myBalance = userDao.getBalance(userId);
-			return ResponseEntity.ok(myBalance);
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("user_id", userId);
+			map.put("balance", myBalance);
+			return ResponseEntity.ok(map);
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());
@@ -45,7 +52,7 @@ public class WalletController {
 
 	@PostMapping("/balance/add")
 	public ResponseEntity<?> addToWallet(@RequestHeader(name = "Authorization", required = false) String authHeader,
-			@RequestBody Double amount) {
+	@RequestHeader(name = "Amount", required = true) Double amount) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
 			// Authorization header is missing
@@ -57,10 +64,13 @@ public class WalletController {
 			log.info("token = {}", token);
 			Integer userId = JwtUtil.verify(token);
 
-			Double myBalance = userDao.getBalance(userId);
 			userDao.addToWallet(userId, amount);
-			myBalance = userDao.getBalance(userId);
-			return ResponseEntity.ok(myBalance);
+			Double myBalance = userDao.getBalance(userId);
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("user_id", userId);
+			map.put("balance", myBalance);
+			return ResponseEntity.ok(map);
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());
@@ -69,7 +79,7 @@ public class WalletController {
 
 	@PostMapping("/balance/withdraw")
 	public ResponseEntity<?> withdrawFromWallet(
-			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Double amount) {
+			@RequestHeader(name = "Authorization", required = false) String authHeader,@RequestHeader(name = "Amount", required = true) Double amount) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
 			// Authorization header is missing
@@ -81,11 +91,14 @@ public class WalletController {
 			log.info("token = {}", token);
 			Integer userId = JwtUtil.verify(token);
 
-			Double myBalance = userDao.getBalance(userId);
 			userDao.withdrawFromWallet(userId, amount);
-			myBalance = userDao.getBalance(userId);
-			return ResponseEntity.ok(myBalance); // should i check if amount is sufficient bcz it is being checked in
-													// withdraw method?
+			Double myBalance = userDao.getBalance(userId);
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("user_id", userId);
+			map.put("balance", myBalance);
+			return ResponseEntity.ok(map);
+			
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());

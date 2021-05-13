@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/services")
 public class ServiceController {
 
     // @Autowired
@@ -30,7 +30,7 @@ public class ServiceController {
 
     ServiceDao serviceDao = new ServiceDao();
     
-    @GetMapping("/services")
+    @GetMapping
 	public ResponseEntity<?> getAllServices() {
 
 		try {
@@ -64,7 +64,7 @@ public class ServiceController {
 		}
 	}
 
-    @GetMapping
+    @GetMapping(value="", params = "category")
 	public ResponseEntity<?> getAllServicesOfACategory(@RequestParam(name="category", required = true) String category) {
 
 		try {
@@ -97,7 +97,7 @@ public class ServiceController {
 		}
 	}
 
-    @PostMapping("/services")
+    @PostMapping
 	public ResponseEntity<?> addAService(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Service service) {
 
@@ -127,7 +127,7 @@ public class ServiceController {
 		}
 	}
 
-    @PostMapping("/services/{service_id}/edit")
+    @PostMapping("/edit")
 	public ResponseEntity<?> updateAService(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Service service) {
 

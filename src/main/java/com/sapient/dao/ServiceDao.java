@@ -13,7 +13,7 @@ public class ServiceDao {
     
     public Boolean addNewService(Service service)
         throws DaoException {
-		String sql = "INSERT INTO service (service_id, provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO SERVICE (id, provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class ServiceDao {
     public List<Service> returnAllServices() throws DaoException {
 		
 		List<Service> services = new ArrayList<Service>();
-		String sql = "SELECT * FROM services";
+		String sql = "SELECT * FROM SERVICE";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			try(ResultSet rs = stmt.executeQuery();)
@@ -50,7 +50,7 @@ public class ServiceDao {
 				if(rs.next()) {
 					do {
 						Service service = new Service();
-						service.setServiceId(rs.getInt("service_id"));
+						service.setServiceId(rs.getInt("id"));
 						service.setProviderId(rs.getInt("provider_id"));
 						service.setAddressId(rs.getInt("address_id"));
 						service.setIsApproved(rs.getBoolean("is_approved"));
@@ -85,8 +85,8 @@ public class ServiceDao {
 
     public List<Service> returnAllServicesOfACategory(String category) throws DaoException {
 		
-		List<Service> services = new ArrayList<Service>();
-		String sql = "SELECT * FROM services WHERE category = ?";
+		List<Service> SERVICE = new ArrayList<Service>();
+		String sql = "SELECT * FROM SERVICE WHERE category = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
             stmt.setString(1, category);
@@ -95,7 +95,7 @@ public class ServiceDao {
 				if(rs.next()) {
 					do {
 						Service service = new Service();
-						service.setServiceId(rs.getInt("service_id"));
+						service.setServiceId(rs.getInt("id"));
 						service.setProviderId(rs.getInt("provider_id"));
 						service.setAddressId(rs.getInt("address_id"));
 						service.setIsApproved(rs.getBoolean("is_approved"));
@@ -106,13 +106,13 @@ public class ServiceDao {
                         service.setPrice(rs.getDouble("price"));
                         service.setRatingCount(rs.getInt("rating_count"));
                         service.setCompletedOrders(rs.getInt("completed_orders"));
-						services.add(service);
+						SERVICE.add(service);
 					} while (rs.next());
 
 				}
 				else
 				{
-					System.out.println("No services of given category found"); 
+					System.out.println("No SERVICE of given category found"); 
 				}
 			
 			}
@@ -124,21 +124,21 @@ public class ServiceDao {
 		catch (Exception e) {
 			throw new DaoException(e);
 		}
-		return services;
+		return SERVICE;
 
 	}
 
     public List<String> returnAllCategories() throws DaoException {
 		
 		List<String> categories = new ArrayList<String>();
-		String sql = "SELECT DISTINCT(category) FROM services";
+		String sql = "SELECT DISTINCT(category) FROM SERVICE";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			try(ResultSet rs = stmt.executeQuery();)
 			{
 				if(rs.next()) {
 					do {
-						categories.add(rs.getString(0));
+						categories.add(rs.getString("category"));
 					} while (rs.next());
 
 				}
@@ -163,7 +163,7 @@ public class ServiceDao {
     public Service returnASpecificService(Integer serviceId) throws DaoException {
 		
         Service service = new Service();
-		String sql = "SELECT * FROM services WHERE service_id = ?";
+		String sql = "SELECT * FROM SERVICE WHERE id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
             stmt.setInt(1, serviceId);
@@ -172,7 +172,7 @@ public class ServiceDao {
 				if(rs.next()) {
 
                     
-                    service.setServiceId(rs.getInt("service_id"));
+                    service.setServiceId(rs.getInt("id"));
                     service.setProviderId(rs.getInt("provider_id"));
                     service.setAddressId(rs.getInt("address_id"));
                     service.setIsApproved(rs.getBoolean("is_approved"));
@@ -208,7 +208,7 @@ public class ServiceDao {
     public Boolean updateAService(Service service)
     throws DaoException {
         //how to authenticate the provider here
-    String sql = "UPDATE services SET address_id = ?, is_approved = ?, category = ?, description = ?, image_url = ?, price = ?, service_radius = ?, rating_count = ?, COMPLETEDSERVICE = ? WHERE service_id = ? AND provider_id = ?";
+    String sql = "UPDATE SERVICE SET address_id = ?, is_approved = ?, category = ?, description = ?, image_url = ?, price = ?, service_radius = ?, rating_count = ?, completed_orders = ? WHERE id = ? AND provider_id = ?";
     //what to do about user id generation?
     try (Connection conn = DbUtil.createConnection(); 
         PreparedStatement stmt = conn.prepareStatement(sql);

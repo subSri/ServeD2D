@@ -10,7 +10,7 @@ Content-Type: application/json
     "email": "zlorraine0@devhub.com",
     "password": "MB86fpAFUS0"
 }
-###
+### 
 
 POST /api/register
 Host: localhost:8080
@@ -25,7 +25,7 @@ Content-Type: application/json
     "password": "1234"
 }
 
-###
+### ORDERS ----------------------------------------------------------------------------------------------
 
 GET /api/orders
 Host: localhost:8080
@@ -82,3 +82,89 @@ Content-Type: application/json
 	"orderStatus" : 2,
 	"amount" : 23.43
 }
+
+### SERVICES ----------------------------------------------------------------------------------------------
+
+GET /api/services
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+
+###
+
+GET /api/services/categories
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+
+###
+
+GET /api/services?category=consectetuer
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+
+###
+
+GET /api/services/2
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+
+###
+
+POST /api/services
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+Content-Type: application/json
+
+{
+    "serviceId": 21,
+    "providerId": 2,
+    "addressId": 2,
+    "isApproved": true,
+    "category": "mattis",
+    "description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+    "imageUrl": "http://dummyimage.com/122x100.png/ff4444/ffffff",
+    "serviceRadius": 10.0,
+    "price": 25.1,
+    "ratingCount": 1000000,
+    "completedOrders": 2222
+}
+
+###
+
+POST /api/services/edit
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+Content-Type: application/json
+
+{
+    "serviceId": 21,
+    "providerId": 2,
+    "addressId": 2,
+    "isApproved": true,
+    "category": "consectetuer",
+    "description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+    "imageUrl": "http://dummyimage.com/122x100.png/ff4444/ffffff",
+    "serviceRadius": 10.0,
+    "price": 25.1,
+    "ratingCount": 1000000,
+    "completedOrders": 2222
+}
+
+### PAYMENT ----------------------------------------------------------------------------------------------
+
+GET /api/wallet/balance
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+
+###
+
+POST /api/wallet/balance/add
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+Amount : 20
+
+###
+
+POST /api/wallet/balance/withdraw
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTU0NjgxLCJpYXQiOjE2MjA4OTQ2ODF9.7GQHOAmXvqlTemX7KOaifY6e7xpledhWDWtXzn8eR1g
+Amount : 10
