@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sapient.dao.OrderDao;
+import com.sapient.dao.*;
 import com.sapient.entity.Order;
 import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.JwtUtil;
@@ -30,10 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderController {
 
 
-	// @Autowired
-	// private OrderDao orderDao;
+	@Autowired
+	private OrderDao orderDao;
 
-	OrderDao orderDao = new OrderDao();
 	
 	@GetMapping
 	public ResponseEntity<?> getOrdersForSpecificUser(

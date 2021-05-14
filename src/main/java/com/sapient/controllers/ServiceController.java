@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sapient.dao.ServiceDao;
-import com.sapient.dao.UserDao;
+import com.sapient.dao.*;
 import com.sapient.entity.Service;
 import com.sapient.utils.JwtUtil;
 
@@ -26,11 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/services")
 public class ServiceController {
 
-    // @Autowired
-	// private ServiceDao serviceDao;
-
-    ServiceDao serviceDao = new ServiceDao();
-	UserDao userDao = new UserDao();
+    @Autowired
+	private ServiceDao serviceDao;
     
     @GetMapping
 	public ResponseEntity<?> getAllServices() {
@@ -163,7 +159,7 @@ public class ServiceController {
 	public ResponseEntity<?> getTopServiceInCategory(@PathVariable("n") Integer n,
 			@PathVariable("category_name") String category) {
 		try {
-			List<Service> service = userDao.getTopRatedNServicesWithinACategory(category, n);
+			List<Service> service = serviceDao.getTopRatedNServicesWithinACategory(category, n);
 			Map<String, Object> map = new HashMap<>();
 			map.put("success", true);
 			map.put("service", service);

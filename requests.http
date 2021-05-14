@@ -203,6 +203,20 @@ Content-Type: application/json
   "longi": 38.5709037
 }
 
+###
+
+POST /api/address/add
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc5MjEwLCJpYXQiOjE2MjA5MTkyMTB9.hqD91BmW0_6hjxtFzjYFxyHDoqNITz_SYQsEy1Sj8eI
+Content-Type: application/json
+
+{
+  "addressid": 51,
+  "userId": 1,
+  "lat": 50.7557791,
+  "longi": 38.5709037
+}
+
 ### REVIEW -----------------------------------------------------------------
 
 GET /api/reviews/5

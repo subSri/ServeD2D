@@ -3,9 +3,9 @@ package com.sapient.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sapient.dao.*;
 import com.sapient.entity.User;
 import com.sapient.utils.JwtUtil;
-import com.sapient.dao.UserDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-	// @Autowired
-    // private UserDao userDao;
-	UserDao userDao = new UserDao();
-
+	@Autowired
+    private UserDao userDao;
+	
 	@PostMapping("/api/login")
 	public ResponseEntity<?> login(@RequestBody User user) throws Exception {
 
