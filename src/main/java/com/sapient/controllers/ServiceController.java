@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sapient.dao.ServiceDao;
-import com.sapient.dao.UserDao;
+import com.sapient.dao.*;
 import com.sapient.entity.Service;
 import com.sapient.utils.JwtUtil;
 
@@ -29,8 +28,8 @@ public class ServiceController {
     // @Autowired
 	// private ServiceDao serviceDao;
 
-    ServiceDao serviceDao = new ServiceDao();
-	UserDao userDao = new UserDao();
+	ServiceDaoDataBaseAccess serviceDao = new ServiceDaoDataBaseAccess();
+    UserDaoDataBaseAccess userDao = new UserDaoDataBaseAccess();
     
     @GetMapping
 	public ResponseEntity<?> getAllServices() {

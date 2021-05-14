@@ -23,8 +23,8 @@ public class WalletController {
 	// @Autowired
 	// private UserDao userDao;
 
-	UserDao userDao = new UserDao();
-       ServiceDao serviceDao = new ServiceDao();
+	UserDaoDataBaseAccess userDao = new UserDaoDataBaseAccess();
+	ServiceDaoDataBaseAccess serviceDao = new ServiceDaoDataBaseAccess();
 
 	@GetMapping("/balance")
 	public ResponseEntity<?> getBalanceOfUser(
@@ -124,7 +124,6 @@ public class WalletController {
 
             if(userDao.getBalance(userId) >= order.getAmount())
             {
-            	userDao.withdrawFromWallet(userId, order.getAmount());
             	Integer serviceId = order.getServiceId();
 
             	Service service = new Service();

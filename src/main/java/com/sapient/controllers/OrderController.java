@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sapient.dao.OrderDao;
+import com.sapient.dao.*;
 import com.sapient.entity.Order;
 import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.JwtUtil;
@@ -33,7 +33,7 @@ public class OrderController {
 	// @Autowired
 	// private OrderDao orderDao;
 
-	OrderDao orderDao = new OrderDao();
+	OrderDaoDataBaseAccess orderDao = new OrderDaoDataBaseAccess();
 	
 	@GetMapping
 	public ResponseEntity<?> getOrdersForSpecificUser(
