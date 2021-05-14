@@ -124,7 +124,6 @@ public class WalletController {
 
             if(userDao.getBalance(userId) >= order.getAmount())
             {
-            	userDao.withdrawFromWallet(userId, order.getAmount());
             	Integer serviceId = order.getServiceId();
 
             	Service service = new Service();
