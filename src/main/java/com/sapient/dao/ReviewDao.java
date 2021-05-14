@@ -10,9 +10,9 @@ import com.sapient.utils.DbUtil;
 
 public class ReviewDao {
     
-    public Boolean addReview(Review review)
+    public Review addReview(Review review)
     throws DaoException {
-    String sql = "INSERT INTO review (review_id, user_id, service_id, rating, comment) VALUES (?,?,?,?,?)";
+    String sql = "INSERT INTO REVIEW (review_id, user_id, service_id, rating, comment) VALUES (?,?,?,?,?)";
     //what to do about user id generation?
     try (Connection conn = DbUtil.createConnection(); 
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -26,18 +26,20 @@ public class ReviewDao {
         stmt.executeUpdate();
         System.out.println("review added");
         updateRatingCount(review.getRating(), review.getServiceId());
-        return true;
+        return review;
+        
 
     } catch (Exception e) {
         throw new DaoException(e);
     }
+    
 }
 
     public List<Review> returnAllReviews() throws DaoException {
     
         List<Review> reviews = new ArrayList<Review>();
         
-        String sql = "SELECT * FROM review ";
+        String sql = "SELECT * FROM REVIEW ";
         try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
         {
             try(ResultSet rs = stmt.executeQuery();)
@@ -46,7 +48,7 @@ public class ReviewDao {
                     do {
                         Review review = new Review();
                         review.setUserId(rs.getInt("user_id"));
-                        review.setServiceId(rs.getInt("PROVIDERID"));
+                        review.setServiceId(rs.getInt("service_id"));
                         review.setRating(rs.getInt("rating"));
                         review.setComment(rs.getString("comment"));
                         reviews.add(review);
@@ -72,22 +74,26 @@ public class ReviewDao {
 
 }
 
-    public Review returnSelectedReviews(Integer serviceId) throws DaoException {
+    public List<Review> returnSelectedReviews(Integer serviceId) throws DaoException {
 		
-		Review review = new Review();
+		List<Review> reviews = new ArrayList<Review>();
 		
-		String sql = "SELECT * FROM review WHERE service_id = ?";
+		String sql = "SELECT * FROM REVIEW WHERE service_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
-            stmt.setInt(1, review.getServiceId());
+            stmt.setInt(1,serviceId);
 			try(ResultSet rs = stmt.executeQuery();)
 			{
 				if(rs.next()) {
+                    do{
+                        Review review = new Review();
 						review.setUserId(rs.getInt("user_id"));
 						review.setServiceId(rs.getInt("service_id"));
 						review.setRating(rs.getInt("rating"));
 						review.setComment(rs.getString("comment"));
 						review.setReviewId(rs.getInt("review_id"));
+                        reviews.add(review);
+                    }while(rs.next());
 				}
 				else
 				{
@@ -103,13 +109,13 @@ public class ReviewDao {
 		catch (Exception e) {
 			throw new DaoException(e);
 		}
-		return review;
+		return reviews;
 
 	}
   
 	public Boolean updateRatingCount(Integer rating, Integer serviceId) throws DaoException {
         //how to authenticate the provider here
-        String sql = "UPDATE service SET rating = rating + ? WHERE service_id = ?";
+        String sql = "UPDATE SERVICE SET rating_count = rating_count + ? WHERE id = ?";
         //what to do about user id generation?
         try (Connection conn = DbUtil.createConnection(); 
             PreparedStatement stmt = conn.prepareStatement(sql);

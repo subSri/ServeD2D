@@ -159,7 +159,7 @@ public class ServiceController {
 		}
 	}
 
-     @GetMapping("/categories/service/category={category_name}&top={n}") // not sure of this
+     @GetMapping("{category_name}/{n}") // not sure of this
 	public ResponseEntity<?> getTopServiceInCategory(@PathVariable("n") Integer n,
 			@PathVariable("category_name") String category) {
 		try {

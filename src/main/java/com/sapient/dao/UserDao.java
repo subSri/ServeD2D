@@ -156,7 +156,7 @@ public class UserDao {
 	
 	public List<Service> getTopRatedNServicesWithinACategory(String category, Integer n) throws DaoException
 	{
-		String sql = "SELECT * FROM user WHERE id IN (SELECT provider_id FROM service WHERE category = ? ORDER BY (rating/completed_orders) DESC LIMIT ?)";
+		String sql = "SELECT * FROM USERS JOIN SERVICE ON USERS.id = SERVICE.provider_id WHERE SERVICE.category = ? ORDER BY (SERVICE.rating_count/SERVICE.completed_orders) DESC LIMIT ?";
 		List<Service> topServices = new ArrayList<Service>();
 		try(
 		Connection conn = DbUtil.createConnection();
@@ -167,7 +167,7 @@ public class UserDao {
 			try(ResultSet rs = stmt.executeQuery();) {
 				while(rs.next()) {
 					Service service = new Service();
-					service.setServiceId(rs.getInt("service_id"));
+					service.setServiceId(rs.getInt("id"));
 					service.setProviderId(rs.getInt("provider_id"));
 					service.setAddressId(rs.getInt("address_id"));
 					service.setIsApproved(rs.getBoolean("is_approved"));
@@ -212,7 +212,7 @@ public class UserDao {
 			try(ResultSet rs = stmt.executeQuery();) {
 				while(rs.next()) {
 					Service service = new Service();
-					service.setServiceId(rs.getInt("service_id"));
+					service.setServiceId(rs.getInt("id"));
 					service.setProviderId(rs.getInt("provider_id"));
 					service.setAddressId(rs.getInt("address_id"));
 					service.setIsApproved(rs.getBoolean("is_approved"));
