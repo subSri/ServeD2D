@@ -13,7 +13,7 @@ public class MessageDaoImpl implements MessageDao {
 	
     public Boolean liveMessage(Message message)
         throws DaoException {
-		String sql = "INSERT INTO MESSAGE (message_id, sender_id, receiver_id, content, timestamp) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO MESSAGE (message_id, sender_id, reciever_id, content, timestamp) VALUES (?,?,?,?,?)";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -36,17 +36,18 @@ public class MessageDaoImpl implements MessageDao {
 		
 		List<Message> chats = new ArrayList<Message>();
 		
-		String sql = "SELECT sender_id,receiver_id,content,timestamp FROM MESSAGE JOIN ORDER ON MESSAGE.sender_id = ORDER.user_id WHERE ORDER.order_id = ?";
+		String sql = "SELECT sender_id,reciever_id,content,MESSAGE.timestamp FROM MESSAGE JOIN `ORDER` ON MESSAGE.sender_id = `ORDER`.user_id WHERE `ORDER`.order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
+			stmt.setInt(1, orderId);
 			try(ResultSet rs = stmt.executeQuery();)
 			{
-                stmt.setInt(1, orderId);
+                
 				if(rs.next()) {
 					do {
 						Message message = new Message();
 						message.setSenderId(rs.getInt("sender_id"));
-						message.setReceiverId(rs.getInt("receiver_id"));
+						message.setReceiverId(rs.getInt("reciever_id"));
 						message.setContent(rs.getString("content"));
 						message.setTimestamp(rs.getDate("timestamp"));
 						chats.add(message);
@@ -75,15 +76,16 @@ public class MessageDaoImpl implements MessageDao {
 		
 		List<Integer> recievers = new ArrayList<Integer>();
 		//Costly Operation
-		String sql = "SELECT DISTINCT(receiver_id) from MESSAGE WHERE sender_id=? INNER JOIN USER ON MESSAGE.receiver_id=USER.user_id ";
+		String sql = "SELECT DISTINCT(reciever_id) from MESSAGE JOIN USER ON MESSAGE.reciever_id=USER.user_id  WHERE sender_id=?  ";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
+			stmt.setInt(1, userId);
 			try(ResultSet rs = stmt.executeQuery();)
 			{
-                stmt.setInt(1, userId);
+                
 				if(rs.next()) {
 					do {
-						recievers.add(rs.getInt("receiver_id"));
+						recievers.add(rs.getInt("reciever_id"));
 					} while (rs.next());
 
 				}

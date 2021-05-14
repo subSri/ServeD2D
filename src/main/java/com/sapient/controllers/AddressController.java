@@ -43,7 +43,7 @@ public class AddressController {
 	}
 	
 	@PostMapping("/edit")
-	public ResponseEntity<?> editAddress(@RequestHeader(name = "Authorization", required = false) String authHeader, Address address) {
+	public ResponseEntity<?> editAddress(@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Address address) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
 			// Authorization header is missing
@@ -56,7 +56,7 @@ public class AddressController {
 			Integer userId = JwtUtil.verify(token);
 			addressDao.updateAddress(address);
 			Address newaddress = new Address();
-			newaddress   = addressDao.getAddress(userId);
+			newaddress = addressDao.getAddress(userId);
 			return ResponseEntity.ok(newaddress);
 			
 		} catch (Exception ex) {

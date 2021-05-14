@@ -4,11 +4,11 @@ Content-Type: application/json
 
 {
     "id" : 1,
-    "name" : "Zonnya Lorraine",
-    "isProvider" : "0",
-    "walletBalance" : "5.40",
-    "email": "zlorraine0@devhub.com",
-    "password": "MB86fpAFUS0"
+    "name" : "Phyllys Sowtere",
+    "isProvider" : "1",
+    "walletBalance" : "73.5",
+    "email": "psowter0@fastcompany.com",
+    "password": "1iYFwMf3"
 }
 ### 
 
@@ -19,7 +19,7 @@ Content-Type: application/json
 {
     "id" : 21,
     "name" : "Subham Srivastava",
-    "isProvider" : "0",
+    "isProvider" : false,
     "walletBalance" : "12.23",
     "email": "subhamxx@gmail.com",
     "password": "1234"
@@ -29,27 +29,27 @@ Content-Type: application/json
 
 GET /api/orders
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
 GET /api/orders/1
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
 GET /api/orders/21
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
-GET /api/orders?status=3
+GET /api/orders?status=1
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
 POST /api/orders
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
@@ -66,7 +66,7 @@ Content-Type: application/json
 
 POST /api/orders?order_id=21
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
@@ -75,7 +75,7 @@ Content-Type: application/json
     "serviceId" : 2,
 	"adressId" : 1,
 	"timestamp" : "2013-01-20",
-	"orderStatus" : 2,
+	"orderStatus" : 1,
 	"amount" : 23.43
 }
 
@@ -83,27 +83,27 @@ Content-Type: application/json
 
 GET /api/services
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
 GET /api/services/categories
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
 GET /api/services?category=consectetuer
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
 GET /api/services/2
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
 POST /api/services
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
@@ -112,7 +112,7 @@ Content-Type: application/json
     "addressId": 2,
     "isApproved": true,
     "category": "mattis",
-    "description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+    "description": "Morbi porttitor lorem id ligula.",
     "imageUrl": "http://dummyimage.com/122x100.png/ff4444/ffffff",
     "serviceRadius": 10.0,
     "price": 25.1,
@@ -124,7 +124,7 @@ Content-Type: application/json
 
 POST /api/services/edit
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
@@ -133,7 +133,7 @@ Content-Type: application/json
     "addressId": 3,
     "isApproved": false,
     "category": "consectetuer",
-    "description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+    "description": "Morbi porttitor lorem id ligula. Suspendisse  ",
     "imageUrl": "http://dummyimage.com/122x100.png/ff4444/ffffff",
     "serviceRadius": 10.0,
     "price": 25.1,
@@ -150,26 +150,26 @@ host: localhost:8080
 
 GET /api/wallet/balance
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 ###
 
 POST /api/wallet/balance/add
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Amount : 20
 
 ###
 
 POST /api/wallet/balance/withdraw
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Amount : 10
 
 ###
 
 POST /api/wallet/balance/payment
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
@@ -179,7 +179,7 @@ Content-Type: application/json
 	"adressId" : 1,
 	"timestamp" : "2013-01-20",
 	"orderStatus" : 3,
-	"amount" : 2
+	"amount" : 30
 }
 
 
@@ -187,32 +187,32 @@ Content-Type: application/json
 
 GET /api/address
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc3NzM3LCJpYXQiOjE2MjA5MTc3Mzd9.ujyWL2wFwXBI4dAHj2Izh4E0rae5jlfIJG3zDmEwUx0
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 
 ###
-
+//TODO//
 POST /api/address/edit
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc5MjEwLCJpYXQiOjE2MjA5MTkyMTB9.hqD91BmW0_6hjxtFzjYFxyHDoqNITz_SYQsEy1Sj8eI
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
-  "addressid": 1,
-  "userId": 1,
+  "addressid": 21,
+  "userId": 2,
   "lat": 50.7557791,
   "longi": 38.5709037
 }
 
 ###
-
+//TODO//
 POST /api/address/add
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIwOTc5MjEwLCJpYXQiOjE2MjA5MTkyMTB9.hqD91BmW0_6hjxtFzjYFxyHDoqNITz_SYQsEy1Sj8eI
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
-  "addressid": 51,
-  "userId": 1,
+  "addressid": 22,
+  "userId": 2,
   "lat": 50.7557791,
   "longi": 38.5709037
 }
@@ -221,24 +221,24 @@ Content-Type: application/json
 
 GET /api/reviews/5
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 
 ###
 
 GET /api/reviews
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 
 ###
 
 POST /api/reviews
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 OrderStatus : 2
 Content-Type: application/json
 
 {
-    "reviewId": 1,
+    "reviewId": 22,
     "userId": 1,
     "serviceId": 1,
     "rating": 5,
@@ -249,27 +249,27 @@ Content-Type: application/json
 
 GET /api/chats/all
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 
 ###
 
 GET /api/chats?order_id=1
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 
 ###
-
+//TODO//
 POST /api/chats
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
-    "messageId": 21,
+    "messageId": 1,
     "senderId": 1,
     "recieverId": 5,
     "content": "My Message",
-    "timestamp": "2013-01-20"
+    "timestamp": "2003-04-20"
 }
 
 

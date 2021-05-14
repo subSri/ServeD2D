@@ -129,6 +129,7 @@ public class WalletController {
             	Service service = new Service();
 
             	service = serviceDao.returnASpecificService(serviceId);
+				userDao.withdrawFromWallet(order.getUserId(), order.getAmount());
             	userDao.addToWallet(service.getProviderId(), order.getAmount());
             	Map<String, Object> map = new HashMap<>();
 				map.put("success", true);

@@ -115,7 +115,7 @@ public class ReviewDaoImpl implements ReviewDao {
   
 	public Boolean updateRatingCount(Integer rating, Integer serviceId) throws DaoException {
         //how to authenticate the provider here
-        String sql = "UPDATE SERVICE SET rating_count = rating_count + ? WHERE id = ?";
+        String sql = "UPDATE SERVICE SET rating_count = rating_count + ? WHERE service_id = ?";
         //what to do about user id generation?
         try (Connection conn = DbUtil.createConnection(); 
             PreparedStatement stmt = conn.prepareStatement(sql);

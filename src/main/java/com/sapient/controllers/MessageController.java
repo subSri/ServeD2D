@@ -43,14 +43,18 @@ public class MessageController {
 			// log.info("token = {}", token);
 			Integer userId = JwtUtil.verify(token);
 
-			messageDao.liveMessage(message);
-			
-			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("user_id", userId);
-			map.put("messages", message); 
+			Boolean done =  messageDao.liveMessage(message);
+			if (done == true){
+                Map<String, Object> map = new HashMap<>();
+                map.put("success", true);
+                map.put("user_id", userId);
+                map.put("messages", message); 
 
-			return ResponseEntity.ok(map);
+                return ResponseEntity.ok(map);
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Message not sent");
+            }
 		}
 		catch(Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());

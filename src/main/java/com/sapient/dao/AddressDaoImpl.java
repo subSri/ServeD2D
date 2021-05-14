@@ -31,14 +31,15 @@ public class AddressDaoImpl implements AddressDao{
     public Boolean updateAddress(Address address)
 			throws DaoException {
 
-		String sql = "UPDATE ADDRESS SET address_id = ?, user_id = ?, latitude = ?, longitude = ?";
+		String sql = "UPDATE ADDRESS SET user_id = ?, latitude = ?, longitude = ? WHERE address_id = ?";
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			) {
-			stmt.setInt(1, address.getAddressid());
-			stmt.setInt(2, address.getUserId());
-			stmt.setDouble(3, address.getLat());
-			stmt.setDouble(4, address.getLongi());
+			stmt.setInt(4, address.getAddressid());
+			stmt.setInt(1, address.getUserId());
+			stmt.setDouble(2, address.getLat());
+			stmt.setDouble(3, address.getLongi());
+			
 
 			stmt.executeUpdate();
 			System.out.println(" address updated");
