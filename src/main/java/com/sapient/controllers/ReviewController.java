@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sapient.dao.OrderDao;
-import com.sapient.dao.ReviewDao;
+import com.sapient.dao.*;
 import com.sapient.entity.Order;
 import com.sapient.entity.Review;
 import com.sapient.enums.Enums.OrderStatus;
@@ -35,8 +34,8 @@ public class ReviewController {
 	// @Autowired
 	// private ReviewDao reviewDao;
 
-    ReviewDao reviewDao = new ReviewDao();
-    OrderDao orderDao = new OrderDao();
+	ReviewDaoDataBaseAccess reviewDao = new ReviewDaoDataBaseAccess();
+	OrderDaoDataBaseAccess orderDao = new OrderDaoDataBaseAccess();
 	
 	@GetMapping("/{service_id}")
 	public ResponseEntity<?> getSelectedReviews(@PathVariable("service_id") Integer serviceId,

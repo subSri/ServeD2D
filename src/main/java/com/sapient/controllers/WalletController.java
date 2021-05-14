@@ -23,8 +23,8 @@ public class WalletController {
 	// @Autowired
 	// private UserDao userDao;
 
-	UserDao userDao = new UserDao();
-       ServiceDao serviceDao = new ServiceDao();
+	UserDaoDataBaseAccess userDao = new UserDaoDataBaseAccess();
+	ServiceDaoDataBaseAccess serviceDao = new ServiceDaoDataBaseAccess();
 
 	@GetMapping("/balance")
 	public ResponseEntity<?> getBalanceOfUser(

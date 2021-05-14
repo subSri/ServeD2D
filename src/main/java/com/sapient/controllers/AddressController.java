@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/api")
 public class AddressController {
-	AddressDao addressDao = new AddressDao();
+	AddressDaoDataBaseAccess addressDao = new AddressDaoDataBaseAccess();
 	
 	@GetMapping("/address")
 	public ResponseEntity<?> getAddressofUser(@RequestHeader(name = "Authorization", required = false) String authHeader) {
