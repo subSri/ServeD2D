@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api")
 public class AddressController {
 	AddressDao addressDao = new AddressDao();
+	
 	@GetMapping("/address")
 	public ResponseEntity<?> getAddressofUser(@RequestHeader(name = "Authorization", required = false) String authHeader) {
 		log.info("authHeader = {}", authHeader);
@@ -61,5 +62,26 @@ public class AddressController {
 		}
 	}
 
-	//addAddress
+	@PostMapping("/address/add")
+	public ResponseEntity<?> addAddress(@RequestHeader(name = "Authorization", required = false) String authHeader, Address address) {
+		log.info("authHeader = {}", authHeader);
+		if (authHeader == null) {
+			// Authorization header is missing
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+		}
+
+		try {
+			String token = authHeader.split(" ")[1];
+			log.info("token = {}", token);
+			Integer userId = JwtUtil.verify(token);
+			addressDao.addNewAddress(address);
+			Address newaddress = new Address();
+			newaddress   = addressDao.getAddress(userId);
+			return ResponseEntity.ok(newaddress);
+			
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.body("Authorization token is invalid or " + ex.getMessage());
+		}
+	}
 }
