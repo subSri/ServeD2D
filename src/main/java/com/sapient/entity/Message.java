@@ -10,7 +10,4 @@ public class Message {
 	private Integer receiverId;
 	private String content;
 	private Date timestamp;
-	
-	
-
 }

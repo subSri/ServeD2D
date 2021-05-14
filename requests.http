@@ -231,8 +231,32 @@ Content-Type: application/json
     "comment": "Vey bad product"
 }
 
+### CHATS -----------------------------------------------------------------
+
+GET /api/chats/all
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+
 ###
 
+GET /api/chats?order_id=1
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+
+###
+
+POST /api/chats
+host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJab25ueWEgTG9ycmFpbmUiLCJpZCI6MSwiZXhwIjoxNjIxMDM1NTkxLCJpYXQiOjE2MjA5NzU1OTF9.3dpAkGxPWrrVB0dIYWWUtIJdX9xD-ord_J4MtDRBLTY
+Content-Type: application/json
+
+{
+    "messageId": 21,
+    "senderId": 1,
+    "recieverId": 5,
+    "content": "My Message",
+    "timestamp": "2013-01-20"
+}
 
 
 

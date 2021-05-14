@@ -13,7 +13,7 @@ public class MessageDao {
     
     public Boolean liveMessage(Message message)
         throws DaoException {
-		String sql = "INSERT INTO message (message_id, sender_id, receiver_id, content, timestamp) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO MESSAGE (message_id, sender_id, receiver_id, content, timestamp) VALUES (?,?,?,?,?)";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -32,16 +32,16 @@ public class MessageDao {
 		}
 	}
 
-    public List<Message> returnAllMessagesForAnOrder(Integer order_id) throws DaoException {
+    public List<Message> returnAllMessagesForAnOrder(Integer orderId) throws DaoException {
 		
 		List<Message> chats = new ArrayList<Message>();
 		
-		String sql = "SELECT sender_id,receiver_id,content,timestamp FROM messages, orders where order.order_id = ?";
+		String sql = "SELECT sender_id,receiver_id,content,timestamp FROM MESSAGE JOIN ORDER ON MESSAGE.sender_id = ORDER.user_id WHERE ORDER.order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			try(ResultSet rs = stmt.executeQuery();)
 			{
-                stmt.setInt(1, order_id);
+                stmt.setInt(1, orderId);
 				if(rs.next()) {
 					do {
 						Message message = new Message();
@@ -71,16 +71,16 @@ public class MessageDao {
 
 	}
 
-    public List<Integer> returnChatsOfUser(Integer user_id) throws DaoException {
+    public List<Integer> returnChatsOfUser(Integer userId) throws DaoException {
 		
 		List<Integer> recievers = new ArrayList<Integer>();
 		//Costly Operation
-		String sql = "SELECT DISTINCT(receiver_id) from message where sender_id=? INNER JOIN users ON message.receiver_id=users.user_id ";
+		String sql = "SELECT DISTINCT(receiver_id) from MESSAGE WHERE sender_id=? INNER JOIN USERS ON MESSAGE.receiver_id=USERS.userId ";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			try(ResultSet rs = stmt.executeQuery();)
 			{
-                stmt.setInt(1, user_id);
+                stmt.setInt(1, userId);
 				if(rs.next()) {
 					do {
 						recievers.add(rs.getInt("receiver_id"));
@@ -104,4 +104,5 @@ public class MessageDao {
 		return recievers;
 
 	}
+
 }
