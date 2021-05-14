@@ -14,8 +14,8 @@ public class ServiceDaoImpl implements ServiceDao{
     
     public Boolean addNewService(Service service)
         throws DaoException {
-		String sql = "INSERT INTO SERVICE (id, provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-		//what to do about user id generation?
+		String sql = "INSERT INTO SERVICE (service_id, provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		//what to do about user user_id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			) {
@@ -51,7 +51,7 @@ public class ServiceDaoImpl implements ServiceDao{
 				if(rs.next()) {
 					do {
 						Service service = new Service();
-						service.setServiceId(rs.getInt("id"));
+						service.setServiceId(rs.getInt("service_id"));
 						service.setProviderId(rs.getInt("provider_id"));
 						service.setAddressId(rs.getInt("address_id"));
 						service.setIsApproved(rs.getBoolean("is_approved"));
@@ -96,7 +96,7 @@ public class ServiceDaoImpl implements ServiceDao{
 				if(rs.next()) {
 					do {
 						Service service = new Service();
-						service.setServiceId(rs.getInt("id"));
+						service.setServiceId(rs.getInt("service_id"));
 						service.setProviderId(rs.getInt("provider_id"));
 						service.setAddressId(rs.getInt("address_id"));
 						service.setIsApproved(rs.getBoolean("is_approved"));
@@ -164,7 +164,7 @@ public class ServiceDaoImpl implements ServiceDao{
     public Service returnASpecificService(Integer serviceId) throws DaoException {
 		
         Service service = new Service();
-		String sql = "SELECT * FROM SERVICE WHERE id = ?";
+		String sql = "SELECT * FROM SERVICE WHERE service_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
             stmt.setInt(1, serviceId);
@@ -173,7 +173,7 @@ public class ServiceDaoImpl implements ServiceDao{
 				if(rs.next()) {
 
                     
-                    service.setServiceId(rs.getInt("id"));
+                    service.setServiceId(rs.getInt("service_id"));
                     service.setProviderId(rs.getInt("provider_id"));
                     service.setAddressId(rs.getInt("address_id"));
                     service.setIsApproved(rs.getBoolean("is_approved"));
@@ -209,8 +209,8 @@ public class ServiceDaoImpl implements ServiceDao{
     public Boolean updateAService(Service service)
     throws DaoException {
         //how to authenticate the provider here
-		String sql = "UPDATE SERVICE SET address_id = ?, is_approved = ?, category = ?, description = ?, image_url = ?, price = ?, service_radius = ?, rating_count = ?, completed_orders = ? WHERE id = ? AND provider_id = ?";
-		//what to do about user id generation?
+		String sql = "UPDATE SERVICE SET address_id = ?, is_approved = ?, category = ?, description = ?, image_url = ?, price = ?, service_radius = ?, rating_count = ?, completed_orders = ? WHERE service_id = ? AND provider_id = ?";
+		//what to do about user user_id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			) {
@@ -237,7 +237,7 @@ public class ServiceDaoImpl implements ServiceDao{
 
 	public List<Service> getTopRatedNServicesWithinACategory(String category, Integer n) throws DaoException
 	{
-		String sql = "SELECT * FROM USERS JOIN SERVICE ON USERS.id = SERVICE.provider_id WHERE SERVICE.category = ? ORDER BY (SERVICE.rating_count/SERVICE.completed_orders) DESC LIMIT ?";
+		String sql = "SELECT * FROM USER JOIN SERVICE ON USER.user_id = SERVICE.provider_id WHERE SERVICE.category = ? ORDER BY (SERVICE.rating_count/SERVICE.completed_orders) DESC LIMIT ?";
 		List<Service> topServices = new ArrayList<Service>();
 		try(
 		Connection conn = DbUtil.createConnection();
@@ -248,7 +248,7 @@ public class ServiceDaoImpl implements ServiceDao{
 			try(ResultSet rs = stmt.executeQuery();) {
 				while(rs.next()) {
 					Service service = new Service();
-					service.setServiceId(rs.getInt("id"));
+					service.setServiceId(rs.getInt("service_id"));
 					service.setProviderId(rs.getInt("provider_id"));
 					service.setAddressId(rs.getInt("address_id"));
 					service.setIsApproved(rs.getBoolean("is_approved"));
@@ -277,7 +277,7 @@ public class ServiceDaoImpl implements ServiceDao{
 	public List<Service> findNearByServicesSortedByDistance(String category, Integer n, Address userAddress) throws DaoException {
 
 		String sql = "SELECT *,(3959 * acos (cos ( radians(?) )* cos( radians( ADDRESS.latitude ) )* cos( radians( ADDRESS.longitude ) - radians(?) )+ sin ( radians(?) )* sin( radians( ADDRESS.latitude ) )))"+
-			"AS distance FROM USERS JOIN ADDRESS ON USERS.user_id = ADDRESS.user_id WHERE USERS.user_id IN (SELECT provider_id FROM SERVICE WHERE category = ? ) ORDER BY distance DESC LIMIT ?";
+			"AS distance FROM USER JOIN ADDRESS ON USER.user_id = ADDRESS.user_id WHERE USER.user_id IN (SELECT provider_id FROM SERVICE WHERE category = ? ) ORDER BY distance DESC LIMIT ?";
 		List<Service> topServiceProviders = new ArrayList<Service>();
 		try(
 		Connection conn = DbUtil.createConnection();
@@ -293,7 +293,7 @@ public class ServiceDaoImpl implements ServiceDao{
 			try(ResultSet rs = stmt.executeQuery();) {
 				while(rs.next()) {
 					Service service = new Service();
-					service.setServiceId(rs.getInt("id"));
+					service.setServiceId(rs.getInt("service_id"));
 					service.setProviderId(rs.getInt("provider_id"));
 					service.setAddressId(rs.getInt("address_id"));
 					service.setIsApproved(rs.getBoolean("is_approved"));

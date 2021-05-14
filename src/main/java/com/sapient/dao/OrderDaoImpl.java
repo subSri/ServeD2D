@@ -4,9 +4,9 @@ import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.DbUtil;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class OrderDaoImpl implements OrderDao {
     
     public Boolean addNewOrder(Order order)
 			throws DaoException {
-		String sql = "INSERT INTO ORDERS (order_id, user_id, service_id, address_id, timestamp, status, amount) VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO ORDER (order_id, user_id, service_id, address_id, timestamp, status, amount) VALUES (?,?,?,?,?,?,?)";
 		//what to do about user id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Order> returnAllOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM ORDERS WHERE user_id =  ?";
+		String sql = "SELECT * FROM ORDER WHERE user_id =  ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -83,7 +83,7 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Order> returnAllIncompleteOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM ORDERS WHERE user_id =  ? AND STATUS = ?";
+		String sql = "SELECT * FROM ORDER WHERE user_id =  ? AND STATUS = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -125,7 +125,7 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Order> returnAllRequestedOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM ORDERS WHERE user_id =  ? AND status = ?";
+		String sql = "SELECT * FROM ORDER WHERE user_id =  ? AND status = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -167,7 +167,7 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Order> returnAllCancelledOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM ORDERS WHERE user_id =  ? AND status = ?";
+		String sql = "SELECT * FROM ORDER WHERE user_id =  ? AND status = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -209,7 +209,7 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Order> returnAllRejectedOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM ORDERS WHERE user_id =  ? AND status = ?";
+		String sql = "SELECT * FROM ORDER WHERE user_id =  ? AND status = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -251,7 +251,7 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Order> returnAllPastCompletedOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
-		String sql = "SELECT * FROM ORDERS WHERE user_id =  ? AND status = ?";
+		String sql = "SELECT * FROM ORDER WHERE user_id =  ? AND status = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, userId);
@@ -293,7 +293,7 @@ public class OrderDaoImpl implements OrderDao {
 	public Order returnSpecificOrder(Integer orderId, Integer userId) throws DaoException {
 		
 		Order order;
-		String sql = "SELECT * FROM ORDERS WHERE order_id = ? AND user_id = ?";
+		String sql = "SELECT * FROM ORDER WHERE order_id = ? AND user_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, orderId);
@@ -331,7 +331,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	public void cancelOrder(Integer orderId) throws DaoException {
 
-		String sql = "UPDATE ORDERS SET status = ? WHERE order_id = ?";
+		String sql = "UPDATE ORDER SET status = ? WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, OrderStatus.CANCELLED.ordinal());
@@ -347,7 +347,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	public void rejectOrder(Integer orderId) throws DaoException {
 
-		String sql = "UPDATE ORDERS SET status = ? WHERE order_id = ?";
+		String sql = "UPDATE ORDER SET status = ? WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 			{
 				stmt.setInt(1, OrderStatus.REJECTED.ordinal());
@@ -362,7 +362,7 @@ public class OrderDaoImpl implements OrderDao {
 	
 	public void acceptOrder(Integer orderId) throws DaoException {
 
-		String sql = "UPDATE ORDERS SET status = ? WHERE order_id = ?";
+		String sql = "UPDATE ORDER SET status = ? WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, OrderStatus.CONFIRMED.ordinal());
@@ -378,7 +378,7 @@ public class OrderDaoImpl implements OrderDao {
 	
 	public void completeOrder(Integer orderId) throws DaoException {
 
-		String sql = "UPDATE ORDERS SET status = ? WHERE order_id = ?";
+		String sql = "UPDATE ORDER SET status = ? WHERE order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, OrderStatus.COMPLETED.ordinal());

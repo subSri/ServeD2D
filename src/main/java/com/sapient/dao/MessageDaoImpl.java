@@ -75,7 +75,7 @@ public class MessageDaoImpl implements MessageDao {
 		
 		List<Integer> recievers = new ArrayList<Integer>();
 		//Costly Operation
-		String sql = "SELECT DISTINCT(receiver_id) from MESSAGE WHERE sender_id=? INNER JOIN USERS ON MESSAGE.receiver_id=USERS.userId ";
+		String sql = "SELECT DISTINCT(receiver_id) from MESSAGE WHERE sender_id=? INNER JOIN USER ON MESSAGE.receiver_id=USER.user_id ";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			try(ResultSet rs = stmt.executeQuery();)
