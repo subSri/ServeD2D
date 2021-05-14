@@ -109,7 +109,7 @@ public class WalletController {
             Double currentBalance = userDao.getBalance(userId);
             if(currentBalance>order.getAmount())
             {
-            	userDao.withdrawFromWallet(userId, (currentBalance-order.getAmount()));
+            	userDao.withdrawFromWallet(userId, order.getAmount());
             	Integer serviceId =order.getServiceId();
             	Service s = new Service();
             	s = serviceDao.returnASpecificService(serviceId);
