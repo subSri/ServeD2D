@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sapient.dao.ServiceDao;
+import com.sapient.dao.UserDao;
 import com.sapient.entity.Service;
 import com.sapient.utils.JwtUtil;
 
@@ -22,20 +23,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/services")
 public class ServiceController {
 
     // @Autowired
 	// private ServiceDao serviceDao;
 
     ServiceDao serviceDao = new ServiceDao();
+	UserDao userDao = new UserDao();
     
-    @GetMapping("/services")
+    @GetMapping
 	public ResponseEntity<?> getAllServices() {
 
 		try {
 			
-			List<Service> services = serviceDao.returnAllServices();
+			List<Service> services = serviceDao.returnAllService();
 			
 			Map<String, Object> map = new HashMap<>();
 			map.put("success", true);
@@ -64,12 +66,12 @@ public class ServiceController {
 		}
 	}
 
-    @GetMapping
+    @GetMapping(value="", params = "category")
 	public ResponseEntity<?> getAllServicesOfACategory(@RequestParam(name="category", required = true) String category) {
 
 		try {
 			
-			List<Service> services = serviceDao.returnAllServicesOfACategory(category);
+			List<Service> services = serviceDao.returnAllServiceOfACategory(category);
 			
 			Map<String, Object> map = new HashMap<>();
 			map.put("success", true);
@@ -97,7 +99,7 @@ public class ServiceController {
 		}
 	}
 
-    @PostMapping("/services")
+    @PostMapping
 	public ResponseEntity<?> addAService(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Service service) {
 
@@ -127,7 +129,7 @@ public class ServiceController {
 		}
 	}
 
-    @PostMapping("/services/{service_id}/edit")
+    @PostMapping("/edit")
 	public ResponseEntity<?> updateAService(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Service service) {
 
@@ -157,14 +159,14 @@ public class ServiceController {
 		}
 	}
 
-     @GetMapping("/categories/SERVICE/Category={category_name}&top={n}") // not sure of this
-	public ResponseEntity<?> getTopSERVICEInCategory(@PathVariable("n") Integer n,
+     @GetMapping("/categories/service/category={category_name}&top={n}") // not sure of this
+	public ResponseEntity<?> getTopServiceInCategory(@PathVariable("n") Integer n,
 			@PathVariable("category_name") String category) {
 		try {
-			List<Service> SERVICE = userDao.getTopRatedNSERVICEWithinACategory(category, n);
+			List<Service> service = userDao.getTopRatedNServicesWithinACategory(category, n);
 			Map<String, Object> map = new HashMap<>();
 			map.put("success", true);
-			map.put("SERVICE", SERVICE);
+			map.put("service", service);
 			return ResponseEntity.ok(map);
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());

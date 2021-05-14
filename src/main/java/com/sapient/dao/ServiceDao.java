@@ -39,9 +39,9 @@ public class ServiceDao {
 		}
 	}
 
-    public List<Service> returnAllSERVICE() throws DaoException {
+    public List<Service> returnAllService() throws DaoException {
 		
-		List<Service> SERVICE = new ArrayList<Service>();
+		List<Service> services = new ArrayList<Service>();
 		String sql = "SELECT * FROM SERVICE";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
@@ -61,7 +61,7 @@ public class ServiceDao {
                         service.setPrice(rs.getDouble("price"));
                         service.setRatingCount(rs.getInt("rating_count"));
                         service.setCompletedOrders(rs.getInt("completed_orders"));
-						SERVICE.add(service);
+						services.add(service);
 					} while (rs.next());
 
 				}
@@ -79,11 +79,11 @@ public class ServiceDao {
 		catch (Exception e) {
 			throw new DaoException(e);
 		}
-		return SERVICE;
+		return services;
 
 	}
 
-    public List<Service> returnAllSERVICEOfACategory(String category) throws DaoException {
+    public List<Service> returnAllServiceOfACategory(String category) throws DaoException {
 		
 		List<Service> SERVICE = new ArrayList<Service>();
 		String sql = "SELECT * FROM SERVICE WHERE category = ?";
@@ -138,7 +138,7 @@ public class ServiceDao {
 			{
 				if(rs.next()) {
 					do {
-						categories.add(rs.getString(0));
+						categories.add(rs.getString("category"));
 					} while (rs.next());
 
 				}
@@ -208,7 +208,7 @@ public class ServiceDao {
     public Boolean updateAService(Service service)
     throws DaoException {
         //how to authenticate the provider here
-    String sql = "UPDATE SERVICE SET address_id = ?, is_approved = ?, category = ?, description = ?, image_url = ?, price = ?, service_radius = ?, rating_count = ?, COMPLETEDSERVICE = ? WHERE id = ? AND provider_id = ?";
+    String sql = "UPDATE SERVICE SET address_id = ?, is_approved = ?, category = ?, description = ?, image_url = ?, price = ?, service_radius = ?, rating_count = ?, completed_orders = ? WHERE id = ? AND provider_id = ?";
     //what to do about user id generation?
     try (Connection conn = DbUtil.createConnection(); 
         PreparedStatement stmt = conn.prepareStatement(sql);

@@ -87,33 +87,11 @@ public class UserDao {
 	}
 	
 	public Boolean addToWallet(Integer userId, Double amount) throws DaoException {
-		Double currentBalance = 0.0;
-		String sql = "SELECT * FROM USERS WHERE id =  ?";
-		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
-		{
-			stmt.setInt(1, userId);
-			try(ResultSet rs = stmt.executeQuery();
-					)
-			{
-				if(rs.next()) {
-					currentBalance = rs.getDouble("wallet_balance");
-				}
-				else
-				{
-					System.out.println("No data found!"); 
-				}
-			
-		   }
-				
-		}
-		catch (Exception e) {
-			throw new DaoException(e);
-		}
-		
-		String sql2 = "UPDATE USERS SET wallet_balance = ? WHERE id = ?";
+	
+		String sql2 = "UPDATE USERS SET wallet_balance = wallet_balance + ? WHERE id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql2);) 
 		{
-			stmt.setDouble(1, amount+currentBalance);
+			stmt.setDouble(1, amount);
 			stmt.setInt(2,userId);
 			stmt.executeUpdate(); 
 			System.out.println("Wallet updated");

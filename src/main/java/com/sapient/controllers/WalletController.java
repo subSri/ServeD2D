@@ -5,7 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.sapient.dao.*;
+import com.sapient.entity.Order;
+import com.sapient.entity.Service;
 import com.sapient.utils.JwtUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +41,11 @@ public class WalletController {
 			Integer userId = JwtUtil.verify(token);
 
 			Double myBalance = userDao.getBalance(userId);
-			return ResponseEntity.ok(myBalance);
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("user_id", userId);
+			map.put("balance", myBalance);
+			return ResponseEntity.ok(map);
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());
@@ -46,7 +55,7 @@ public class WalletController {
 
 	@PostMapping("/balance/add")
 	public ResponseEntity<?> addToWallet(@RequestHeader(name = "Authorization", required = false) String authHeader,
-			@RequestBody Double amount) {
+	@RequestHeader(name = "Amount", required = true) Double amount) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
 			// Authorization header is missing
@@ -58,10 +67,13 @@ public class WalletController {
 			log.info("token = {}", token);
 			Integer userId = JwtUtil.verify(token);
 
-			Double myBalance = userDao.getBalance(userId);
 			userDao.addToWallet(userId, amount);
-			myBalance = userDao.getBalance(userId);
-			return ResponseEntity.ok(myBalance);
+			Double myBalance = userDao.getBalance(userId);
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("user_id", userId);
+			map.put("balance", myBalance);
+			return ResponseEntity.ok(map);
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());
@@ -70,7 +82,7 @@ public class WalletController {
 
 	@PostMapping("/balance/withdraw")
 	public ResponseEntity<?> withdrawFromWallet(
-			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Double amount) {
+			@RequestHeader(name = "Authorization", required = false) String authHeader,@RequestHeader(name = "Amount", required = true) Double amount) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
 			// Authorization header is missing
@@ -82,18 +94,21 @@ public class WalletController {
 			log.info("token = {}", token);
 			Integer userId = JwtUtil.verify(token);
 
-			Double myBalance = userDao.getBalance(userId);
 			userDao.withdrawFromWallet(userId, amount);
-			myBalance = userDao.getBalance(userId);
-			return ResponseEntity.ok(myBalance); // should i check if amount is sufficient bcz it is being checked in
-													// withdraw method?
+			Double myBalance = userDao.getBalance(userId);
+			Map<String, Object> map = new HashMap<>();
+			map.put("success", true);
+			map.put("user_id", userId);
+			map.put("balance", myBalance);
+			return ResponseEntity.ok(map);
+			
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());
 		}
 	}
 
-        @PostMapping("/balance/payment")
+    @PostMapping("/balance/payment")
 	public ResponseEntity<?> makePayment(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Order order) {
 		log.info("authHeader = {}", authHeader);
@@ -106,16 +121,22 @@ public class WalletController {
 			String token = authHeader.split(" ")[1];
 			log.info("token = {}", token);
 			Integer userId = JwtUtil.verify(token);
-            Double currentBalance = userDao.getBalance(userId);
-            if(currentBalance>order.getAmount())
+
+            if(userDao.getBalance(userId) >= order.getAmount())
             {
-            	userDao.withdrawFromWallet(userId, order.getAmount());
-            	Integer serviceId =order.getServiceId();
-            	Service s = new Service();
-            	s = serviceDao.returnASpecificService(serviceId);
-            	userDao.addToWallet(s.getProviderId(), order.getAmount());
-            	currentBalance = userDao.getBalance(userId);
-            	return ResponseEntity.ok(currentBalance);
+            	Integer serviceId = order.getServiceId();
+
+            	Service service = new Service();
+
+            	service = serviceDao.returnASpecificService(serviceId);
+            	userDao.addToWallet(service.getProviderId(), order.getAmount());
+            	Map<String, Object> map = new HashMap<>();
+				map.put("success", true);
+				map.put("user_id", userId);
+				map.put("wallet_balance", userDao.getBalance(userId));
+				map.put("provider_id", service.getProviderId());
+				map.put("service", service);
+				return ResponseEntity.ok(map);
             }
             else
             {
