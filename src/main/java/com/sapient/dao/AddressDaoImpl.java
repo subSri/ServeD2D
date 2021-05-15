@@ -1,6 +1,8 @@
 package com.sapient.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.sapient.entity.Address;
 import com.sapient.utils.DbUtil;
@@ -50,33 +52,38 @@ public class AddressDaoImpl implements AddressDao{
 		}
 	}
     
-    public Address getAddress(Integer userId) throws DaoException 
+    public List<Address> getAddress(Integer userId) throws DaoException 
     {
 		String sql = "SELECT * FROM ADDRESS WHERE user_id = ?";
+		List<Address> addresses = new ArrayList<Address>();
 		try (Connection conn = DbUtil.createConnection(); 
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				) 
 		{
 			
+			
 		    stmt.setInt(1,userId);
 			try (ResultSet rs = stmt.executeQuery();) {
 				if (rs.next()) {
+					do{
 					Address address = new Address();
 					address.setAddressid(rs.getInt("address_id"));
 					address.setLat(rs.getDouble("latitude"));
 					address.setLongi(rs.getDouble("longitude"));
 					address.setUserId(userId);
-					return address;
+					addresses.add(address);
+					}while(rs.next());
+
 				} 
 			   else {
 					System.out.println("No such user");
-					return null;
 				}
 		   }
 		}
 		catch (Exception e) {
 			throw new DaoException(e);
 		}
+		return addresses;
 		
 	}
     

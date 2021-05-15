@@ -190,7 +190,7 @@ host: localhost:8080
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 
 ###
-//TODO//
+
 POST /api/address/edit
 host: localhost:8080
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
@@ -198,21 +198,21 @@ Content-Type: application/json
 
 {
   "addressid": 21,
-  "userId": 2,
+  "userId": 1,
   "lat": 50.7557791,
   "longi": 38.5709037
 }
 
 ###
-//TODO//
+
 POST /api/address/add
 host: localhost:8080
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
-  "addressid": 22,
-  "userId": 2,
+  "addressid":24 ,
+  "userId": 1,
   "lat": 50.7557791,
   "longi": 38.5709037
 }
@@ -258,16 +258,16 @@ host: localhost:8080
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 
 ###
-//TODO//
+
 POST /api/chats
 host: localhost:8080
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMDc3Njg5LCJpYXQiOjE2MjEwMTc2ODl9.gFYZMzcC1ggsroLBUvN8QVEpGB5EuAhj-U9dZHKsvac
 Content-Type: application/json
 
 {
-    "messageId": 1,
+    "messageId": 21,
     "senderId": 1,
-    "recieverId": 5,
+    "receiverId": 5,
     "content": "My Message",
     "timestamp": "2003-04-20"
 }

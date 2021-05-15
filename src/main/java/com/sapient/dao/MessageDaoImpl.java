@@ -36,7 +36,7 @@ public class MessageDaoImpl implements MessageDao {
 		
 		List<Message> chats = new ArrayList<Message>();
 		
-		String sql = "SELECT sender_id,reciever_id,content,MESSAGE.timestamp FROM MESSAGE JOIN `ORDER` ON MESSAGE.sender_id = `ORDER`.user_id WHERE `ORDER`.order_id = ?";
+		String sql = "SELECT message_id,sender_id,reciever_id,content,MESSAGE.timestamp FROM MESSAGE JOIN `ORDER` ON MESSAGE.sender_id = `ORDER`.user_id WHERE `ORDER`.order_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
 			stmt.setInt(1, orderId);
@@ -46,6 +46,7 @@ public class MessageDaoImpl implements MessageDao {
 				if(rs.next()) {
 					do {
 						Message message = new Message();
+						message.setMessageId(rs.getInt("message_id"));
 						message.setSenderId(rs.getInt("sender_id"));
 						message.setReceiverId(rs.getInt("reciever_id"));
 						message.setContent(rs.getString("content"));
