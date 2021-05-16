@@ -27,10 +27,8 @@ public class LoginController {
 
 		if (userDao.verifyUserCreds(user)) {
 			Map<String, Object> map = new HashMap<>();
-			map.put("id", user.getId()); // need to get this from DB using DAO
-			map.put("fullname", user.getName());
+			getResponse(user, map);
 			map.put("token", JwtUtil.createToken(user.getId(), user.getName()));
-			
 			return ResponseEntity.ok(map);
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email/password");
@@ -43,16 +41,18 @@ public class LoginController {
 		if (!(userDao.verifyUserCreds(user))) {
 			userDao.addNewUser(user);
 			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("id", user.getId());
-			map.put("fullname", user.getName());
-			
-
+			getResponse(user, map);
 			return ResponseEntity.ok(map);
 		} else {
 			return  ResponseEntity.status(HttpStatus.CONFLICT).body("This account already exists!");
 		}
 
+	}
+
+	private void getResponse(User user, Map<String, Object> map) {
+		map.put("success", true);
+		map.put("id", user.getId());
+		map.put("name", user.getName());
 	}
 	
 

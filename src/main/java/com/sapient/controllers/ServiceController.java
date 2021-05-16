@@ -103,13 +103,11 @@ public class ServiceController {
 		// log.info("authHeader = {}", authHeader);
 		if(authHeader==null) {
 			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 		
 		try {
-			String token = authHeader.split(" ")[1]; // second element from the header's value
-			// log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 
 			serviceDao.addNewService(service);
 			
@@ -125,6 +123,17 @@ public class ServiceController {
 		}
 	}
 
+	private Integer auth(String authHeader) throws Exception {
+		String token = authHeader.split(" ")[1]; // second element from the header's value
+		// log.info("token = {}", token);
+		Integer userId = JwtUtil.verify(token);
+		return userId;
+	}
+
+	private ResponseEntity<?> ifAuthNull() {
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+	}
+
     @PostMapping("/edit")
 	public ResponseEntity<?> updateAService(
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Service service) {
@@ -132,14 +141,11 @@ public class ServiceController {
 		
 		// log.info("authHeader = {}", authHeader);
 		if(authHeader==null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 		
 		try {
-			String token = authHeader.split(" ")[1]; // second element from the header's value
-			// log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 
 			serviceDao.updateAService(service);
 			

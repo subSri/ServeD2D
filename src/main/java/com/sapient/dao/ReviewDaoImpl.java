@@ -3,6 +3,7 @@ package com.sapient.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.sapient.entity.Review;
@@ -46,11 +47,7 @@ public class ReviewDaoImpl implements ReviewDao {
             {
                 if(rs.next()) {
                     do {
-                        Review review = new Review();
-                        review.setUserId(rs.getInt("user_id"));
-                        review.setServiceId(rs.getInt("service_id"));
-                        review.setRating(rs.getInt("rating"));
-                        review.setComment(rs.getString("comment"));
+                        Review review = getReviewObj(rs);
                         reviews.add(review);
                     } while (rs.next());
 
@@ -86,12 +83,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			{
 				if(rs.next()) {
                     do{
-                        Review review = new Review();
-						review.setUserId(rs.getInt("user_id"));
-						review.setServiceId(rs.getInt("service_id"));
-						review.setRating(rs.getInt("rating"));
-						review.setComment(rs.getString("comment"));
-						review.setReviewId(rs.getInt("review_id"));
+                        Review review = getReviewObj(rs);
                         reviews.add(review);
                     }while(rs.next());
 				}
@@ -112,6 +104,16 @@ public class ReviewDaoImpl implements ReviewDao {
 		return reviews;
 
 	}
+
+    private Review getReviewObj(ResultSet rs) throws SQLException {
+        Review review = new Review();
+        review.setUserId(rs.getInt("user_id"));
+        review.setServiceId(rs.getInt("service_id"));
+        review.setRating(rs.getInt("rating"));
+        review.setComment(rs.getString("comment"));
+        review.setReviewId(rs.getInt("review_id"));
+        return review;
+    }
   
 	public Boolean updateRatingCount(Integer rating, Integer serviceId) throws DaoException {
         //how to authenticate the provider here

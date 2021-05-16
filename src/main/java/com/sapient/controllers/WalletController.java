@@ -32,13 +32,11 @@ public class WalletController {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
 			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 
 		try {
-			String token = authHeader.split(" ")[1]; // second element from the header's value
-			log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 
 			Double myBalance = userDao.getBalance(userId);
 			Map<String, Object> map = new HashMap<>();
@@ -47,10 +45,20 @@ public class WalletController {
 			map.put("balance", myBalance);
 			return ResponseEntity.ok(map);
 		} catch (Exception ex) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body("Authorization token is invalid or " + ex.getMessage());
+			return getCatchResponse(ex);
 		}
 
+	}
+
+	private Integer auth(String authHeader) throws Exception {
+		String token = authHeader.split(" ")[1]; // second element from the header's value
+		log.info("token = {}", token);
+		Integer userId = JwtUtil.verify(token);
+		return userId;
+	}
+
+	private ResponseEntity<?> ifAuthNull() {
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
 	}
 
 	@PostMapping("/balance/add")
@@ -58,14 +66,11 @@ public class WalletController {
 	@RequestHeader(name = "Amount", required = true) Double amount) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 
 		try {
-			String token = authHeader.split(" ")[1];
-			log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 
 			userDao.addToWallet(userId, amount);
 			Double myBalance = userDao.getBalance(userId);
@@ -75,8 +80,7 @@ public class WalletController {
 			map.put("balance", myBalance);
 			return ResponseEntity.ok(map);
 		} catch (Exception ex) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body("Authorization token is invalid or " + ex.getMessage());
+			return getCatchResponse(ex);
 		}
 	}
 
@@ -85,14 +89,11 @@ public class WalletController {
 			@RequestHeader(name = "Authorization", required = false) String authHeader,@RequestHeader(name = "Amount", required = true) Double amount) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 
 		try {
-			String token = authHeader.split(" ")[1];
-			log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 
 			userDao.withdrawFromWallet(userId, amount);
 			Double myBalance = userDao.getBalance(userId);
@@ -103,9 +104,13 @@ public class WalletController {
 			return ResponseEntity.ok(map);
 			
 		} catch (Exception ex) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body("Authorization token is invalid or " + ex.getMessage());
+			return getCatchResponse(ex);
 		}
+	}
+
+	private ResponseEntity<?> getCatchResponse(Exception ex) {
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+				.body("Authorization token is invalid or " + ex.getMessage());
 	}
 
     @PostMapping("/balance/payment")
@@ -113,14 +118,11 @@ public class WalletController {
 			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Order order) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 
 		try {
-			String token = authHeader.split(" ")[1];
-			log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 
             if(userDao.getBalance(userId) >= order.getAmount())
             {
@@ -144,8 +146,7 @@ public class WalletController {
             	return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body("Insufficient balance in your wallet");
             }
 		} catch (Exception ex) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body("Authorization token is invalid or " + ex.getMessage());
+			return getCatchResponse(ex);
 		}
 	}
 

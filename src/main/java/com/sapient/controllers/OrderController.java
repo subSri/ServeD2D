@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.extern.slf4j.Slf4j;
+// import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/orders")
-@Slf4j
+// @Slf4j
 public class OrderController {
 
 
@@ -42,19 +42,15 @@ public class OrderController {
 		// log.info("authHeader = {}", authHeader);
 		if(authHeader==null) {
 			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 		
 		try {
-			String token = authHeader.split(" ")[1]; // second element from the header's value
-			// log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 			
 			List<Order> orders = orderDao.returnAllOrders(userId);
 			
-			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("user_id", userId);
+			Map<String, Object> map = getResponse(userId);
 			map.put("orders", orders); 
 			return ResponseEntity.ok(map);
 		}
@@ -63,13 +59,29 @@ public class OrderController {
 		}
 	}
 
+	private Map<String, Object> getResponse(Integer userId) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("success", true);
+		map.put("user_id", userId);
+		return map;
+	}
+
+	private Integer auth(String authHeader) throws Exception {
+		String token = authHeader.split(" ")[1]; // second element from the header's value
+		Integer userId = JwtUtil.verify(token);
+		return userId;
+	}
+
+	private ResponseEntity<?> ifAuthNull() {
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+	}
+
 	@GetMapping(value="", params = "status")
 	public ResponseEntity<?> getOrdersOnStatus(@RequestParam(name="status", required = true) String status,
 			@RequestHeader(name = "Authorization", required = false) String authHeader) {
 		// log.info("authHeader = {}", authHeader);
 		if(authHeader==null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 		
 		try {
@@ -95,9 +107,7 @@ public class OrderController {
 			}
 			
 			
-			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("user_id", userId);
+			Map<String, Object> map = getResponse(userId);
 			map.put("orders", orders); 
 			return ResponseEntity.ok(map);
 		}
@@ -111,29 +121,18 @@ public class OrderController {
 		@RequestHeader(name = "Authorization", required = false) String authHeader) {
 
 	if(authHeader==null) {
-		// Authorization header is missing
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+		return ifAuthNull();
 	}
-	
 	try {
-		String token = authHeader.split(" ")[1]; // second element from the header's value
-		// log.info("token = {}", token);
-		Integer userId = JwtUtil.verify(token);
+		Integer userId = auth(authHeader);
 		
 		Order order = orderDao.returnSpecificOrder(orderId, userId);
-		
-		Map<String, Object> map = new HashMap<>();
-		
+
 		if (order == null){
-			// map.put("success", true);
-			// map.put("user_id", userId);
-			// map.put("order", new Object[] {}); 
-			// return ResponseEntity.ok(map);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No requested Order found for the current User");
 		}
 		else{
-			map.put("success", true);
-			map.put("user_id", userId);
+			Map<String, Object> map = getResponse(userId);
 			map.put("order", order); 
 			return ResponseEntity.ok(map);
 		}
@@ -148,14 +147,11 @@ public class OrderController {
 			@RequestBody Order order) {
 		// log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 
 		try {
-			String token = authHeader.split(" ")[1];
-			// log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 			Order mod_order = new Order();
 
 			Integer status = order.getOrderStatus();
@@ -173,9 +169,7 @@ public class OrderController {
 				orderDao.acceptOrder(orderId);
 			}
 			mod_order = orderDao.returnSpecificOrder(orderId, userId);
-			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("user_id", userId);
+			Map<String, Object> map = getResponse(userId);
 			map.put("order_id", orderId);
 			map.put("order_details", mod_order); 
 			return ResponseEntity.ok(map);
@@ -193,20 +187,15 @@ public class OrderController {
 		
 		// log.info("authHeader = {}", authHeader);
 		if(authHeader==null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 		
 		try {
-			String token = authHeader.split(" ")[1]; // second element from the header's value
-			// log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
+			Integer userId = auth(authHeader);
 
 			orderDao.addNewOrder(order);
 			
-			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("user_id", userId);
+			Map<String, Object> map = getResponse(userId);
 			map.put("order", order); 
 			return ResponseEntity.ok(map);
 		}

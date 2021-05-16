@@ -3,6 +3,7 @@ package com.sapient.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,18 +51,7 @@ public class ServiceDaoImpl implements ServiceDao{
 			{
 				if(rs.next()) {
 					do {
-						Service service = new Service();
-						service.setServiceId(rs.getInt("service_id"));
-						service.setProviderId(rs.getInt("provider_id"));
-						service.setAddressId(rs.getInt("address_id"));
-						service.setIsApproved(rs.getBoolean("is_approved"));
-						service.setCategory(rs.getString("category"));
-						service.setDescription(rs.getString("description"));
-						service.setImageUrl(rs.getString("image_url"));
-						service.setServiceRadius(rs.getDouble("service_radius"));
-                        service.setPrice(rs.getDouble("price"));
-                        service.setRatingCount(rs.getInt("rating_count"));
-                        service.setCompletedOrders(rs.getInt("completed_orders"));
+						Service service = getServiceObj(rs);
 						services.add(service);
 					} while (rs.next());
 
@@ -84,9 +74,25 @@ public class ServiceDaoImpl implements ServiceDao{
 
 	}
 
+	private Service getServiceObj(ResultSet rs) throws SQLException {
+		Service service = new Service();
+		service.setServiceId(rs.getInt("service_id"));
+		service.setProviderId(rs.getInt("provider_id"));
+		service.setAddressId(rs.getInt("address_id"));
+		service.setIsApproved(rs.getBoolean("is_approved"));
+		service.setCategory(rs.getString("category"));
+		service.setDescription(rs.getString("description"));
+		service.setImageUrl(rs.getString("image_url"));
+		service.setServiceRadius(rs.getDouble("service_radius"));
+		service.setPrice(rs.getDouble("price"));
+		service.setRatingCount(rs.getInt("rating_count"));
+		service.setCompletedOrders(rs.getInt("completed_orders"));
+		return service;
+	}
+
     public List<Service> returnAllServiceOfACategory(String category) throws DaoException {
 		
-		List<Service> SERVICE = new ArrayList<Service>();
+		List<Service> serviceList = new ArrayList<Service>();
 		String sql = "SELECT * FROM SERVICE WHERE category = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
@@ -95,19 +101,8 @@ public class ServiceDaoImpl implements ServiceDao{
 			{
 				if(rs.next()) {
 					do {
-						Service service = new Service();
-						service.setServiceId(rs.getInt("service_id"));
-						service.setProviderId(rs.getInt("provider_id"));
-						service.setAddressId(rs.getInt("address_id"));
-						service.setIsApproved(rs.getBoolean("is_approved"));
-						service.setCategory(rs.getString("category"));
-						service.setDescription(rs.getString("description"));
-						service.setImageUrl(rs.getString("image_url"));
-						service.setServiceRadius(rs.getDouble("service_radius"));
-                        service.setPrice(rs.getDouble("price"));
-                        service.setRatingCount(rs.getInt("rating_count"));
-                        service.setCompletedOrders(rs.getInt("completed_orders"));
-						SERVICE.add(service);
+						Service service = getServiceObj(rs);
+						serviceList.add(service);
 					} while (rs.next());
 
 				}
@@ -125,7 +120,7 @@ public class ServiceDaoImpl implements ServiceDao{
 		catch (Exception e) {
 			throw new DaoException(e);
 		}
-		return SERVICE;
+		return serviceList;
 
 	}
 
@@ -170,23 +165,8 @@ public class ServiceDaoImpl implements ServiceDao{
             stmt.setInt(1, serviceId);
 			try(ResultSet rs = stmt.executeQuery();)
 			{
-				if(rs.next()) {
-
-                    
-                    service.setServiceId(rs.getInt("service_id"));
-                    service.setProviderId(rs.getInt("provider_id"));
-                    service.setAddressId(rs.getInt("address_id"));
-                    service.setIsApproved(rs.getBoolean("is_approved"));
-                    service.setCategory(rs.getString("category"));
-                    service.setDescription(rs.getString("description"));
-                    service.setImageUrl(rs.getString("image_url"));
-                    service.setServiceRadius(rs.getDouble("service_radius"));
-                    service.setPrice(rs.getDouble("price"));
-                    service.setRatingCount(rs.getInt("rating_count"));
-                    service.setCompletedOrders(rs.getInt("completed_orders"));
-                    
-
-
+				if(rs.next()) {    
+					service = getServiceObj(rs);
 				}
 				else
 				{
@@ -247,18 +227,7 @@ public class ServiceDaoImpl implements ServiceDao{
 			stmt.setInt(2, n);
 			try(ResultSet rs = stmt.executeQuery();) {
 				while(rs.next()) {
-					Service service = new Service();
-					service.setServiceId(rs.getInt("service_id"));
-					service.setProviderId(rs.getInt("provider_id"));
-					service.setAddressId(rs.getInt("address_id"));
-					service.setIsApproved(rs.getBoolean("is_approved"));
-					service.setCategory(rs.getString("category"));
-					service.setDescription(rs.getString("description"));
-					service.setImageUrl(rs.getString("image_url"));
-					service.setServiceRadius(rs.getDouble("service_radius"));
-					service.setPrice(rs.getDouble("price"));
-					service.setRatingCount(rs.getInt("rating_count"));
-					service.setCompletedOrders(rs.getInt("completed_orders"));
+					Service service = getServiceObj(rs);
 					topServices.add(service);
 				}
 			}
@@ -292,18 +261,7 @@ public class ServiceDaoImpl implements ServiceDao{
 			stmt.setInt(5, n);
 			try(ResultSet rs = stmt.executeQuery();) {
 				while(rs.next()) {
-					Service service = new Service();
-					service.setServiceId(rs.getInt("service_id"));
-					service.setProviderId(rs.getInt("provider_id"));
-					service.setAddressId(rs.getInt("address_id"));
-					service.setIsApproved(rs.getBoolean("is_approved"));
-					service.setCategory(rs.getString("category"));
-					service.setDescription(rs.getString("description"));
-					service.setImageUrl(rs.getString("image_url"));
-					service.setServiceRadius(rs.getDouble("service_radius"));
-					service.setPrice(rs.getDouble("price"));
-					service.setRatingCount(rs.getInt("rating_count"));
-					service.setCompletedOrders(rs.getInt("completed_orders"));
+					Service service = getServiceObj(rs);
 					topServiceProviders.add(service);
 				}
 			}

@@ -6,7 +6,7 @@ import com.sapient.utils.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,14 +50,7 @@ public class OrderDaoImpl implements OrderDao {
 			{
 				if(rs.next()) {
 					do {
-						Order order = new Order();
-						order.setOrderId(rs.getInt("order_id"));
-						order.setUserId(rs.getInt("user_id"));
-						order.setServiceId(rs.getInt("service_id"));
-						order.setAdressId(rs.getInt("address_id"));
-						order.setAmount(rs.getDouble("amount"));
-						order.setTimestamp(rs.getDate("timestamp"));
-						order.setOrderStatus(rs.getInt("status"));
+						Order order = getOrderObj(rs);
 						orders.add(order);
 					} while (rs.next());
 
@@ -80,6 +73,18 @@ public class OrderDaoImpl implements OrderDao {
 
 	}
 
+	private Order getOrderObj(ResultSet rs) throws SQLException {
+		Order order = new Order();
+		order.setOrderId(rs.getInt("order_id"));
+		order.setUserId(rs.getInt("user_id"));
+		order.setServiceId(rs.getInt("service_id"));
+		order.setAdressId(rs.getInt("address_id"));
+		order.setAmount(rs.getDouble("amount"));
+		order.setTimestamp(rs.getDate("timestamp"));
+		order.setOrderStatus(rs.getInt("status"));
+		return order;
+	}
+
 	public List<Order> returnAllIncompleteOrders(Integer userId) throws DaoException {
 		
 		List<Order> orders = new ArrayList<Order>();
@@ -92,14 +97,7 @@ public class OrderDaoImpl implements OrderDao {
 			{
 				if(rs.next()) {
 					do {
-						Order order = new Order();
-						order.setOrderId(rs.getInt("order_id"));
-						order.setUserId(rs.getInt("user_id"));
-						order.setServiceId(rs.getInt("service_id"));
-						order.setAdressId(rs.getInt("address_id"));
-						order.setAmount(rs.getDouble("amount"));
-						order.setTimestamp(rs.getDate("timestamp"));
-						order.setOrderStatus(rs.getInt("status"));
+						Order order = getOrderObj(rs);
 						orders.add(order);
 					} while (rs.next());
 
@@ -134,14 +132,7 @@ public class OrderDaoImpl implements OrderDao {
 			{
 				if(rs.next()) {
 					do {
-						Order order = new Order();
-						order.setOrderId(rs.getInt("order_id"));
-						order.setUserId(rs.getInt("user_id"));
-						order.setServiceId(rs.getInt("service_id"));
-						order.setAdressId(rs.getInt("address_id"));
-						order.setAmount(rs.getDouble("amount"));
-						order.setTimestamp(rs.getDate("timestamp"));
-						order.setOrderStatus(rs.getInt("status"));
+						Order order = getOrderObj(rs);
 						orders.add(order);
 					} while (rs.next());
 
@@ -176,14 +167,7 @@ public class OrderDaoImpl implements OrderDao {
 			{
 				if(rs.next()) {
 					do {
-						Order order = new Order();
-						order.setOrderId(rs.getInt("order_id"));
-						order.setUserId(rs.getInt("user_id"));
-						order.setServiceId(rs.getInt("service_id"));
-						order.setAdressId(rs.getInt("address_id"));
-						order.setAmount(rs.getDouble("amount"));
-						order.setTimestamp(rs.getDate("timestamp"));
-						order.setOrderStatus(rs.getInt("status"));
+						Order order = getOrderObj(rs);
 						orders.add(order);
 					} while (rs.next());
 
@@ -218,14 +202,7 @@ public class OrderDaoImpl implements OrderDao {
 			{
 				if(rs.next()) {
 					do {
-						Order order = new Order();
-						order.setOrderId(rs.getInt("order_id"));
-						order.setUserId(rs.getInt("user_id"));
-						order.setServiceId(rs.getInt("service_id"));
-						order.setAdressId(rs.getInt("address_id"));
-						order.setAmount(rs.getDouble("amount"));
-						order.setTimestamp(rs.getDate("timestamp"));
-						order.setOrderStatus(rs.getInt("status"));
+						Order order = getOrderObj(rs);
 						orders.add(order);
 					} while (rs.next());
 
@@ -260,14 +237,7 @@ public class OrderDaoImpl implements OrderDao {
 			{
 				if(rs.next()) {
 					do {
-						Order order = new Order();
-						order.setOrderId(rs.getInt("order_id"));
-						order.setUserId(rs.getInt("user_id"));
-						order.setServiceId(rs.getInt("service_id"));
-						order.setAdressId(rs.getInt("address_id"));
-						order.setAmount(rs.getDouble("amount"));
-						order.setTimestamp(rs.getDate("timestamp"));
-						order.setOrderStatus(rs.getInt("status"));
+						Order order = getOrderObj(rs);
 						orders.add(order);
 					} while (rs.next());
 
@@ -292,7 +262,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	public Order returnSpecificOrder(Integer orderId, Integer userId) throws DaoException {
 		
-		Order order;
+		
 		String sql = "SELECT * FROM `ORDER` WHERE order_id = ? AND user_id = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
@@ -301,15 +271,8 @@ public class OrderDaoImpl implements OrderDao {
 			try(ResultSet rs = stmt.executeQuery();)
 			{
 				if(rs.next()) {
-						order = new Order();
-						order.setOrderId(rs.getInt("order_id"));
-						order.setUserId(rs.getInt("user_id"));
-						order.setServiceId(rs.getInt("service_id"));
-						order.setAdressId(rs.getInt("address_id"));
-						order.setAmount(rs.getDouble("amount"));
-						order.setTimestamp(rs.getDate("timestamp"));
-						order.setOrderStatus(rs.getInt("status"));
-						return order;
+					Order order = getOrderObj(rs);
+					return order;
 				}
 				else
 				{

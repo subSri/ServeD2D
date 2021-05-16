@@ -26,48 +26,46 @@ public class AddressController {
 	public ResponseEntity<?> getAddressofUser(@RequestHeader(name = "Authorization", required = false) String authHeader) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 
 		try {
-			String token = authHeader.split(" ")[1];
-			log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
-			
+			Integer userId = auth(authHeader);
 			List<Address> addresses =addressDao.getAddress(userId);
-			
-			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("user_id", userId);
-			map.put("address", addresses);
-			return ResponseEntity.ok(map);
-     
+			return getResponse(userId, addresses);
 			
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());
 		}
+	}
+
+	private Integer auth(String authHeader) throws Exception {
+		String token = authHeader.split(" ")[1];
+		log.info("token = {}", token);
+		Integer userId = JwtUtil.verify(token);
+		return userId;
+	}
+
+	private ResponseEntity<?> getResponse(Integer userId, List<Address> addresses) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("success", true);
+		map.put("user_id", userId);
+		map.put("address", addresses);
+		return ResponseEntity.ok(map);
 	}
 	
 	@PostMapping("/edit")
 	public ResponseEntity<?> editAddress(@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Address address) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 
 		try {
-			String token = authHeader.split(" ")[1];
-			log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
-			addressDao.updateAddress(address);
-			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("user_id", userId);
-			map.put("address", address);
-			return ResponseEntity.ok(map);
+			Integer userId = auth(authHeader);
+			addressDao.updateAddress(address,userId);
+			return getResponse(address, userId);
 			
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -75,28 +73,33 @@ public class AddressController {
 		}
 	}
 
+	private ResponseEntity<?> getResponse(Address address, Integer userId) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("success", true);
+		map.put("user_id", userId);
+		map.put("address", address);
+		return ResponseEntity.ok(map);
+	}
+
 	@PostMapping("/add")
 	public ResponseEntity<?> addAddress(@RequestHeader(name = "Authorization", required = false) String authHeader,@RequestBody Address address) {
 		log.info("authHeader = {}", authHeader);
 		if (authHeader == null) {
-			// Authorization header is missing
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
+			return ifAuthNull();
 		}
 
 		try {
-			String token = authHeader.split(" ")[1];
-			log.info("token = {}", token);
-			Integer userId = JwtUtil.verify(token);
-			addressDao.addNewAddress(address);
-			Map<String, Object> map = new HashMap<>();
-			map.put("success", true);
-			map.put("user_id", userId);
-			map.put("address", address);
-			return ResponseEntity.ok(map);
+			Integer userId = auth(authHeader);
+			addressDao.addNewAddress(address, userId);
+			return getResponse(address, userId);
 			
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body("Authorization token is invalid or " + ex.getMessage());
 		}
+	}
+
+	private ResponseEntity<?> ifAuthNull() {
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
 	}
 }
