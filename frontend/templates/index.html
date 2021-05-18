@@ -15,22 +15,22 @@
 <body>
    
 
-    <div class="container">
-       <!-- NavBar -->
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5 opacity-85 shadow-transition" data-navbar-on-scroll="data-navbar-on-scroll" style="background-image: none; transition: none 0s ease 0s; background-color: rgb(249, 250, 253);">
-        <div class="container"><a class="navbar-brand" href="index.html"><img class="d-inline-block align-top img-fluid" src="../media/images/icons/logo.svg" alt="" width="50"><span class="text-theme font-monospace fs-4 ps-2">Serve-D2D</span></a><button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="navbar-collapse border-lg-0 mt-4 mt-lg-0 collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#header">Home</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-medium" href="#about">About</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-medium" href="#categories">Categories</a></li>
-              <!-- <li class="nav-item px-2"><a class="nav-link fw-medium" href="#invest">Invest</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-medium" href="#contact">Contact </a></li> -->
-            </ul>
-            <form class="d-flex"><button class="btn btn-lg btn-dark bg-gradient order-0" type="submit">Sign Up</button></form>
-          </div>
+  <div class="container">
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5 opacity-85 shadow-transition" data-navbar-on-scroll="data-navbar-on-scroll" style="background-image: none; transition: none 0s ease 0s; background-color: rgb(249, 250, 253);">
+      <div class="container"><a class="navbar-brand" href="index.html"><img class="d-inline-block align-top img-fluid" src="../media/images/icons/logo.svg" alt="" width="50"><span class="text-theme font-monospace fs-4 ps-2">Serve-D2D</span></a><button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="navbar-collapse border-lg-0 mt-4 mt-lg-0 collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#header">Home</a></li>
+            <li class="nav-item px-2"><a class="nav-link fw-medium" href="#about">About</a></li>
+            <li class="nav-item px-2"><a class="nav-link fw-medium" href="#categories">Categories</a></li>
+            <!-- <li class="nav-item px-2"><a class="nav-link fw-medium" href="#invest">Invest</a></li>
+            <li class="nav-item px-2"><a class="nav-link fw-medium" href="#contact">Contact </a></li> -->
+          </ul>
+          <form class="d-flex"><button class="btn btn-lg btn-dark bg-gradient order-0" type="submit">Sign Up</button></form>
         </div>
-      </nav>
+      </div>
+    </nav>
 
 
     <section class="py-0 mb-5" id="header">
@@ -102,13 +102,19 @@
 
     <hr>
 
+    <!-- Categories -->
     <section class="m-5">
       <div class="container-lg">
         <div class="row flex-center">
+          <div class="d-flex justify-content-center">
+          <div class="spinner-grow text-success" style="width: 3rem; height: 3rem;" role="status" id="loading">
+            <!-- <span class="sr-only">Loading...</span> -->
+          </div>
+        </div>
           <div class="col-12 col-lg-12">
             <div class="bg-holder" style="background-image:url(../media/images/door.png);background-position:top left;background-size:120px 83px;"></div>
             <!--/.bg-holder-->
-            <h6 class="fs-2 fs-lg-5 fw-bold lh-sm text-center">Services we offer</h6>
+            <h6 id="server_msg" class="fs-2 fs-lg-5 fw-bold lh-sm text-center"></h6>
           </div>
           <div class="row mt-5" id = "categories">
             <!-- <div class="col-sm-3">
@@ -135,15 +141,17 @@
     </section>
 
 
-    </div>
-    <hr>
-    <footer>
-      <div class="row-12 flex-center py-5">
-        <div class="col-12 text-center"> <a class="text-decoration-none" href="#"><span class="text-theme font-monospace fs-3 ps-2">Serve-D2D</span></a></div>
-       
-      </div>
-    </footer>
+  </div>
+
+  <hr>
+
+  <footer>
+    <div class="row-12 flex-center py-5">
+      <div class="col-12 text-center"> <a class="text-decoration-none" href="#"><span class="text-theme font-monospace fs-3 ps-2">Serve-D2D</span></a></div>
     
+    </div>
+  </footer>
+  
 
 
     
