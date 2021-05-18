@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sapient.dao.*;
+import com.sapient.entity.Address;
 import com.sapient.entity.Order;
 import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.JwtUtil;
@@ -35,6 +36,9 @@ public class OrderController {
 	@Autowired
 	private OrderDao orderDao;
 
+	@Autowired
+	private AddressDao addressDao;
+
 	
 	@GetMapping
 	public ResponseEntity<?> getOrdersForSpecificUser(
@@ -60,6 +64,43 @@ public class OrderController {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
 		}
 	}
+
+	@GetMapping("/provider")
+	public ResponseEntity<?> getOrdersForSpecificProviders(
+			@RequestHeader(name = "Authorization", required = false) String authHeader) {
+
+		
+		// log.info("authHeader = {}", authHeader);
+		if(authHeader==null) {
+			// Authorization header is missing
+			return ifAuthNull();
+		}
+		
+		try {
+			Integer provId = auth(authHeader);
+			
+			List<Order> orders = orderDao.returnAllOrdersForProvider(provId);
+			Map<String, Object> mainmap = new HashMap<>();
+			mainmap.put("success", true);
+			mainmap.put("user_id", provId);
+			
+			for (Order order : orders) {
+				Address address = addressDao.getAddressFromId(order.getAdressId()); 
+				Map<String, Object> map = new HashMap<>();
+				map.put("order",order);
+				map.put("address_of_consumer",address);
+
+
+				mainmap.put("info",map);
+				
+			}
+			return ResponseEntity.ok(mainmap);
+		}
+		catch(Exception ex) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
+		}
+	}
+
 
 	private Map<String, Object> getResponse(Integer userId) {
 		Map<String, Object> map = new HashMap<>();

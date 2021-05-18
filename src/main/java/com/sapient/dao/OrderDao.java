@@ -7,6 +7,7 @@ import com.sapient.entity.Order;
 public interface OrderDao {
 	public Boolean addNewOrder(Order order) throws DaoException;
 	public List<Order> returnAllOrders(Integer userId) throws DaoException;
+	public List<Order> returnAllOrdersForProvider(Integer provId) throws DaoException;
 	public List<Order> returnAllIncompleteOrders(Integer userId) throws DaoException;
 	public List<Order> returnAllRequestedOrders(Integer userId) throws DaoException ;
 	public List<Order> returnAllCancelledOrders(Integer userId) throws DaoException ;

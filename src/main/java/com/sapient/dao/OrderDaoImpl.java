@@ -73,6 +73,41 @@ public class OrderDaoImpl implements OrderDao {
 
 	}
 
+	public List<Order> returnAllOrdersForProvider(Integer provId) throws DaoException {
+		
+		List<Order> orders = new ArrayList<Order>();
+		String sql = "SELECT order_id,user_id,SERVICE.service_id,SERVICE.address_id,amount,timestamp,status FROM `ORDER` JOIN SERVICE ON `ORDER`.service_id = SERVICE.service_id WHERE provider_id = ?";
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
+		{
+			stmt.setInt(1, provId);
+			try(ResultSet rs = stmt.executeQuery();)
+			{
+				if(rs.next()) {
+					do {
+						Order order = getOrderObj(rs);
+						orders.add(order);
+					} while (rs.next());
+
+				}
+				else
+				{
+					System.out.println("No data found!"); 
+				}
+			
+			}
+			catch (Exception e) {
+				throw new DaoException(e);
+			}
+				
+		}
+		catch (Exception e) {
+			throw new DaoException(e);
+		}
+		return orders;
+
+	}
+
+
 	private Order getOrderObj(ResultSet rs) throws SQLException {
 		Order order = new Order();
 		order.setOrderId(rs.getInt("order_id"));

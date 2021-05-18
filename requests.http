@@ -17,7 +17,7 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "id" : 21,
+    "id" : 23,
     "name" : "Subham Srivastava",
     "isProvider" : false,
     "walletBalance" : "12.23",
@@ -32,17 +32,17 @@ Host: localhost:8080
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
 ###
 
-GET /api/orders
-Host: localhost:8080
-
-###
-
 GET /api/orders/1
 Host: localhost:8080
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
 ###
 
 GET /api/orders/21
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+###
+
+GET /api/orders/provider
 Host: localhost:8080
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
 ###
@@ -58,9 +58,9 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 Content-Type: application/json
 
 {
-    "orderId" : 21,
-    "userId" : 1,
-    "serviceId" : 2,
+    "orderId" : 22,
+    "userId" : 2,
+    "serviceId" : 23,
 	"adressId" : 1,
 	"timestamp" : "2013-01-20",
 	"orderStatus" : 2,
@@ -112,8 +112,8 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 Content-Type: application/json
 
 {
-    "serviceId": 22,
-    "providerId": 2,
+    "serviceId": 23,
+    "providerId": 1,
     "addressId": 2,
     "isApproved": true,
     "category": "mattis",
