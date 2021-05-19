@@ -87,6 +87,9 @@ public class OrderController {
 			for (Order order : orders) {
 				Address address = addressDao.getAddressFromId(order.getAdressId()); 
 				Map<String, Object> map = new HashMap<>();
+				// just call ur getUserInfo DAO which u will create 
+				// User user = userDao.getUserInfo(order.getUserId());
+				// map.put("consumer_info",user);
 				map.put("order",order);
 				map.put("address_of_consumer",address);
 
