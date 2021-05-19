@@ -82,11 +82,11 @@ public class OrderController {
 			List<Order> orders = orderDao.returnAllOrdersForProvider(provId);
 			Map<String, Object> mainmap = new HashMap<>();
 			mainmap.put("success", true);
-			mainmap.put("user_id", provId);
-			
+			mainmap.put("provider_id", provId);
+			Map<String, Object> map;
 			for (Order order : orders) {
 				Address address = addressDao.getAddressFromId(order.getAdressId()); 
-				Map<String, Object> map = new HashMap<>();
+				map = new HashMap<>();
 				// just call ur getUserInfo DAO which u will create 
 				// User user = userDao.getUserInfo(order.getUserId());
 				// map.put("consumer_info",user);
@@ -94,7 +94,7 @@ public class OrderController {
 				map.put("address_of_consumer",address);
 
 
-				mainmap.put("info",map);
+				mainmap.put("info"+order.getOrderId(),map);
 				
 			}
 			return ResponseEntity.ok(mainmap);

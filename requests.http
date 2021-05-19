@@ -12,6 +12,21 @@ Content-Type: application/json
 }
 ### 
 
+POST /api/login
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "id" : 2,
+    "name" : "Ewell Callaghan",
+    "isProvider" : "1",
+    "walletBalance" : "137.00",
+    "email": "ecallaghan1@abc.net.au",
+    "password": "EDyV9QRpV9E"
+}
+
+###
+
 POST /api/register
 Host: localhost:8080
 Content-Type: application/json
@@ -44,7 +59,7 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 
 GET /api/orders/provider
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFd2VsbCBDYWxsYWdoYW4iLCJpZCI6MiwiZXhwIjoxNjIxNDk4MjkzLCJpYXQiOjE2MjE0MzgyOTN9.6DJ0-Nh24H_uyY3Gw4wNGZm3wfJJm3pm8C15h_QTgh0
 ###
 
 GET /api/orders?status=1
