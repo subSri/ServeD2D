@@ -99,6 +99,40 @@ public class AddressDaoImpl implements AddressDao{
 		address.setUserId(userId);
 		return address;
 	}
+
+	public Address getAddressFromId(Integer addressId) throws DaoException 
+    {
+		String sql = "SELECT * FROM ADDRESS WHERE address_id = ?";
+		Address address;
+		try (Connection conn = DbUtil.createConnection(); 
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				) 
+		{
+			
+			
+		    stmt.setInt(1,addressId);
+			try (ResultSet rs = stmt.executeQuery();) {
+				if (rs.next()) {
+					
+					address = setAddressObj(addressId, rs);
+					return address;
+					
+
+				} 
+			   else {
+					System.out.println("No such address");
+					throw new DaoException("No such address");
+				}
+		   }
+		}
+		catch (Exception e) {
+			throw new DaoException(e);
+		}
+		
+		
+		
+	}
+
     
     
 

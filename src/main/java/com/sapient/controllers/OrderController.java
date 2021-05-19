@@ -6,18 +6,27 @@ import java.util.List;
 import java.util.Map;
 
 import com.sapient.dao.*;
-import com.sapient.entity.*;
+import com.sapient.entity.Address;
+import com.sapient.entity.Order;
 import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 // import lombok.extern.slf4j.Slf4j;
 
-@CrossOrigin 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/orders")
 // @Slf4j
@@ -26,9 +35,10 @@ public class OrderController {
 
 	@Autowired
 	private OrderDao orderDao;
-    
+
 	@Autowired
-	private UserDao userDao;
+	private AddressDao addressDao;
+
 	
 	@GetMapping
 	public ResponseEntity<?> getOrdersForSpecificUser(
@@ -45,18 +55,52 @@ public class OrderController {
 			Integer userId = auth(authHeader);
 			
 			List<Order> orders = orderDao.returnAllOrders(userId);
-//			User user = new User();
-//			user = userDao.getUserInfo(userId);
-//			String userName =user.getName();
+			
 			Map<String, Object> map = getResponse(userId);
-//			map.put("userName", userName);
-			map.put("orders", orders);
+			map.put("orders", orders); 
 			return ResponseEntity.ok(map);
 		}
 		catch(Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
 		}
 	}
+
+	@GetMapping("/provider")
+	public ResponseEntity<?> getOrdersForSpecificProviders(
+			@RequestHeader(name = "Authorization", required = false) String authHeader) {
+
+		
+		// log.info("authHeader = {}", authHeader);
+		if(authHeader==null) {
+			// Authorization header is missing
+			return ifAuthNull();
+		}
+		
+		try {
+			Integer provId = auth(authHeader);
+			
+			List<Order> orders = orderDao.returnAllOrdersForProvider(provId);
+			Map<String, Object> mainmap = new HashMap<>();
+			mainmap.put("success", true);
+			mainmap.put("user_id", provId);
+			
+			for (Order order : orders) {
+				Address address = addressDao.getAddressFromId(order.getAdressId()); 
+				Map<String, Object> map = new HashMap<>();
+				map.put("order",order);
+				map.put("address_of_consumer",address);
+
+
+				mainmap.put("info",map);
+				
+			}
+			return ResponseEntity.ok(mainmap);
+		}
+		catch(Exception ex) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
+		}
+	}
+
 
 	private Map<String, Object> getResponse(Integer userId) {
 		Map<String, Object> map = new HashMap<>();
