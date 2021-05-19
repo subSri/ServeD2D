@@ -20,7 +20,7 @@ $(document).ready(function(){
                     <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">${data.categories[cat]} </h5>
-                        <a href="#" class="btn btn-success">Explore</a>
+                        <a href="./servicelist.html?category=${data.categories[cat]}" class="btn btn-success">Explore</a>
                     </div>
                     </div>
                 </div>`
