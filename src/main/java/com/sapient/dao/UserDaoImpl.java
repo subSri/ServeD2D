@@ -150,6 +150,43 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 	
+	public User getUserInfo(Integer userId) throws DaoException
+	{
+		String sql = "SELECT * FROM USER WHERE user_id=?";
+		//what to do about user user_id generation?
+		User user = new User();
+		try (Connection conn = DbUtil.createConnection(); 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			) {
+			stmt.setInt(1, userId);
+			try(ResultSet rs = stmt.executeQuery();
+					)
+			{
+				if(rs.next()) {
+					
+					user.setId(rs.getInt(0));
+					user.setName(rs.getString(1));
+					user.setEmail(rs.getString(2));
+					user.setPassword(rs.getString(3));
+					user.setIsProvider(rs.getString(4));
+//					user.setWalletBalance(rs.getFloat(5));
+				}
+				else
+				{
+					System.out.println("No data found!"); 
+				}
+			
+		   }
+
+			System.out.println("new user added");
+			return user;
+
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+		
+	}
+	
 }
   
   

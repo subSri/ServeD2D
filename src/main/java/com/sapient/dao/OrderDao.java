@@ -2,7 +2,7 @@ package com.sapient.dao;
 
 import java.util.List;
 
-import com.sapient.entity.Order;
+import com.sapient.entity.*;
 
 public interface OrderDao {
 	public Boolean addNewOrder(Order order) throws DaoException;
