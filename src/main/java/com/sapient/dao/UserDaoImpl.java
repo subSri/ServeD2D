@@ -164,11 +164,11 @@ public class UserDaoImpl implements UserDao {
 			{
 				if(rs.next()) {
 					
-					user.setId(rs.getInt(0));
-					user.setName(rs.getString(1));
-					user.setEmail(rs.getString(2));
-					user.setPassword(rs.getString(3));
-					user.setIsProvider(rs.getString(4));
+					user.setId(rs.getInt("user_id"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setIsProvider(rs.getString("is_provider"));
 //					user.setWalletBalance(rs.getFloat(5));
 				}
 				else
