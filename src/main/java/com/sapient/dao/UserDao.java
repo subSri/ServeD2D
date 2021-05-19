@@ -11,6 +11,6 @@ public interface UserDao {
 	public Double getBalance(Integer userId) throws DaoException, ClassNotFoundException, SQLException ;
 	public Boolean addToWallet(Integer userId, Double amount) throws DaoException ;
 	public Boolean withdrawFromWallet(Integer userId, Double amount) throws DaoException;
-	
+	public User getUserInfo(Integer userId) throws DaoException;
 
 }

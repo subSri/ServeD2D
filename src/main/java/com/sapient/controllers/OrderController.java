@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sapient.dao.*;
-import com.sapient.entity.Address;
-import com.sapient.entity.Order;
+import com.sapient.entity.*;
 import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.JwtUtil;
 
@@ -38,6 +37,9 @@ public class OrderController {
 
 	@Autowired
 	private AddressDao addressDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	
 	@GetMapping
@@ -82,20 +84,23 @@ public class OrderController {
 			List<Order> orders = orderDao.returnAllOrdersForProvider(provId);
 			Map<String, Object> mainmap = new HashMap<>();
 			mainmap.put("success", true);
-			mainmap.put("provider_id", provId);
-			Map<String, Object> map;
+			User provider = new User();
+			provider = userDao.getUserInfo(provId);
+			mainmap.put("user_name", provider.getName());
+			List<Map<String, Object>> listOfOrders = new ArrayList<Map<String, Object>>();
+			mainmap.put("info", listOfOrders);
+			
+			
 			for (Order order : orders) {
 				Address address = addressDao.getAddressFromId(order.getAdressId()); 
+				Map<String, Object> map;
 				map = new HashMap<>();
-				// just call ur getUserInfo DAO which u will create 
-				// User user = userDao.getUserInfo(order.getUserId());
-				// map.put("consumer_info",user);
 				map.put("order",order);
 				map.put("address_of_consumer",address);
-
-
-				mainmap.put("info"+order.getOrderId(),map);
-				
+				User user = new User();
+				user = userDao.getUserInfo(order.getUserId());
+                map.put("name_of_consumer",user.getName());
+                listOfOrders.add(map);
 			}
 			return ResponseEntity.ok(mainmap);
 		}
