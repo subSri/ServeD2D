@@ -254,7 +254,7 @@ Content-Type: application/json
 
 GET /api/chats/all
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDc4MjA1LCJpYXQiOjE2MjE0MTgyMDV9.sTp4iykhZaXPzs6WYQ8lBAcqt_MRFyRzMhIU4hWZ4s4
 
 ###
 

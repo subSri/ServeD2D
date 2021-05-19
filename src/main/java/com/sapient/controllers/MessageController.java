@@ -1,6 +1,5 @@
 package com.sapient.controllers;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,37 +26,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
     @Autowired
-	private MessageDao messageDao;
-    
+    private MessageDao messageDao;
+
     @PostMapping
-    public ResponseEntity<?> addAMessage(
-			@RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Message message) {
+    public ResponseEntity<?> addAMessage(@RequestHeader(name = "Authorization", required = false) String authHeader,
+            @RequestBody Message message) {
 
-		
-		// log.info("authHeader = {}", authHeader);
-		if(authHeader==null) {
-			// Authorization header is missing
-			return ifAuthNull();
-		}
-		
-		try {
-			Integer userId = auth(authHeader);
+        // log.info("authHeader = {}", authHeader);
+        if (authHeader == null) {
+            // Authorization header is missing
+            return ifAuthNull();
+        }
 
-			Boolean done =  messageDao.liveMessage(message, userId);
-			if (done == true){
+        try {
+            Integer userId = auth(authHeader);
+
+            Boolean done = messageDao.liveMessage(message, userId);
+            if (done == true) {
                 Map<String, Object> map = getResponse(userId);
-                map.put("messages", message); 
+                map.put("messages", message);
 
                 return ResponseEntity.ok(map);
-            }
-            else{
+            } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Message not sent");
             }
-		}
-		catch(Exception ex) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
-		}
-	}
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Authorization token is invalid or " + ex.getMessage());
+        }
+    }
 
     private Integer auth(String authHeader) throws Exception {
         String token = authHeader.split(" ")[1]; // second element from the header's value
@@ -76,49 +73,50 @@ public class MessageController {
     private ResponseEntity<?> ifAuthNull() {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is missing");
     }
-    
-    @GetMapping(value="", params = "order_id")
-	public ResponseEntity<?> getMessagesOfASpecificOrder(@RequestParam(name="order_id", required = true) Integer orderId,
-		@RequestHeader(name = "Authorization", required = false) String authHeader) {
 
-        if(authHeader==null) {
+    @GetMapping(value = "", params = "order_id")
+    public ResponseEntity<?> getMessagesOfASpecificOrder(
+            @RequestParam(name = "order_id", required = true) Integer orderId,
+            @RequestHeader(name = "Authorization", required = false) String authHeader) {
+
+        if (authHeader == null) {
             return ifAuthNull();
         }
-	
+
         try {
             Integer userId = auth(authHeader);
-            
+
             List<Message> messages = messageDao.returnAllMessagesForAnOrder(orderId);
-            
+
             Map<String, Object> map = getResponse(userId);
-            map.put("messages", messages); 
+            map.put("messages", messages);
             return ResponseEntity.ok(map);
-        }
-        catch(Exception ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Authorization token is invalid or " + ex.getMessage());
         }
     }
 
     @GetMapping("/all")
     public ResponseEntity<?> getDetailsOfASpecificOrder(
-        @RequestHeader(name = "Authorization", required = false) String authHeader) {
+            @RequestHeader(name = "Authorization", required = false) String authHeader) {
 
-        if(authHeader==null) {
+        if (authHeader == null) {
             return ifAuthNull();
         }
-        
+
         try {
             Integer userId = auth(authHeader);
-            
-            List<Integer> messages = messageDao.returnChatsOfUser(userId);
-            
+
+            Map<Integer, Map<String, String>> messages = messageDao.returnChatsOfUser(userId);
+
             Map<String, Object> map = getResponse(userId);
-            map.put("messages", messages); 
+            map.put("messages", messages);
             return ResponseEntity.ok(map);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Authorization token is invalid or " + ex.getMessage());
         }
-        catch(Exception ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
-        }
+    }
+
 }
-    
-	}
