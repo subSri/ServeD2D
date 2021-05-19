@@ -8,11 +8,9 @@ import java.util.Map;
 import com.sapient.dao.*;
 import com.sapient.entity.Address;
 import com.sapient.entity.Order;
-import com.sapient.entity.User;
 import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.JwtUtil;
 
-//import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,11 +38,6 @@ public class OrderController {
 
 	@Autowired
 	private AddressDao addressDao;
-	
-	@Autowired
-	private UserDao userDao;
-	
-	
 
 	
 	@GetMapping
@@ -89,21 +82,20 @@ public class OrderController {
 			List<Order> orders = orderDao.returnAllOrdersForProvider(provId);
 			Map<String, Object> mainmap = new HashMap<>();
 			mainmap.put("success", true);
-			User provider = new User();
-			provider = userDao.getUserInfo(provId);
-			mainmap.put("user_name", provider.getName());
-			List<Map<String, Object>> listOfOrders = new ArrayList<Map<String, Object>>();
-			mainmap.put("info", listOfOrders);
+			mainmap.put("provider_id", provId);
+			Map<String, Object> map;
 			for (Order order : orders) {
 				Address address = addressDao.getAddressFromId(order.getAdressId()); 
-				Map<String, Object> map = new HashMap<>();
+				map = new HashMap<>();
+				// just call ur getUserInfo DAO which u will create 
+				// User user = userDao.getUserInfo(order.getUserId());
+				// map.put("consumer_info",user);
 				map.put("order",order);
 				map.put("address_of_consumer",address);
-				User user = new User();
-				user = userDao.getUserInfo(order.getUserId());
-                map.put("name_of_consumer",user.getName());
-                listOfOrders.add(map);
-//                mainmap.put("info"+order.getOrderId(),map);				// this is for passing the info about particular order as a map
+
+
+				mainmap.put("info"+order.getOrderId(),map);
+				
 			}
 			return ResponseEntity.ok(mainmap);
 		}

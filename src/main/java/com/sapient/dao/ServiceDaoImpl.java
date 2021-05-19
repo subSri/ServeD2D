@@ -87,13 +87,16 @@ public class ServiceDaoImpl implements ServiceDao{
 		service.setPrice(rs.getDouble("price"));
 		service.setRatingCount(rs.getInt("rating_count"));
 		service.setCompletedOrders(rs.getInt("completed_orders"));
+		service.setName(rs.getString("name"));
+		service.setRatings();
 		return service;
 	}
 
     public List<Service> returnAllServiceOfACategory(String category) throws DaoException {
 		
 		List<Service> serviceList = new ArrayList<Service>();
-		String sql = "SELECT * FROM SERVICE WHERE category = ?";
+		String sql ="SELECT SERVICE.*,USER.name FROM SERVICE INNER JOIN USER ON SERVICE.provider_id=USER.user_id WHERE SERVICE.category=?";
+		//String sql = "SELECT * FROM SERVICE WHERE category = ?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
 		{
             stmt.setString(1, category);

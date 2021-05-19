@@ -16,5 +16,13 @@ public class Service {
     private Double price;
     private Integer ratingCount;
     private Integer completedOrders;
+    private String name;
+    private Double ratings;
+
+    public void setRatings() {
+        Double count = Double.valueOf(getRatingCount());
+        Double nOrders = Double.valueOf(getCompletedOrders());
+        this.ratings = count/nOrders;
+    }
     
 }

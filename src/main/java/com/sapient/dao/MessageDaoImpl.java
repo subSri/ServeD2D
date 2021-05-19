@@ -5,21 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.sapient.entity.Message;
 import com.sapient.utils.DbUtil;
 
 public class MessageDaoImpl implements MessageDao {
-	
-    public Boolean liveMessage(Message message, Integer senderId)
-        throws DaoException {
-		if (senderId == message.getSenderId()){
+
+	public Boolean liveMessage(Message message, Integer senderId) throws DaoException {
+		if (senderId == message.getSenderId()) {
 			String sql = "INSERT INTO MESSAGE (message_id, sender_id, reciever_id, content, timestamp) VALUES (?,?,?,?,?)";
-			//what to do about user id generation?
-			try (Connection conn = DbUtil.createConnection(); 
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				) {
+			// what to do about user id generation?
+			try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 				stmt.setInt(1, message.getMessageId());
 				stmt.setInt(2, message.getSenderId());
 				stmt.setInt(3, message.getReceiverId());
@@ -32,42 +31,35 @@ public class MessageDaoImpl implements MessageDao {
 			} catch (Exception e) {
 				throw new DaoException(e);
 			}
-		}
-		else{
+		} else {
 			throw new DaoException("Forbidden Request");
 		}
 	}
 
-    public List<Message> returnAllMessagesForAnOrder(Integer orderId) throws DaoException {
-		
+	public List<Message> returnAllMessagesForAnOrder(Integer orderId) throws DaoException {
+
 		List<Message> chats = new ArrayList<Message>();
-		
+
 		String sql = "SELECT message_id,sender_id,reciever_id,content,MESSAGE.timestamp FROM MESSAGE JOIN `ORDER` WHERE (MESSAGE.sender_id = `ORDER`.user_id OR MESSAGE.reciever_id = `ORDER`.user_id) AND `ORDER`.order_id = ?";
-		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
-		{
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, orderId);
-			try(ResultSet rs = stmt.executeQuery();)
-			{
-                
-				if(rs.next()) {
+			try (ResultSet rs = stmt.executeQuery();) {
+
+				if (rs.next()) {
 					do {
 						Message message = getMessageObj(rs);
 						chats.add(message);
 					} while (rs.next());
 
+				} else {
+					System.out.println("No data found!");
 				}
-				else
-				{
-					System.out.println("No data found!"); 
-				}
-			
-			}
-			catch (Exception e) {
+
+			} catch (Exception e) {
 				throw new DaoException(e);
 			}
-				
-		}
-		catch (Exception e) {
+
+		} catch (Exception e) {
 			throw new DaoException(e);
 		}
 		return chats;
@@ -84,35 +76,36 @@ public class MessageDaoImpl implements MessageDao {
 		return message;
 	}
 
-    public List<Integer> returnChatsOfUser(Integer userId) throws DaoException {
-		
-		List<Integer> recievers = new ArrayList<Integer>();
-		//Costly Operation
-		String sql = "SELECT DISTINCT(reciever_id) from MESSAGE JOIN USER ON MESSAGE.reciever_id=USER.user_id  WHERE sender_id=?  ";
-		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
-		{
+	public Map<Integer, Map<String, String>> returnChatsOfUser(Integer userId) throws DaoException {
+
+		Map<Integer, Map<String, String>> recievers = new HashMap<Integer, Map<String, String>>();
+		// Costly Operation
+		String sql = "select name,user_id, content,max(timestamp) timestamp from (select reciever_id u_id,content,timestamp from MESSAGE where sender_id=? union select sender_id u_id,content,timestamp from MESSAGE where reciever_id=?) t,USER where user_id=u_id group by user_id";
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, userId);
-			try(ResultSet rs = stmt.executeQuery();)
-			{
-                
-				if(rs.next()) {
+			stmt.setInt(2, userId);
+			try (ResultSet rs = stmt.executeQuery();) {
+
+				if (rs.next()) {
 					do {
-						recievers.add(rs.getInt("reciever_id"));
+						Map<String, String> entry = new HashMap<>();
+						entry.put("user_id", rs.getString("user_id"));
+						entry.put("name", rs.getString("name"));
+						entry.put("timestamp", rs.getString("timestamp"));
+						entry.put("content", rs.getString("content"));
+
+						recievers.put(rs.getInt("user_id"), entry);
 					} while (rs.next());
 
+				} else {
+					System.out.println("User has made no conversation!");
 				}
-				else
-				{
-					System.out.println("User has made no conversation!"); 
-				}
-			
-			}
-			catch (Exception e) {
+
+			} catch (Exception e) {
 				throw new DaoException(e);
 			}
-				
-		}
-		catch (Exception e) {
+
+		} catch (Exception e) {
 			throw new DaoException(e);
 		}
 		return recievers;
@@ -120,35 +113,29 @@ public class MessageDaoImpl implements MessageDao {
 	}
 
 	public List<Message> returnAllMessagesForAReceiver(Integer recieverId) throws DaoException {
-		
+
 		List<Message> chats = new ArrayList<Message>();
-		
+
 		String sql = "SELECT message_id,sender_id,reciever_id,content,MESSAGE.timestamp FROM MESSAGE WHERE reciever_id = ?";
-		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) 
-		{
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, recieverId);
-			try(ResultSet rs = stmt.executeQuery();)
-			{
-                
-				if(rs.next()) {
+			try (ResultSet rs = stmt.executeQuery();) {
+
+				if (rs.next()) {
 					do {
 						Message message = getMessageObj(rs);
 						chats.add(message);
 					} while (rs.next());
 
+				} else {
+					System.out.println("No data found!");
 				}
-				else
-				{
-					System.out.println("No data found!"); 
-				}
-			
-			}
-			catch (Exception e) {
+
+			} catch (Exception e) {
 				throw new DaoException(e);
 			}
-				
-		}
-		catch (Exception e) {
+
+		} catch (Exception e) {
 			throw new DaoException(e);
 		}
 		return chats;

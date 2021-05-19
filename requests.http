@@ -12,6 +12,21 @@ Content-Type: application/json
 }
 ### 
 
+POST /api/login
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "id" : 2,
+    "name" : "Ewell Callaghan",
+    "isProvider" : "1",
+    "walletBalance" : "137.00",
+    "email": "ecallaghan1@abc.net.au",
+    "password": "EDyV9QRpV9E"
+}
+
+###
+
 POST /api/register
 Host: localhost:8080
 Content-Type: application/json
@@ -29,32 +44,32 @@ Content-Type: application/json
 
 GET /api/orders
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 GET /api/orders/1
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 GET /api/orders/21
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 GET /api/orders/provider
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFd2VsbCBDYWxsYWdoYW4iLCJpZCI6MiwiZXhwIjoxNjIxNDk4MjkzLCJpYXQiOjE2MjE0MzgyOTN9.6DJ0-Nh24H_uyY3Gw4wNGZm3wfJJm3pm8C15h_QTgh0
 ###
 
 GET /api/orders?status=1
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 POST /api/orders
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Content-Type: application/json
 
 {
@@ -71,7 +86,7 @@ Content-Type: application/json
 
 POST /api/orders?order_id=21
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Content-Type: application/json
 
 {
@@ -88,27 +103,27 @@ Content-Type: application/json
 
 GET /api/services
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 GET /api/services/categories
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 GET /api/services?category=consectetuer
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 GET /api/services/2
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 POST /api/services
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Content-Type: application/json
 
 {
@@ -129,7 +144,7 @@ Content-Type: application/json
 
 POST /api/services/edit
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Content-Type: application/json
 
 {
@@ -148,33 +163,33 @@ Content-Type: application/json
 
 ###
 
-GET /api/services/consectetuer/3
+GET /api/services/consectetuer/4
 host: localhost:8080
 
 ### PAYMENT ----------------------------------------------------------------------------------------------
 
 GET /api/wallet/balance
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 ###
 
 POST /api/wallet/balance/add
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Amount : 20
 
 ###
 
 POST /api/wallet/balance/withdraw
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Amount : 10
 
 ###
 
 POST /api/wallet/balance/payment
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Content-Type: application/json
 
 {
@@ -192,13 +207,13 @@ Content-Type: application/json
 
 GET /api/address
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 
 ###
 
 POST /api/address/edit
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Content-Type: application/json
 
 {
@@ -212,7 +227,7 @@ Content-Type: application/json
 
 POST /api/address/add
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Content-Type: application/json
 
 {
@@ -226,19 +241,19 @@ Content-Type: application/json
 
 GET /api/reviews/5
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 
 ###
 
 GET /api/reviews
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 
 ###
 
 POST /api/reviews
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 OrderStatus : 2
 Content-Type: application/json
 
@@ -254,19 +269,19 @@ Content-Type: application/json
 
 GET /api/chats/all
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDc4MjA1LCJpYXQiOjE2MjE0MTgyMDV9.sTp4iykhZaXPzs6WYQ8lBAcqt_MRFyRzMhIU4hWZ4s4
 
 ###
 
 GET /api/chats?order_id=1
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 
 ###
 
 POST /api/chats
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxMzg0Njk0LCJpYXQiOjE2MjEzMjQ2OTR9.4GKOhGuKjLX1MFLbHP9maqM1Y8yMTryCrUbWdZEf0-o
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
 Content-Type: application/json
 
 {
