@@ -25,13 +25,13 @@ public class DbConnTest {
         
     }
 
-    // @AfterAll
-    // public static void after() throws SQLException,ClassNotFoundException {
-    //     if (connection != null){
-    //         connection.close();
-    //     }
+    @AfterAll
+    public static void after() throws SQLException,ClassNotFoundException {
+        if (connection != null){
+            connection.close();
+        }
         
-    // }
+    }
 
     @Test
     public void createConnection_connectionActive() throws SQLException,ClassNotFoundException {

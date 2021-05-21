@@ -13,9 +13,9 @@ public final class DbUtil {
 
 	public static Connection createConnection() throws SQLException, ClassNotFoundException {
 
-		// if (connection != null){
-		// 	return connection;
-		// }
+		if (connection != null){
+			return connection;
+		}
 
 		ResourceBundle rb = ResourceBundle.getBundle("jdbc-data");
 		String driverClassName = rb.getString("jdbc.driverClassName");
@@ -27,5 +27,11 @@ public final class DbUtil {
 		connection = DriverManager.getConnection(url, username, password);
 		return connection;
 	}
+
+
+	// public static void main(String[] args) throws SQLException, ClassNotFoundException{
+	// 	System.out.println("Connection is : "+ DbUtil.createConnection());
+		
+	// }
 
 }

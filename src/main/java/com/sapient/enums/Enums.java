@@ -3,7 +3,6 @@ package com.sapient.enums;
 public final class Enums {
     
     public enum OrderStatus {
-        REQUESTED,
         CONFIRMED,
         COMPLETED,
         CANCELLED,
