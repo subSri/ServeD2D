@@ -1,6 +1,6 @@
 package com.sapient.entity;
 
-import java.util.Date;
+import java.sql.Date;
 import lombok.Data;
 
 @Data
@@ -10,7 +10,4 @@ public class Message {
 	private Integer receiverId;
 	private String content;
 	private Date timestamp;
-	
-	
-
 }

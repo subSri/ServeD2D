@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/bootstrap.min.css" rel= "stylesheet" type="text/css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="..\scripts\jquery-3.6.0.js"></script>
+   
+    <title>Document</title>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="100" height="100" class="d-inline-block align-top" alt="">
+      D2D Service
+    </a>
+    <div class = "d-flex flex-row-reverse bd-highlight"> 
+        <div class="p-2 bd-highlight">
+            <ul class="nav nav-tabs">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="name">Hi </a>
+                       <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">My profile</a>
+                            <a class="dropdown-item" href="#">My wallet</a>
+                            <a class="dropdown-item" href="#">My services</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+  <div class="card">
+    <div class="card-body">
+        <h3>Live orders</h3>
+        <div id="liveOrders">
+
+        </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+        <h3>Current orders</h3>
+        <div id="currentOrders">
+
+        </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+        <h3>Completed orders</h3>
+        <div id="completedOrders">
+
+        </div>
+    </div>
+  </div>
+  <script src="../scripts/providerDashboard.js"></script>
+</body>
+</html>
+
+
