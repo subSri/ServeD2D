@@ -1,0 +1,78 @@
+.outFrame{
+	
+}
+.inFrame{
+	margin:10% auto;
+	height:60%;
+	width:70%;
+	
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.leftpic{
+    position:relative;
+	height: 100%;
+    width: 70%;
+    float: left;
+    
+}
+.textonpic{
+    position: absolute;
+      font-family:monospace;
+    font-size: 35px;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.rightact{
+    
+    background-color:white;
+height: 100%;
+    width: 30%;
+    float: right;
+   
+}
+h3{
+    
+    font-family: monospace;
+    font-size:20px;
+    color:#008CBA;
+    
+}
+.myIcon{
+    float:right;
+    margin-right:5%;
+    margin-top: 5%;
+}
+.block1{
+    margin-left: 15%;
+    margin-top: 10%;
+}
+.block {
+	    margin-top: 30%;
+    margin-left: 17%;
+}
+
+input[type=text],input[type=password]{
+	padding: 12px 20px;
+  margin: 3px;
+/*  box-sizing: border-box;*/
+  border-radius:2px;
+}
+
+input[type=submit]{
+    width:78%;
+  background-color:#008CBA;/* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+border-radius: 50px;
+}
+
+input[type=submit]:hover{
+      opacity: 0.6;
+}
