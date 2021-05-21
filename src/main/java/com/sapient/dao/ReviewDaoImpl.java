@@ -13,19 +13,25 @@ public class ReviewDaoImpl implements ReviewDao {
     
     public Review addReview(Review review)
     throws DaoException {
-    String sql = "INSERT INTO REVIEW (review_id, user_id, service_id, rating, comment) VALUES (?,?,?,?,?)";
-    //what to do about user id generation?
+//    String sql = "INSERT INTO REVIEW (review_id, user_id, service_id, rating, comment) VALUES (?,?,?,?,?)";
+    	String sql = "INSERT INTO REVIEW (user_id, service_id, rating, comment) VALUES (?,?,?,?)";
     try (Connection conn = DbUtil.createConnection(); 
         PreparedStatement stmt = conn.prepareStatement(sql);
         ) {
-        stmt.setInt(1, review.getReviewId());
-        stmt.setInt(2, review.getUserId());
-        stmt.setInt(3, review.getServiceId());
-        stmt.setInt(4, review.getRating());
-        stmt.setString(5,review.getComment());
+//        stmt.setInt(1, review.getReviewId());
+        stmt.setInt(1, review.getUserId());
+        stmt.setInt(2, review.getServiceId());
+        stmt.setInt(3, review.getRating());
+        stmt.setString(4,review.getComment());
 
         stmt.executeUpdate();
-        System.out.println("review added");
+        
+        ResultSet key = stmt.getGeneratedKeys();
+		if(key.next())
+		{
+			int id = key.getInt(1);  // or "review_id"
+			 System.out.println("review added" + id);
+		}
         updateRatingCount(review.getRating(), review.getServiceId());
         return review;
         
