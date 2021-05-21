@@ -3,11 +3,12 @@ package com.sapient.dao;
 import java.sql.*;
 
 import com.sapient.entity.User;
+import com.sapient.dto.LoginUser;
 import com.sapient.utils.DbUtil;
 
 public class UserDaoImpl implements UserDao {
 
-	public Boolean verifyUserCreds(User user) throws DaoException {
+	public Boolean verifyUserCreds(LoginUser user) throws DaoException {
 		String sql = "SELECT password FROM USER where email = ?";
 		//what to do about user user_id generation?
 		try (Connection conn = DbUtil.createConnection(); 
@@ -24,10 +25,7 @@ public class UserDaoImpl implements UserDao {
 						System.out.println("User Verified");
 						return true;
 					}
-				} else {
-					System.out.println("No such user");
 				}
-
 			} catch (Exception e) {
 				throw new DaoException(e);
 			}
@@ -174,6 +172,44 @@ public class UserDaoImpl implements UserDao {
 				else
 				{
 					System.out.println("No data found!"); 
+				}
+			
+		   }
+
+			System.out.println("new user added");
+			return user;
+
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+		
+	}
+	
+	public User getUser(String email) throws DaoException
+	{
+		String sql = "SELECT * FROM USER WHERE email=?";
+		//what to do about user user_id generation?
+		User user = new User();
+		try (Connection conn = DbUtil.createConnection(); 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			) {
+			stmt.setString(1, email);
+			try(ResultSet rs = stmt.executeQuery();
+					)
+			{
+				if(rs.next()) {
+					
+					user.setId(rs.getInt("user_id"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setIsProvider(rs.getString("is_provider"));
+//					user.setWalletBalance(rs.getFloat(5));
+				}
+				else
+				{
+					System.out.println("No data found!");
+					return null;
 				}
 			
 		   }

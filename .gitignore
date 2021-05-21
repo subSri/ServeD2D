@@ -40,3 +40,4 @@ target/**
 /target/
 
 .bin/
+/bin/

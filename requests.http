@@ -3,10 +3,6 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "id" : 1,
-    "name" : "Phyllys Sowtere",
-    "isProvider" : "1",
-    "walletBalance" : "73.5",
     "email": "psowter0@fastcompany.com",
     "password": "1iYFwMf3"
 }
