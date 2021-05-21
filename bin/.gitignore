@@ -1,4 +1,4 @@
-
+jdbc-data.properties
 
 # Compiled class file
 *.class
@@ -37,7 +37,3 @@ target/**
 
 
 .settings/**
-/target/
-
-
-.bin/
