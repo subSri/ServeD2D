@@ -3,10 +3,7 @@ package com.sapient.dao;
 import com.sapient.enums.Enums.OrderStatus;
 import com.sapient.utils.DbUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,21 +14,27 @@ public class OrderDaoImpl implements OrderDao {
     
     public Boolean addNewOrder(Order order)
 			throws DaoException {
-		String sql = "INSERT INTO `ORDER` (order_id, user_id, service_id, address_id, timestamp, status, amount) VALUES (?,?,?,?,?,?,?)";
-		//what to do about user id generation?
+//		String sql = "INSERT INTO `ORDER` (order_id, user_id, service_id, address_id, timestamp, status, amount) VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO `ORDER` (user_id, service_id, address_id, timestamp, status, amount) VALUES (?,?,?,?,?,?)";
 		try (Connection conn = DbUtil.createConnection(); 
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			) {
-			stmt.setInt(1, order.getOrderId());
-            stmt.setInt(2, order.getUserId());
-            stmt.setInt(3, order.getServiceId());
-            stmt.setInt(4, order.getAdressId());
-			stmt.setDate(5, order.getTimestamp());
-			stmt.setInt(6, order.getOrderStatus());
-			stmt.setDouble(7, order.getAmount());
+//			stmt.setInt(1, order.getOrderId());
+            stmt.setInt(1, order.getUserId());
+            stmt.setInt(2, order.getServiceId());
+            stmt.setInt(3, order.getAdressId());
+			stmt.setDate(4, order.getTimestamp());
+			stmt.setInt(5, order.getOrderStatus());
+			stmt.setDouble(6, order.getAmount());
 
 			stmt.executeUpdate();
-			System.out.println("new order added");
+			
+			ResultSet key = stmt.getGeneratedKeys();
+			if(key.next())
+			{
+				int id = key.getInt(1);  // or "order_id"
+				System.out.println("new order added" + id);
+			}
 			return true;
 
 		} catch (Exception e) {
