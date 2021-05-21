@@ -7,23 +7,30 @@ import java.util.List;
 import com.sapient.entity.Address;
 import com.sapient.utils.DbUtil;
 
-public class AddressDaoImpl implements AddressDao{
-    
-    public Boolean addNewAddress(Address address, Integer userId)
+public class AddressDaoImpl implements AddressDao {
+
+	public Boolean addNewAddress(Address address, Integer userId)
 			throws DaoException {
 				
 		if (address.getUserId() == userId){
-			String sql = "INSERT INTO ADDRESS (address_id, user_id, latitude, longitude) VALUES (?,?,?,?)";
+//			String sql = "INSERT INTO ADDRESS (address_id, user_id, latitude, longitude) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO ADDRESS (user_id, latitude, longitude) VALUES (?,?,?)";
 			try (Connection conn = DbUtil.createConnection(); 
-				PreparedStatement stmt = conn.prepareStatement(sql);
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				) {
-					stmt.setInt(1, address.getAddressid());
-					stmt.setInt(2, address.getUserId());
-					stmt.setDouble(3, address.getLat());
-					stmt.setDouble(4, address.getLongi());
+//					stmt.setInt(1, address.getAddressid());
+					stmt.setInt(1, address.getUserId());
+					stmt.setDouble(2, address.getLat());
+					stmt.setDouble(3, address.getLongi());
 			
 					stmt.executeUpdate();
-				System.out.println("new address added");
+					
+					ResultSet key = stmt.getGeneratedKeys();
+					if(key.next())
+					{
+						int id = key.getInt(1);  // or "address_id"
+				        System.out.println("new address added" + id);
+					}
 				return true;
 
 			} catch (Exception e) {
@@ -36,20 +43,16 @@ public class AddressDaoImpl implements AddressDao{
 
 	}
 
-
-    public Boolean updateAddress(Address address, Integer userId)
-			throws DaoException {
-		if (address.getUserId() == userId){
+	public Boolean updateAddress(Address address, Integer userId) throws DaoException {
+		if (address.getUserId() == userId) {
 			String sql = "UPDATE ADDRESS SET latitude = ?, longitude = ? WHERE address_id = ? AND user_id = ?";
-			try (Connection conn = DbUtil.createConnection(); 
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				) {
-					stmt.setInt(3, address.getAddressid());
-					stmt.setInt(4, userId);
-					stmt.setDouble(1, address.getLat());
-					stmt.setDouble(2, address.getLongi());
-			
-					stmt.executeUpdate();
+			try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+				stmt.setInt(3, address.getAddressid());
+				stmt.setInt(4, userId);
+				stmt.setDouble(1, address.getLat());
+				stmt.setDouble(2, address.getLongi());
+
+				stmt.executeUpdate();
 				System.out.println(" address updated");
 				return true;
 
@@ -59,36 +62,29 @@ public class AddressDaoImpl implements AddressDao{
 		}
 		throw new DaoException("Requested user not logged in");
 	}
-    
-    public List<Address> getAddress(Integer userId) throws DaoException 
-    {
+
+	public List<Address> getAddress(Integer userId) throws DaoException {
 		String sql = "SELECT * FROM ADDRESS WHERE user_id = ?";
 		List<Address> addresses = new ArrayList<Address>();
-		try (Connection conn = DbUtil.createConnection(); 
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				) 
-		{
-			
-			
-		    stmt.setInt(1,userId);
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+			stmt.setInt(1, userId);
 			try (ResultSet rs = stmt.executeQuery();) {
 				if (rs.next()) {
-					do{
-					Address address = setAddressObj(userId, rs);
-					addresses.add(address);
-					}while(rs.next());
+					do {
+						Address address = setAddressObj(userId, rs);
+						addresses.add(address);
+					} while (rs.next());
 
-				} 
-			   else {
+				} else {
 					System.out.println("No such user");
 				}
-		   }
-		}
-		catch (Exception e) {
+			}
+		} catch (Exception e) {
 			throw new DaoException(e);
 		}
 		return addresses;
-		
+
 	}
 
 	private Address setAddressObj(Integer userId, ResultSet rs) throws SQLException {
@@ -100,40 +96,27 @@ public class AddressDaoImpl implements AddressDao{
 		return address;
 	}
 
-	public Address getAddressFromId(Integer addressId) throws DaoException 
-    {
+	public Address getAddressFromId(Integer addressId) throws DaoException {
 		String sql = "SELECT * FROM ADDRESS WHERE address_id = ?";
 		Address address;
-		try (Connection conn = DbUtil.createConnection(); 
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				) 
-		{
-			
-			
-		    stmt.setInt(1,addressId);
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+			stmt.setInt(1, addressId);
 			try (ResultSet rs = stmt.executeQuery();) {
 				if (rs.next()) {
-					
+
 					address = setAddressObj(addressId, rs);
 					return address;
-					
 
-				} 
-			   else {
+				} else {
 					System.out.println("No such address");
 					throw new DaoException("No such address");
 				}
-		   }
-		}
-		catch (Exception e) {
+			}
+		} catch (Exception e) {
 			throw new DaoException(e);
 		}
-		
-		
-		
-	}
 
-    
-    
+	}
 
 }

@@ -1,9 +1,6 @@
 package com.sapient.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,16 +13,23 @@ public class MessageDaoImpl implements MessageDao {
 
 	public Boolean liveMessage(Message message, Integer senderId) throws DaoException {
 		if (senderId == message.getSenderId()) {
-			String sql = "INSERT INTO MESSAGE (message_id, sender_id, reciever_id, content, timestamp) VALUES (?,?,?,?,?)";
-			// what to do about user id generation?
-			try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
-				stmt.setInt(1, message.getMessageId());
-				stmt.setInt(2, message.getSenderId());
-				stmt.setInt(3, message.getReceiverId());
-				stmt.setString(4, message.getContent());
-				stmt.setDate(5, (java.sql.Date) message.getTimestamp());
+//			String sql = "INSERT INTO MESSAGE (message_id, sender_id, reciever_id, content, timestamp) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO MESSAGE (sender_id, reciever_id, content, timestamp) VALUES (?,?,?,?)";
+			try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);) {
+//				stmt.setInt(1, message.getMessageId());
+				stmt.setInt(1, message.getSenderId());
+				stmt.setInt(2, message.getReceiverId());
+				stmt.setString(3, message.getContent());
+				stmt.setDate(4, (java.sql.Date) message.getTimestamp());
 				stmt.executeUpdate();
-				System.out.println("message sent");
+				
+				ResultSet key = stmt.getGeneratedKeys();
+				if(key.next())
+				{
+					int id = key.getInt(1);  // or "message_id"
+					System.out.println("message sent" + id);
+				}
+				
 				return true;
 
 			} catch (Exception e) {

@@ -10,7 +10,6 @@ public class UserDaoImpl implements UserDao {
 
 	public Boolean verifyUserCreds(LoginUser user) throws DaoException {
 		String sql = "SELECT password FROM USER where email = ?";
-		//what to do about user user_id generation?
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			) {
@@ -39,20 +38,26 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public Boolean addNewUser(User user) throws DaoException {
-		String sql = "INSERT INTO USER (user_id, name, email, password, is_provider, wallet_balance) VALUES (?,?,?,?,?,?)";
-		//what to do about user user_id generation?
+//		String sql = "INSERT INTO USER (user_id, name, email, password, is_provider, wallet_balance) VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO USER (name, email, password, is_provider, wallet_balance) VALUES (?,?,?,?,?)";
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			) {
-			stmt.setInt(1, user.getId());
-			stmt.setString(2, user.getName());
-			stmt.setString(3, user.getEmail());
-			stmt.setString(4, user.getPassword());
-			stmt.setBoolean(5, user.getIsProvider());
-			stmt.setDouble(6, user.getWalletBalance());
+//			stmt.setInt(1, user.getId());
+			stmt.setString(1, user.getName());
+			stmt.setString(2, user.getEmail());
+			stmt.setString(3, user.getPassword());
+			stmt.setBoolean(4, user.getIsProvider());
+			stmt.setDouble(5, user.getWalletBalance());
 
 			stmt.executeUpdate();
-			System.out.println("new user added");
+			
+			ResultSet key = stmt.getGeneratedKeys();
+		    if(key.next())
+			{
+				int id = key.getInt(1);  // or "review_id"
+				System.out.println("new user added" + id);
+			}
 			return true;
 
 		} catch (Exception e) {
