@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\css\wallet.css">
+    <script src="..\scripts\jquery-3.6.0.js"></script>
+    <script src="..\scripts\get_balance.js"></script>
+    
+    <title>My Wallet</title>
+    <style>
+      /* body { padding-top: 120px; } */
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+      <div class="app-wrapper">
+  
+        <!--Wallet-->
+        <aside class="wallet">
+          <h2>My Wallet</h2>
+          <!-- <div class="modal-control">+</div> -->
+          <br><br>
+            <!-- <button id="withdraw-btn" class="btn btn-success"><h4>Withdraw</h4></button>
+            <br><br>
+            <input id="amount" type="text" class="form-control" placeholder="Enter Your Amount">
+            <br><br>
+            <button id="deposit-btn" class="btn btn-success"><h4>Deposit</h4></button> -->
+          <div class="cards"><img src="../media/images/wallet.jpeg" alt="Avatar" style="width: 100%;"></div>
+        </aside>
+  
+        <content class="transactions-wrapper">
+          <h2>
+            Current Balance
+            <span class="total-balance"></span>
+          </h2>
+        
+          <div class="transactions"></div>
+        </content>
+  
+      </div>
+  
+    </div>
+    <div class="modal">
+      <div class="modal-body">
+        <h3>Add New Card</h3>
+        <div class="modal-close">+</div>
+        <div class="card-list">
+          <div class="card-image visa"></div>
+          <div class="card-image amex"></div>
+          <div class="card-image mc"></div>
+        </div>
+      </div>
+    </div>
+  
+  </body>
+</html>
