@@ -42,6 +42,7 @@ public class LoginController {
 		if (!(userDao.verifyUserCreds(user))) {
 			userDao.addNewUser(user);
 			Map<String, Object> map = new HashMap<>();
+			
 			getResponse(user, map);
 			return ResponseEntity.ok(map);
 		} else {
@@ -52,8 +53,9 @@ public class LoginController {
 
 	private void getResponse(User user, Map<String, Object> map) {
 		map.put("success", true);
-		map.put("id", user.getId());
+//		map.put("id", user.getId());
 		map.put("name", user.getName());
+		map.put("email", user.getEmail());
 	}
 	
 
