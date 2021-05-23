@@ -3,21 +3,21 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "email": "psowter0@fastcompany.com",
-    "password": "1iYFwMf3"
+    "email": "g@gmail.com",
+    "password": "1234"
 }
-### 
+###  provider login ^
 
 POST /api/login
 Host: localhost:8080
 Content-Type: application/json
 
 {
-    "email": "ecallaghan1@abc.net.au",
-    "password": "EDyV9QRpV9E"
+    "email": "p@gmail.com",
+    "password": "1234"
 }
 
-###
+### consumer login ^
 
 POST /api/register
 Host: localhost:8080
@@ -25,10 +25,10 @@ Content-Type: application/json
 
 {
 
-    "name" : "Faizan",
-    "isProvider" : true,
+    "name" : "Preetam",
+    "isProvider" : "0",
     "walletBalance" : "1000",
-    "email": "fz@gmail.com",
+    "email": "p@gmail.com",
     "password": "1234"
 }
 
