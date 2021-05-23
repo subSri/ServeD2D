@@ -11,7 +11,7 @@ public class User {
 	private String isProvider;
 
 	public Boolean getIsProvider() {
-		if (this.isProvider == "0"){
+		if (this.isProvider.equals("0")){
 			return false;
 		}
 		else{
