@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 //		String sql = "INSERT INTO USER (user_id, name, email, password, is_provider, wallet_balance) VALUES (?,?,?,?,?,?)";
 		String sql = "INSERT INTO USER (name, email, password, is_provider, wallet_balance) VALUES (?,?,?,?,?)";
 		try (Connection conn = DbUtil.createConnection(); 
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			) {
 //			stmt.setInt(1, user.getId());
 			stmt.setString(1, user.getName());
@@ -56,6 +56,7 @@ public class UserDaoImpl implements UserDao {
 		    if(key.next())
 			{
 				int id = key.getInt(1);  // or "review_id"
+				user.setId(id);
 				System.out.println("new user added" + id);
 			}
 			return true;
