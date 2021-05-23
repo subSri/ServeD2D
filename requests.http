@@ -3,10 +3,6 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "id" : 1,
-    "name" : "Phyllys Sowtere",
-    "isProvider" : "1",
-    "walletBalance" : "73.5",
     "email": "psowter0@fastcompany.com",
     "password": "1iYFwMf3"
 }
@@ -17,10 +13,6 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "id" : 2,
-    "name" : "Ewell Callaghan",
-    "isProvider" : "1",
-    "walletBalance" : "137.00",
     "email": "ecallaghan1@abc.net.au",
     "password": "EDyV9QRpV9E"
 }
@@ -32,11 +24,11 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-    "id" : 23,
-    "name" : "Subham Srivastava",
-    "isProvider" : false,
-    "walletBalance" : "12.23",
-    "email": "subhamxx@gmail.com",
+
+    "name" : "Faizan",
+    "isProvider" : true,
+    "walletBalance" : "1000",
+    "email": "fz@gmail.com",
     "password": "1234"
 }
 
