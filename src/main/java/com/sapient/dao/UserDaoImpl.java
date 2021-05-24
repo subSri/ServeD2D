@@ -3,11 +3,12 @@ package com.sapient.dao;
 import java.sql.*;
 
 import com.sapient.entity.User;
+import com.sapient.dto.LoginUser;
 import com.sapient.utils.DbUtil;
 
 public class UserDaoImpl implements UserDao {
 
-	public Boolean verifyUserCreds(User user) throws DaoException {
+	public Boolean verifyUserCreds(LoginUser user) throws DaoException {
 		String sql = "SELECT password FROM USER where email = ?";
 		try (Connection conn = DbUtil.createConnection(); 
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -23,10 +24,7 @@ public class UserDaoImpl implements UserDao {
 						System.out.println("User Verified");
 						return true;
 					}
-				} else {
-					System.out.println("No such user");
 				}
-
 			} catch (Exception e) {
 				throw new DaoException(e);
 			}
@@ -43,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 //		String sql = "INSERT INTO USER (user_id, name, email, password, is_provider, wallet_balance) VALUES (?,?,?,?,?,?)";
 		String sql = "INSERT INTO USER (name, email, password, is_provider, wallet_balance) VALUES (?,?,?,?,?)";
 		try (Connection conn = DbUtil.createConnection(); 
-			PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			) {
 //			stmt.setInt(1, user.getId());
 			stmt.setString(1, user.getName());
@@ -58,6 +56,7 @@ public class UserDaoImpl implements UserDao {
 		    if(key.next())
 			{
 				int id = key.getInt(1);  // or "review_id"
+				user.setId(id);
 				System.out.println("new user added" + id);
 			}
 			return true;
@@ -192,14 +191,43 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 	
+	public User getUser(String email) throws DaoException
+	{
+		String sql = "SELECT * FROM USER WHERE email=?";
+		//what to do about user user_id generation?
+		User user = new User();
+		try (Connection conn = DbUtil.createConnection(); 
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			) {
+			stmt.setString(1, email);
+			try(ResultSet rs = stmt.executeQuery();
+					)
+			{
+				if(rs.next()) {
+					
+					user.setId(rs.getInt("user_id"));
+					user.setName(rs.getString("name"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setIsProvider(rs.getString("is_provider"));
+//					user.setWalletBalance(rs.getFloat(5));
+				}
+				else
+				{
+					System.out.println("No data found!");
+					return null;
+				}
+			
+		   }
+
+			System.out.println("new user added");
+			return user;
+
+		} catch (Exception e) {
+			throw new DaoException(e);
+		}
+		
+	}
+	
 }
   
-  
- 
-	
-	
-	
-	
-	
-	
-	
