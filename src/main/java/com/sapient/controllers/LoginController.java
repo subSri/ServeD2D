@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.sapient.dao.*;
 import com.sapient.entity.User;
+import com.sapient.dto.LoginUser;
 import com.sapient.utils.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,13 @@ public class LoginController {
     private UserDao userDao;
 	
 	@PostMapping("/api/login")
-	public ResponseEntity<?> login(@RequestBody User user) throws Exception {
+	public ResponseEntity<?> login(@RequestBody LoginUser loginUser) throws Exception {
 
-		if (userDao.verifyUserCreds(user)) {
+		if (userDao.verifyUserCreds(loginUser)) {
+			User user = userDao.getUser(loginUser.getEmail());
 			Map<String, Object> map = new HashMap<>();
 			getResponse(user, map);
+			map.put("isProvider", user.getIsProvider());
 			map.put("token", JwtUtil.createToken(user.getId(), user.getName()));
 			return ResponseEntity.ok(map);
 		} else {
@@ -39,7 +42,7 @@ public class LoginController {
 	
 	@PostMapping("/api/register")
 	public ResponseEntity<?> register(@RequestBody User user) throws Exception {
-		if (!(userDao.verifyUserCreds(user))) {
+		if ((userDao.getUser(user.getEmail()) == null )) {
 			userDao.addNewUser(user);
 			Map<String, Object> map = new HashMap<>();
 			
