@@ -19,7 +19,7 @@ $(document).ready(function(){
                     //console.log(data["messages"][userid]);
                     $("#message_list").append(
                         `<div class="row py-2 chat" onclick="location.href='#';"  style="cursor: pointer;">
-                        <div class="col-2 text-center mx-auto"><img class="" src="../media/images/icons/default_profile.svg" alt="" width="60"></div>
+                        <div class="col-2 text-center mx-auto"><img class="" src="media/images/icons/default_profile.svg" alt="" width="60"></div>
                         <div class="col-10 mx-auto">
                             <div class="row">
                                 <div class="col-8">
