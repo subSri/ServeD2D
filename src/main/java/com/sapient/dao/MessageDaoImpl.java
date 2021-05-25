@@ -28,6 +28,7 @@ public class MessageDaoImpl implements MessageDao {
 				{
 					int id = key.getInt(1);  // or "message_id"
 					System.out.println("message sent" + id);
+					message.setMessageId(id);
 				}
 				
 				return true;
@@ -49,7 +50,7 @@ public class MessageDaoImpl implements MessageDao {
 			stmt.setInt(1, orderId);
 			try (ResultSet rs = stmt.executeQuery();) {
 
-				if (rs.next()) {
+				if(rs.next()) {
 					do {
 						Message message = getMessageObj(rs);
 						chats.add(message);
