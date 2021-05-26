@@ -147,4 +147,39 @@ public class MessageDaoImpl implements MessageDao {
 
 	}
 
+	public List<Message> getAllMessagesBetween(Integer firstUserId, Integer secondUserId) throws DaoException {
+		
+		List<Message> chats = new ArrayList<Message>();
+
+		String sql = "SELECT * from MESSAGE where (sender_id = ? AND reciever_id = ?) OR (sender_id = ? AND reciever_id = ?)";
+
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+			stmt.setInt(1, firstUserId);
+			stmt.setInt(2, secondUserId);
+			stmt.setInt(3, secondUserId);
+			stmt.setInt(4, firstUserId);
+
+			try (ResultSet rs = stmt.executeQuery();) {
+
+				if (rs.next()) {
+					do {
+						Message message = getMessageObj(rs);
+						chats.add(message);
+					} while (rs.next());
+
+				} else {
+					System.out.println("No data found!");
+				}
+			} catch (Exception e) {
+				throw new DaoException();
+			}
+
+		} catch (Exception e) {
+			throw new DaoException();
+		}
+
+		return chats;
+	}
+
 }
