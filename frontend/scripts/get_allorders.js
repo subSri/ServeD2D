@@ -21,7 +21,7 @@ $(document).ready(function(){
                     
                     switch(data["orders"][i].status){
                         case "REQUESTED":
-                            status_color="text-secondary";
+                            status_color="text-primary";
                             break;
                         case "CONFIRMED":
                             status_color="text-info";
@@ -38,7 +38,7 @@ $(document).ready(function(){
 
                     }
                     $("#order_list").append(
-                                    `<div class="row py-2 order"   style="cursor: pointer;">
+                                    `<div class="row py-2 order" onClick="openOrder(${data["orders"][i].order_id})" style="cursor: pointer;">
                                     <div class="col-1 text-center mx-auto"><img class="" src="media/images/icons/order.svg" alt="" width="60"></div>
                                     <div class="col-11 mx-auto">
                                       <div class="row mx-0 px-0">
@@ -46,16 +46,16 @@ $(document).ready(function(){
                                           <h3 class="text-light font-monospace "><b>Order ID # ${data["orders"][i].order_id}</b></h3>
                                         </div>
                                         <div class="col-6" style="padding: 0;margin: 0;">
-                                          <h5 class=" font-monospace ">Service : ${data["orders"][i].service_name}</h5>
+                                          <h5 class=" ">Service : ${data["orders"][i].service_name}</h5>
                                         </div>
                                         <div class="col-6" style="padding: 0;margin: 0;">
-                                          <h5 class="font-monospace ">Date : ${data["orders"][i].timestamp}</h5>
+                                          <h5 class="">Date : ${data["orders"][i].timestamp}</h5>
                                         </div>
                                         <div class="col-6" style="padding: 0;margin: 0;">
-                                          <h5 class="font-monospace ">Order Amount : Rs. ${data["orders"][i].amount}</h5>
+                                          <h5 class="">Order Amount : Rs. ${data["orders"][i].amount}</h5>
                                         </div>
                                         <div class="col-6" style="padding: 0;margin: 0;">
-                                          <h5 class="font-monospace ${status_color}">Status : ${data["orders"][i].status}</h5>
+                                          <h5 class="${status_color}">Status : ${data["orders"][i].status}</h5>
                                         </div>
                                       </div>
                                     </div>
@@ -82,7 +82,7 @@ $(document).ready(function(){
         error: function(){
             $("#order_list").append(
                 `<div class="row py-1 text-center">
-                    <h3>Error Getting Order List.</h3>
+                    <h3 >Error Getting Order List.</h3>
                 </div>`
             );
             $("#loading").hide();
@@ -93,7 +93,7 @@ $(document).ready(function(){
 });
 
 function openOrder(id){
-    location.href= location.href.split("#")[0].split("?")[0]+"?userid="+id+"#Chat" 
+    location.href= location.href.split("#")[0].split("?")[0]+"?orderid="+id+"#order" 
     loadView();
 };
 

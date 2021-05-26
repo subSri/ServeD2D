@@ -44,7 +44,7 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Map<String, String>> returnAllOrders(Integer userId) throws DaoException {
 
 		List<Map<String, String>> orders = new ArrayList<Map<String, String>>();
-		String sql = "select o.order_id,o.user_id,u.name,o.service_id,s.service_name,o.address_id,o.timestamp,o.amount,o.status from `ORDER` o, `USER` u,`SERVICE` s where o.user_id=u.user_id and u.user_id=? and o.service_id=s.service_id group by o.order_id";
+		String sql = "select o.order_id,o.user_id,o.service_id,s.service_name,o.address_id,o.timestamp,o.amount,o.status from `ORDER` o,`SERVICE` s where o.user_id=? and o.service_id=s.service_id group by o.order_id";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, userId);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -53,7 +53,6 @@ public class OrderDaoImpl implements OrderDao {
 						Map<String, String> order = new HashMap<String, String>();
 						order.put("order_id", rs.getString("order_id"));
 						order.put("user_id", rs.getString("user_id"));
-						order.put("name", rs.getString("name"));
 						order.put("service_id", rs.getString("service_id"));
 						order.put("service_name", rs.getString("service_name"));
 						order.put("address_id", rs.getString("address_id"));
@@ -263,15 +262,27 @@ public class OrderDaoImpl implements OrderDao {
 
 	}
 
-	public Order returnSpecificOrder(Integer orderId, Integer userId) throws DaoException {
+	public Map<String, String> returnSpecificOrder(Integer orderId, Integer userId) throws DaoException {
 
-		String sql = "SELECT * FROM `ORDER` WHERE order_id = ? AND user_id = ?";
+		String sql = "select o.order_id,o.user_id,u.name,o.service_id,s.service_name,s.provider_id,o.address_id,a.latitude,a.longitude,o.timestamp,o.amount,o.status from `ORDER` o, `USER` u,`SERVICE` s,`ADDRESS` a where s.provider_id=u.user_id and o.service_id=s.service_id and o.address_id=a.address_id and o.order_id=? and o.user_id=?";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, orderId);
 			stmt.setInt(2, userId);
 			try (ResultSet rs = stmt.executeQuery();) {
 				if (rs.next()) {
-					Order order = getOrderObj(rs);
+					Map<String, String> order = new HashMap<>();
+					order.put("order_id", rs.getString("order_id"));
+					order.put("user_id", rs.getString("user_id"));
+					order.put("provider_name", rs.getString("name"));
+					order.put("provider_id", rs.getString("provider_id"));
+					order.put("service_id", rs.getString("service_id"));
+					order.put("service_name", rs.getString("service_name"));
+					order.put("address_id", rs.getString("address_id"));
+					order.put("latitude", rs.getString("latitude"));
+					order.put("longitude", rs.getString("longitude"));
+					order.put("timestamp", rs.getString("timestamp"));
+					order.put("amount", rs.getString("amount"));
+					order.put("status", OrderStatus.values()[rs.getInt("status")].name());
 					return order;
 				} else {
 					System.out.println("No data found!");

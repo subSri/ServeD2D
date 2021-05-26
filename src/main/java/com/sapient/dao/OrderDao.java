@@ -22,7 +22,7 @@ public interface OrderDao {
 
 	public List<Order> returnAllPastCompletedOrders(Integer userId) throws DaoException;
 
-	public Order returnSpecificOrder(Integer orderId, Integer userId) throws DaoException;
+	public Map<String, String> returnSpecificOrder(Integer orderId, Integer userId) throws DaoException;
 
 	public void cancelOrder(Integer orderId) throws DaoException;
 

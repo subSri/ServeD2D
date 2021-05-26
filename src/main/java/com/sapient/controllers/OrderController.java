@@ -168,7 +168,7 @@ public class OrderController {
 		try {
 			Integer userId = auth(authHeader);
 
-			Order order = orderDao.returnSpecificOrder(orderId, userId);
+			Map<String, String> order = orderDao.returnSpecificOrder(orderId, userId);
 
 			if (order == null) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
