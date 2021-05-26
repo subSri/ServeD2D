@@ -13,4 +13,6 @@ public interface MessageDao {
 
 	public Map<Integer, Map<String, String>> returnChatsOfUser(Integer userId) throws DaoException;
 
+	public List<Message> getAllMessagesBetween(Integer firstUserId, Integer secondUserId) throws DaoException;
+
 }
