@@ -15,14 +15,82 @@
 		</div>
 	</div>
 </nav>
-<form class="block">
-	<h3 class="2">SIGN-UP FORM</h3>
-	<input type="text" name="username" placeholder="Enter your Name"><br>
-	<input type="text" name="emailid" placeholder="Enter your Email-Id"><br>
-	<input type="Password" name="pass" placeholder="Enter your Password"><br>
-	<input type="Password" name="confpass" placeholder="Confirm your
-	Password"><br><br>
-	<button class="btn
-	btn-lg
-	btn-dark bg-gradient order-0" onclick="">Sigh Up</button>
-</form>
+<div class="container-fluid">
+	<h3 class="2">SignUp to Serve-D2D</h3>
+	<form class="block">
+	  <fieldset>
+		<div class="form-group">
+			<label for="exampleInputEmail1" class="form-label mt-4"
+			  >Full Name</label
+			>
+			<input
+			  type="text"
+			  class="form-control"
+			  id="name"
+			  aria-describedby="emailHelp"
+			  placeholder="Enter full name"
+			/>
+		  </div>
+		<div class="form-group">
+		  <label for="exampleInputEmail1" class="form-label mt-4"
+			>Email address</label
+		  >
+		  <input
+			type="email"
+			class="form-control"
+			id="email"
+			aria-describedby="emailHelp"
+			placeholder="Enter email"
+			style="
+			  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==');
+			  background-repeat: no-repeat;
+			  background-attachment: scroll;
+			  background-size: 16px 18px;
+			  background-position: 98% 50%;
+			"
+		  />
+		  <small id="emailHelp" class="form-text text-muted"
+			>We'll never share your email with anyone else.</small
+		  >
+		</div>
+		<div class="form-group">
+		  <label for="exampleInputPassword1" class="form-label mt-4"
+			>Password</label
+		  >
+		  <input
+			type="password"
+			class="form-control"
+			id="pswd"
+			placeholder="Password"
+			style="
+			  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=');
+			  background-repeat: no-repeat;
+			  background-attachment: scroll;
+			  background-size: 16px 18px;
+			  background-position: 98% 50%;
+			"
+		  />
+		</div>
+		<fieldset class="form-group">
+			<legend class="mt-4">Register As</legend>
+			<div class="form-check">
+			  <label class="form-check-label">
+				<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Consumer" checked="">
+				Consumer
+			  </label>
+			</div>
+			<div class="form-check">
+			  <label class="form-check-label">
+				<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Producer">
+				Producer
+			  </label>
+			</div>
+		  </fieldset>
+		  <br/>
+		<button type="submit" class="btn btn-success btn-lg" id="signupBtn">
+		  Submit
+		</button>
+	  </fieldset>
+	</form>
+  </div>
+  <script src="./scripts/signup.js"></script>
