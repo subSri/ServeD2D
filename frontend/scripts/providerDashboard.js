@@ -1,14 +1,18 @@
 var baseUrl = "http://localhost:8080/";
 var url = baseUrl+"api/orders";
+var tokens = localStorage.getItem('token').split(" ");
+var arrayOfLiveOrders = [];
 window.onload = function() {
     what();
     function what(){
-       
+        $("#name").append(localStorage.getItem('name'));
+        console.log(tokens[1]);
+
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:8080/api/orders/provider',
+            url: url.concat('/provider'),
             headers: {
-                "Authorization": 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFd2VsbCBDYWxsYWdoYW4iLCJpZCI6MiwiZXhwIjoxNjIxNTAyMjEzLCJpYXQiOjE2MjE0NDIyMTN9.X0doDvRrGO2A_eDngg3qrITdrpcDENF_q6qlWswowao'
+                "Authorization": 'Bearer '.concat(tokens[1])
               },
             success: function(data) {
                 var out1 =  `<table class="table table-striped">
@@ -27,20 +31,21 @@ window.onload = function() {
                 var out3 =  out1;
                 console.log('success');
                 console.log(data);
-                $("#name").append(data.user_name);
+                
                 for (i = 0; i < data.info.length; i++) {
                     if( data.info[i].order.orderStatus=="0"){
-                        console.log(data.info[i].order);
-                        out1 = out1+`<tr>
+                        // console.log(data.info[i].order.orderId);
+                        out1 = out1+`<tr id = "${data.info[i].order.orderId}">
                         <td>${data.info[i].order.orderId} </td>
                         <td>${data.info[i].order.serviceId} </td>
                         <td>${data.info[i].name_of_consumer}</td>
                         <td>Rs ${data.info[i].order.amount}</td>
                         <td>${data.info[i].address_of_consumer.lat}, ${data.info[i].address_of_consumer.longi}</td>
                         <td>${data.info[i].order.timestamp}</td>
-                        <td> <button id="button1">
+                        <td> <button id="data.info[i].order.orderId" onclick="ajaxPostAccept(${data.info[i].order.orderId})">
                         Accept </button></td>
                         </tr>`;
+                        arrayOfLiveOrders.push(data.info[i].order.orderId);
                     }
                     else if(data.info[i].order.orderStatus=="1")
                     {
@@ -52,9 +57,7 @@ window.onload = function() {
                         <td>Rs ${data.info[i].order.amount}</td>
                         <td>${data.info[i].address_of_consumer.lat}, ${data.info[i].address_of_consumer.longi}</td>
                         <td>${data.info[i].order.timestamp}</td>
-                        <td> <button id="button1">
-                        Message </button></td>
-                        <td> <button id="button1">
+                        <td> <button id="data.info[i].order.orderId" onclick="ajaxPostCancel(${data.info[i].order.orderId})">
                         Cancel </button></td>
                         </tr>`;
                     }
@@ -90,4 +93,45 @@ window.onload = function() {
             }
         });
     };
+}
+function ajaxPostAccept(id)
+{
+    var path = ('/accept/').concat(id.toString());
+    $.ajax({
+        type: "POST",
+        url: url.concat(path),
+        headers: {
+            "Authorization": 'Bearer '.concat(tokens[1])
+            },
+        data: { 
+            
+        },
+        success: function(result) {
+            alert("You have accepted order :" + id.toString());
+        },
+        error: function(result) {
+            alert('try again!');
+        }
+    });
+}
+
+function ajaxPostCancel(id)
+{
+    var path = ('/cancel/').concat(id.toString());
+    $.ajax({
+        type: "POST",
+        url: url.concat(path),
+        headers: {
+            "Authorization": 'Bearer '.concat(tokens[1])
+        },
+        data: { 
+            
+        },
+        success: function(result) {
+            alert("You have cancelled order :" + id.toString());
+        },
+        error: function(result) {
+            alert('try again!');
+        }
+    });
 }
