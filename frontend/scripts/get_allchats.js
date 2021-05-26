@@ -5,11 +5,12 @@ var url = baseUrl+"api/chats/all";
 
 
 $(document).ready(function(){
+    token=localStorage.getItem('token');
     $.ajax({
         type: "GET",
         url: url,
         headers: {
-            "Authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDc4MjA1LCJpYXQiOjE2MjE0MTgyMDV9.sTp4iykhZaXPzs6WYQ8lBAcqt_MRFyRzMhIU4hWZ4s4"
+            "Authorization": token
         },
         success: function(data){
             console.log();
@@ -18,7 +19,7 @@ $(document).ready(function(){
                     //console.log(data["messages"][userid]);
                     $("#message_list").append(
                         `<div class="row py-2 chat" onclick="location.href='#';"  style="cursor: pointer;">
-                        <div class="col-2 text-center mx-auto"><img class="" src="../media/images/icons/default_profile.svg" alt="" width="60"></div>
+                        <div class="col-2 text-center mx-auto"><img class="" src="media/images/icons/default_profile.svg" alt="" width="60"></div>
                         <div class="col-10 mx-auto">
                             <div class="row">
                                 <div class="col-8">
@@ -41,6 +42,7 @@ $(document).ready(function(){
                     }, function(){
                     $(this).css("background-color", "#002b36");
                   });
+                
             }
             else{
                 $("#message_list").append(
@@ -49,6 +51,7 @@ $(document).ready(function(){
                     </div>`
                 );
             }
+            $("#loading").hide();
             
         },
         error: function(){
@@ -57,7 +60,9 @@ $(document).ready(function(){
                     <h3>Error Getting Messages.</h3>
                 </div>`
             );
+            $("#loading").hide();
         }
     });
+    
     
 });
