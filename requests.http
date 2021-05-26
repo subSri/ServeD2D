@@ -1,3 +1,54 @@
+POST /api/register
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "id": 50,
+    "name" : "Saurav Singh",
+    "isProvider" : "0",
+    "walletBalance" : "1000",
+    "email": "sau11@gmail.com",
+    "password": "1234"
+}
+
+###
+
+POST /api/login
+Host: localhost:8080
+Content-Type: application/json
+
+{
+    "email": "sau11@gmail.com",
+    "password": "1234"
+}
+
+###
+
+GET /api/chats/all
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYXVyYXYgU2luZ2giLCJpZCI6MjEsImV4cCI6MTYyMjA1NTI2NywiaWF0IjoxNjIxOTk1MjY3fQ.25DF4npWKQzf9F2aYT-bPAnQ_7uY2ShHb5AwXCwcpKU
+###
+
+GET /api/chats?id=1
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYXVyYXYgU2luZ2giLCJpZCI6MjEsImV4cCI6MTYyMjA1NTI2NywiaWF0IjoxNjIxOTk1MjY3fQ.25DF4npWKQzf9F2aYT-bPAnQ_7uY2ShHb5AwXCwcpKU
+
+###
+
+POST /api/chats
+Host: localhost:8080
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYXVyYXYgU2luZ2giLCJpZCI6MjEsImV4cCI6MTYyMjA2MDE3OCwiaWF0IjoxNjIyMDAwMTc4fQ.JWUUxz5Fhe1TQm8mFn0IV9ZYjfhHYnhfuH5P945PLo8
+
+{
+    "senderId": "21",
+    "receiverId": "22",
+    "content": "Anyway you from here.",
+    "timestamp": "2021-06-11"
+}
+
+###
+
 POST /api/login
 Host: localhost:8080
 Content-Type: application/json
@@ -267,7 +318,7 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHYXVyYXYiLCJp
 
 GET /api/chats?order_id=1
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYXVyYXYgU2luZ2giLCJpZCI6MjEsImV4cCI6MTYyMjAxNzcyMiwiaWF0IjoxNjIxOTU3NzIyfQ.75BNOxmxiNojD6BbcjxEk50cFJIc1-UbiYgW6zlY9pM
 
 ###
 
