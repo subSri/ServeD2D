@@ -70,7 +70,7 @@ $(document).ready(function(){
 });
 
 function openChat(id){
-    location.href= location.href.split("#")[0].split("?")[0]+"?userid="+id+"#Chat" 
+    location.href= location.href.split("#")[0].split("?")[0]+"?userid="+id+"#chat" 
     loadView();
 };
 
