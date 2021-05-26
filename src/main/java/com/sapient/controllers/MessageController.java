@@ -119,4 +119,26 @@ public class MessageController {
         }
     }
 
+    @GetMapping(value = "", params = "id")
+    public ResponseEntity<?> getChatsWithASpecificUser(
+        @RequestHeader(name = "Authorization", required = false) String authHeader,
+        @RequestParam(name = "id", required = true) Integer secondUserId) {
+
+        if (authHeader == null) {
+            return ifAuthNull();
+        }
+
+        try {
+            Integer userId = auth(authHeader);
+            List<Message> messages = messageDao.getAllMessagesBetween(userId, secondUserId);
+            Map<String, Object> map = getResponse(userId);
+            map.put("messages", messages);
+            return ResponseEntity.ok(map);
+
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Authorization token is invalid or " + ex.getMessage());
+        }
+    }
+
 }

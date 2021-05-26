@@ -1,19 +1,28 @@
+token = window.localStorage.getItem('token');
+headerParams = { Authorization: token };
 
-headerParams={"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04"}
+function backFromWallet() {
+  if (window.localStorage.getItem('token')) {
+    if (window.localStorage.getItem('provider') === 'true') {
+      navigateTo('provider');
+    } else {
+      navigateTo('consumer');
+    }
+  }
+}
 
-$(function(){
-    $("#loading").show();
-    
-
-    $.ajax({
-        method: 'GET',
-        url:  "http://localhost:8080/api/wallet/balance",
-        headers: headerParams,
-        success:function(data){
-            $("span.total-balance").text(data.balance);
-        }
-    });
-/*
+$(function () {
+  $('#loading').show();
+  $('#name').append(localStorage.getItem('name'));
+  $.ajax({
+    method: 'GET',
+    url: 'http://localhost:8080/api/wallet/balance',
+    headers: headerParams,
+    success: function (data) {
+      $('span.total-balance').text(data.balance);
+    },
+  });
+  /*
     function getInputNumb(idName){
         const amount = document.getElementById(idName).value;
         const amountNumber = parseFloat(amount);
@@ -54,34 +63,34 @@ $(function(){
         })
     */
 
-    
-    $.ajax({
-        method: 'GET',
-        url:  "http://localhost:8080/api/orders",
-        headers: headerParams,
-        success:function(data){
-            var count=5;
-            var output = "<h3> Last 5 Transactions</h3><br><br>";
-           
-            for (var i=data.orders.length-1;i>=0;i--) {
-                if(count<=0)
-                break;
-                var card=data.orders[i];
-                var type="debit";
-                if(card.amount>0)
-                    type="credit";
-                
-                var price="0"+card.amount.toString();
-                console.log(i,price,typeof price);
-                output += "<div class='transaction-item " + type + "'>";
-                output += "<div class='transaction-item_details'>";
-                output += "<h3>"+ card.timestamp +"</h3>";
-                output += "</div>";
-                output += "<div class='transaction-item_amount'><span>₹ &nbsp;</span><p class='amount'>"+ price +"</p></div>";
-                output += "</div>";
-                document.querySelector('.transactions').innerHTML = output;
-                count--;
-            }
-        }
-    });
+  $.ajax({
+    method: 'GET',
+    url: 'http://localhost:8080/api/orders',
+    headers: headerParams,
+    success: function (data) {
+      var count = 5;
+      var output = '<h3> Last 5 Transactions</h3><br><br>';
+
+      for (var i = data.orders.length - 1; i >= 0; i--) {
+        if (count <= 0) break;
+        var card = data.orders[i];
+        var type = 'debit';
+        if (card.amount > 0) type = 'credit';
+
+        var price = '0' + card.amount.toString();
+        console.log(i, price, typeof price);
+        output += "<div class='transaction-item " + type + "'>";
+        output += "<div class='transaction-item_details'>";
+        output += '<h3>' + card.timestamp + '</h3>';
+        output += '</div>';
+        output +=
+          "<div class='transaction-item_amount'><span>₹ &nbsp;</span><p class='amount'>" +
+          price +
+          '</p></div>';
+        output += '</div>';
+        document.querySelector('.transactions').innerHTML = output;
+        count--;
+      }
+    },
+  });
 });

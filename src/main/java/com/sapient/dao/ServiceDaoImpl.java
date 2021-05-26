@@ -1,9 +1,6 @@
 package com.sapient.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class ServiceDaoImpl implements ServiceDao {
 	public Boolean addNewService(Service service) throws DaoException {
 //		String sql = "INSERT INTO SERVICE (service_id, provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 		String sql = "INSERT INTO SERVICE (provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?)";
-		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);) {
 //			stmt.setInt(1, service.getServiceId());
 			stmt.setInt(1, service.getProviderId());
 			stmt.setInt(2, service.getAddressId());
@@ -83,7 +80,7 @@ public class ServiceDaoImpl implements ServiceDao {
 		service.setPrice(rs.getDouble("price"));
 		service.setRatingCount(rs.getInt("rating_count"));
 		service.setCompletedOrders(rs.getInt("completed_orders"));
-		service.setName(rs.getString("name"));
+		service.setName(rs.getString("service_name"));
 		service.setRatings();
 		return service;
 	}
@@ -172,7 +169,7 @@ public class ServiceDaoImpl implements ServiceDao {
 //		String sql = "UPDATE SERVICE SET address_id = ?, is_approved = ?, category = ?, description = ?, image_url = ?, price = ?, service_radius = ?, rating_count = ?, completed_orders = ? WHERE service_id = ? AND provider_id = ?";
 		String sql = "UPDATE SERVICE SET address_id = ?, is_approved = ?, category = ?, description = ?, image_url = ?, price = ?, service_radius = ?, rating_count = ?, completed_orders = ? WHERE provider_id = ?";
 
-		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);) {
 
 			stmt.setInt(1, service.getAddressId());
 			stmt.setBoolean(2, service.getIsApproved());
