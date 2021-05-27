@@ -20,7 +20,7 @@ $(document).ready(function(){
                     <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">${data.categories[cat]} </h5>
-                        <a href="./templates/servicelist.html?category=${data.categories[cat]}" class="btn btn-success">Explore</a>
+                        <button class="btn btn-success" onclick="openCategory('${data.categories[cat]}')">Explore</button>
                     </div>
                     </div>
                 </div>`
@@ -39,10 +39,10 @@ $(document).ready(function(){
         );
         $("#loading").hide();
 
-    });
-       
-           
-            
-    
-       
+    });      
 });
+
+function openCategory(category){
+    location.href= location.href.split("#")[0].split("?")[0]+"?category="+category+"#servicelist" 
+    loadView();
+};
