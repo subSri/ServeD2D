@@ -1,6 +1,9 @@
 var base_url = "http://localhost:8080";
 var msg;
 
+var par = new URLSearchParams(window.location.search);
+// console.log(par.get("userid"));
+
 $("form").on("submit", function(event) {
     event.preventDefault();
 
@@ -11,11 +14,11 @@ $("form").on("submit", function(event) {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         headers: {
-            Authorization: "JWT " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYXVyYXYgU2luZ2giLCJpZCI6MjEsImV4cCI6MTYyMjA1NTI2NywiaWF0IjoxNjIxOTk1MjY3fQ.25DF4npWKQzf9F2aYT-bPAnQ_7uY2ShHb5AwXCwcpKU"
+            Authorization: localStorage.getItem("token")
         },
         data: JSON.stringify({
             "senderId": "21",
-            "receiverId": "22",
+            "receiverId": par.get("userid"),
             "content": msg,
             "timestamp": new Date(),
         }),
@@ -24,7 +27,12 @@ $("form").on("submit", function(event) {
             console.log(data);
         },
         error: function (jqXHR, statusCode, errorThrown) {
-
+            console.log(errorThrown);
+            console.log("failed");
+        },
+        complete: function (jqXHR, textStatus) {
+            $("#exampleTextArea").val("");
+            console.log($("#exampleTextArea"));
         }
     });
 });
@@ -40,11 +48,11 @@ setInterval(function() {
         url: base_url + "/api/chats",
         type: "GET",
         headers: {
-            Authorization: "JWT " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYXVyYXYgU2luZ2giLCJpZCI6MjEsImV4cCI6MTYyMjA1NTI2NywiaWF0IjoxNjIxOTk1MjY3fQ.25DF4npWKQzf9F2aYT-bPAnQ_7uY2ShHb5AwXCwcpKU"
+            Authorization: localStorage.getItem("token")
         },
         contentType: "application/json",
         data: {
-            "id": "22"
+            "id": par.get("userid")
         },
         dataType: "json",
         success: function (data, statusCode, jqXHR) {
@@ -74,5 +82,8 @@ setInterval(function() {
                 }
             });
         },
+        error: function (jqXHR, statusCode, errorThrown) {
+            console.log(errorThrown);
+        }
     });
 }, 1000);

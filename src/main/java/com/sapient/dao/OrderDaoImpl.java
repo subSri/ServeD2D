@@ -17,13 +17,15 @@ public class OrderDaoImpl implements OrderDao {
 		// String sql = "INSERT INTO `ORDER` (order_id, user_id, service_id, address_id,
 		// timestamp, status, amount) VALUES (?,?,?,?,?,?,?)";
 		String sql = "INSERT INTO `ORDER` (user_id, service_id, address_id, timestamp, status, amount) VALUES (?,?,?,?,?,?)";
-		try (Connection conn = DbUtil.createConnection();
-				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-			// stmt.setInt(1, order.getOrderId());
-			stmt.setInt(1, order.getUserId());
-			stmt.setInt(2, order.getServiceId());
-			stmt.setInt(3, order.getAdressId());
-			stmt.setDate(4, order.getTimestamp());
+
+		try (Connection conn = DbUtil.createConnection(); 
+			PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			) {
+//			stmt.setInt(1, order.getOrderId());
+            stmt.setInt(1, order.getUserId());
+            stmt.setInt(2, order.getServiceId());
+            stmt.setInt(3, order.getAdressId());
+			stmt.setDate(4, (java.sql.Date) order.getTimestamp());
 			stmt.setInt(5, order.getOrderStatus());
 			stmt.setDouble(6, order.getAmount());
 

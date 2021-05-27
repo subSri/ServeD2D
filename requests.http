@@ -61,11 +61,11 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 
 POST /api/orders
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYXVyYXYgU2luZ2giLCJpZCI6MjEsImV4cCI6MTYyMjE4MDM0MywiaWF0IjoxNjIyMTIwMzQzfQ.aN5qKwKRTUI66S9FEsc-QAfIOALzUgzu7SAbK59lGZA
 Content-Type: application/json
 
 {
-    "orderId" : 22,
+    "orderId" : 26,
     "userId" : 2,
     "serviceId" : 23,
 	"adressId" : 1,

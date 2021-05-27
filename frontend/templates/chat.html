@@ -1,108 +1,49 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Chat box</title>
-        <link rel="stylesheet" href="../css/bootswatch-solar.css">
-        <script src="../scripts/jquery-3.6.0.js"></script>
-        <style>
-            body {min-height: 100vh;}
-        </style>
-    </head>
-
-    <body>
-        <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; align-items: stretch;">
-            <!-- <div style="flex: 2 1 0; position: relative;">
-                <div class="card text-white bg-primary mb-3" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin-bottom: 0;">
-                    <div class="card-header">Order Details</div>
-                    <div class="card-body">
-                        <h4 class="card-title">Primary card title</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div> -->
-            
-            <div style="flex: 7 1 0; position: relative; padding: 0; margin: 0;">
-
-                <div class="card bg-success mb-3" style="position: absolute; top: 0; bottom: 5%; left: 0; right: 0;">
-                    <!-- <div class="card-header">Chat Box</div> -->
-                    <div class="chat-container card-body" style="display: flex; flex-direction: column; position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow-y: auto;">
-                        
-                        <div style="align-self: flex-start; max-width: 75%">
-                            <div class="card text-white bg-dark border-success mb-3" style="display: inline-block">
-                                <div class="card-body">
-                                <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. A ipsam quas necessitatibus aliquid libero nobis quam iusto deleniti dolorem accusantium consequatur ab sequi perspiciatis culpa possimus, pariatur aperiam nisi perferendis.</div>
-                                </div>
-                            </div>
-                        </div>
-                  
-                        <div style="align-self: flex-end; max-width: 75%;">
-                            <div class="card bg-light mb-3" style="display: inline-block">
-                                <div class="card-body">
-                                    <div class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi eos distinctio id amet odio itaque temporibus assumenda accusamus eligendi maxime debitis neque omnis ex optio, illum, corporis vero beatae tempora?</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="align-self: flex-start; max-width: 75%">
-                            <div class="card text-white bg-dark border-success mb-3" style="display: inline-block">
-                                <div class="card-body">
-                                <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. A ipsam quas necessitatibus aliquid libero nobis quam iusto deleniti dolorem accusantium consequatur ab sequi perspiciatis culpa possimus, pariatur aperiam nisi perferendis.</div>
-                                </div>
-                            </div>
-                        </div>
-                  
-                        <div style="align-self: flex-end; max-width: 75%;">
-                            <div class="card bg-light mb-3" style="display: inline-block">
-                                <div class="card-body">
-                                    <div class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi eos distinctio id amet odio itaque temporibus assumenda accusamus eligendi maxime debitis neque omnis ex optio, illum, corporis vero beatae tempora?</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="align-self: flex-start; max-width: 75%">
-                            <div class="card text-white bg-dark border-success mb-3" style="display: inline-block">
-                                <div class="card-body">
-                                <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. A ipsam quas necessitatibus aliquid libero nobis quam iusto deleniti dolorem accusantium consequatur ab sequi perspiciatis culpa possimus, pariatur aperiam nisi perferendis.</div>
-                                </div>
-                            </div>
-                        </div>
-                  
-                        <div style="align-self: flex-end; max-width: 75%;">
-                            <div class="card bg-light mb-3" style="display: inline-block">
-                                <div class="card-body">
-                                    <div class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi eos distinctio id amet odio itaque temporibus assumenda accusamus eligendi maxime debitis neque omnis ex optio, illum, corporis vero beatae tempora?</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="align-self: flex-start; max-width: 75%">
-                            <div class="card text-white bg-dark border-success mb-3" style="display: inline-block">
-                                <div class="card-body">
-                                <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. A ipsam quas necessitatibus aliquid libero nobis quam iusto deleniti dolorem accusantium consequatur ab sequi perspiciatis culpa possimus, pariatur aperiam nisi perferendis.</div>
-                                </div>
-                            </div>
-                        </div>
-                  
-                        <div class="msg-container" style="align-self: flex-end; max-width: 75%;">
-                            <div class="card bg-light mb-3" style="display: inline-block">
-                                <div class="card-body">
-                                    <div class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi eos distinctio id amet odio itaque temporibus assumenda accusamus eligendi maxime debitis neque omnis ex optio, illum, corporis vero beatae tempora?</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <div class="form-group" style="position: absolute; top: 91%; bottom: 0; left: 0; right: 0; padding: 0; margin: 0;">
-                    <form style="box-sizing: border-box; margin: 0; padding: 0; display: flex; align-items: stretch;">
-                        <textarea class="form-control" id="exampleTextArea" name="message" style="flex: 24 1 0;"></textarea>
-                        <button type="submit" class="btn btn-primary" style="flex: 2 1 0;">Send</button>
-                    </form>
-                </div>
-
+<style>
+    body {min-height: 100vh;}
+</style>
+<div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; align-items: stretch;">
+    <!-- <div style="flex: 2 1 0; position: relative;">
+        <div class="card text-white bg-primary mb-3" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin-bottom: 0;">
+            <div class="card-header">Order Details</div>
+            <div class="card-body">
+                <h4 class="card-title">Primary card title</h4>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
         </div>
-        <script src="../scripts/chat.js"></script>
-    </body>
-</html>
+    </div> -->
+    
+    <div style="flex: 7 1 0; position: relative; padding: 0; margin: 0;">
+
+        <div class="card bg-success mb-3" style="position: absolute; top: 0; bottom: 5%; left: 0; right: 0;">
+            <!-- <div class="card-header">Chat Box</div> -->
+            <div class="chat-container card-body" style="display: flex; flex-direction: column; position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow-y: auto;">
+                
+                <!-- <div style="align-self: flex-start; max-width: 75%">
+                    <div class="card text-white bg-dark border-success mb-3" style="display: inline-block">
+                        <div class="card-body">
+                        <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. A ipsam quas necessitatibus aliquid libero nobis quam iusto deleniti dolorem accusantium consequatur ab sequi perspiciatis culpa possimus, pariatur aperiam nisi perferendis.</div>
+                        </div>
+                    </div>
+                </div>
+          
+                <div class="msg-container" style="align-self: flex-end; max-width: 75%;">
+                    <div class="card bg-light mb-3" style="display: inline-block">
+                        <div class="card-body">
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi eos distinctio id amet odio itaque temporibus assumenda accusamus eligendi maxime debitis neque omnis ex optio, illum, corporis vero beatae tempora?</div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            
+        </div>
+
+        <div class="form-group" style="position: absolute; top: 91%; bottom: 0; left: 0; right: 0; padding: 0; margin: 0;">
+            <form style="box-sizing: border-box; margin: 0; padding: 0; display: flex; align-items: stretch;">
+                <textarea class="form-control" id="exampleTextArea" name="message" style="flex: 24 1 0;"></textarea>
+                <button type="submit" class="btn btn-primary" style="flex: 2 1 0;">Send</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="./scripts/chat.js"></script>

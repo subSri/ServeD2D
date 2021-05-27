@@ -28,7 +28,7 @@ $(document).ready(function(){
                                     <h2>${data["messages"][userid].name}</h2>
                                 </div>
                                 <div class="col-4  text-end">
-                                    <h5>${data["messages"][userid].timestamp}</h5>
+                                    <h5>${data["messages"][userid].timestamp}</h5>>>>>>>> master
                                 </div>
                             </div>
                             <div class="row">
@@ -70,7 +70,7 @@ $(document).ready(function(){
 });
 
 function openChat(id){
-    location.href= location.href.split("#")[0].split("?")[0]+"?userid="+id+"#chat" 
+    location.href= location.href.split("#")[0].split("?")[0]+"?userid="+id+"#Chat" 
     loadView();
 };
 
