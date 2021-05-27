@@ -9,7 +9,7 @@ public class User {
 	private String password;
 	private String email;
 	private String isProvider;
-
+	private Float walletBalance;
 	public Boolean getIsProvider() {
 		if (this.isProvider.equals("0")){
 			return false;
@@ -22,6 +22,6 @@ public class User {
 		
 		this.isProvider = isProvider;
 	}
-	private Float walletBalance;
+	
 
 }
