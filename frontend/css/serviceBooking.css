@@ -1,0 +1,234 @@
+/* base rules  */
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family:'Montserrat',sans-serif;
+}
+
+p{
+    font-family: 'Nunito',sans-serif;
+    font-size: 20px;
+    line-height: 30px;
+    color: #6c757d;
+}
+
+body{
+    background: #fff;
+}
+
+.f-c{
+    background: #000;
+}
+
+.bg-sec{
+    /* background: #F8F9FA; */
+}
+
+.f-p{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+/* Navigation */
+
+nav .r-nav{
+    background: transparent;
+    padding:20 px 0;
+    transition:.5s all;
+}
+
+nav .navbar-brand{
+    font-size: 20px;
+    color:#fff;
+}
+
+nav .navbar-nav li a{
+    color: rgba(255, 255,255,0.8) !important;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    font-family: 'Nunito',sans-serif;
+}
+
+nav .navbar-nav li{
+    margin-left: 15px;
+}
+
+nav.stickyadd{
+    background: #000 !important;
+    padding: 15px 0;
+    box-shadow: 0 1px 8px 3px rgba(0,0,0,0.05);
+    transition: .5s all ease-in-out;
+}
+
+nav.stickyadd .navbar-brand{
+    color: #fff;
+    font-size:25px; 
+    transition: .5s all;
+}
+
+nav.stickyadd .navbar-nav .nav-link{
+    color: #fff !important;
+}
+
+.navbar .hamburger{
+    color: #fff;
+}
+
+nav.stickyadd .hamburger{
+    color: #fff;
+}
+
+.f-bt{
+    float: right;
+    margin:20px;
+    text-align: center;
+}
+
+/* header section */
+header{
+    height: 100vh;
+    width:100%;
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('../media/images/air-conditioning-repair-service-hyderabad.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.header-content{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+}
+
+.content-box{
+    max-width:700px;
+    color:#fff;
+}
+
+.content-box h4{
+    font-size: 30px;
+}
+
+.content-box h1{
+    font-size: 52px;
+}
+
+.content-box a{
+    color:#fff;
+    text-decoration: none;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 5px 25px;
+}
+
+.content-box a:hover{
+    color:#000;
+    background: #fff;
+    transition: .5s all;
+
+}
+
+.content-box p{
+    color: #fff;
+}
+
+/* About Me */
+
+.about-me h2,h4{
+    color:#fff;
+}
+
+.about li a{
+    color: #fff;
+    display: inline-block;
+    height: 42px;
+    width: 42px;
+    font-size:20px;
+    border:2px solid #d4d4d4;
+    border-radius: 30%;
+    line-height:40px;
+    transition: 0.5 all;
+    text-align: center;
+}
+
+.about li a:hover{
+    color:#000;
+    background: #fff;
+}
+
+
+
+/* Experience  */
+
+.exp-class .progress{
+    height:10px;
+    border-radius:20px;
+    font-size:10px;
+}
+
+.progress-bar{
+    color:#000;
+    font-size: 10px;
+    background: rgb(221, 41, 41);
+}
+
+label{
+    color:rgb(224,224,224);
+}
+
+.exp-class h3{
+    color:rgb(228,224,224)
+}
+
+/* .exp-class{
+    padding-top: 60px;
+    padding-bottom: 60px;
+} */
+
+/* Services */
+
+.card,.card-header{
+    background: #F8F9FA !important;
+}
+
+.card-header{
+    border:none !important;
+}
+
+.services-class .card-header i{
+    font-size:50 px;
+}
+
+.service-border{
+    height:4px;
+    width: 150px;
+    margin:15px auto;
+    background: #e65f78;
+}
+
+
+.in-border{
+    height:2px;
+    width: 500px;
+    margin:15px auto;
+    background: #252525;
+}
+
+.service-bottom{
+    /* width: calc(50% ); */
+    /* margin-left: calc((50%)/2); */
+    padding-bottom: 20px;
+    border-bottom:4px #e65f78 solid !important;
+}
+.book-now:hover{
+    transform: scale(1.2);
+    transition: 800ms;
+}
+
