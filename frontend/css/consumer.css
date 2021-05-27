@@ -1,0 +1,53 @@
+body {
+    padding-top: 120px;
+}
+
+.box {
+    padding: 15px 0px;
+}
+
+span {
+    font-size: 15px;
+}
+
+.box-part {
+    background: #FFF;
+    border-radius: 0;
+    padding: 15px 10px;
+    margin: 5px 0px;
+    cursor: pointer;
+
+}
+
+.myhover {
+    margin: 0px 0px;
+    margin-bottom: 10px;
+
+
+
+}
+
+.myhover :hover {
+
+    background-color: #111;
+    color: #EEE;
+}
+
+.text {
+    margin: 10px 0px;
+}
+
+.fa {
+    color: #4183D7;
+}
+
+.welcomeHeading {
+    background: #000;
+    color: #EEE;
+    border-radius: 0;
+    padding: 7px 10px;
+    margin-top: 2px;
+
+    width: auto;
+
+}
