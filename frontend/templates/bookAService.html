@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/serviceBooking.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Nunito:ital,wght@0,700;1,300&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../lib/bootstrap.min.css"> -->
+    <script src="https://kit.fontawesome.com/a56a9dd35d.js" crossorigin="anonymous"></script>
+    <script src="../lib/jquery-3.6.0.min.js"></script>
+    <script src="../lib/popper.min.js"></script>
+    <script src="../lib/js/bootstrap.min.js"></script>
+    <script src="../lib/typed.js"></script>
+    <script src="../lib/jquery.waypoints.min.js"></script>
+    <script src="../scripts/bookService.js"></script>
+    <script src="../scripts/singleService.js"></script>
+    <title>Mohammad Faizan</title>
+</head>
+<body>
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg sticky fixed-top f-nav">
+        <div class="container">
+            <a href="#" class="navbar-brand">D2D</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarId">
+                <span><i class="fas fa-bars hamburger"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarId">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Services</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a href="" class="nav-link">Portfolio</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- header -->
+    <header id="home">
+        <div class="container-fluid header-content">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="content-box">
+                        <h4>Welcome</h4>
+                        <h3>User</h3>
+                        <h1><span class="element"></span></h1>
+                        <div id="rate"></div>
+                        <a href="#" class="btn" onclick="bookingService()">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+   
+
+    <!-- testing  -->
+
+    <div class="container f-p text-center">
+        <div class="row">
+            <div class="col-">
+                <div id="view"></div>
+            </div>
+            <!-- <div class="col-3">
+                <h3>Sidebar options</h3>
+            </div> -->
+        </div>
+    </div>
+
+
+
+   <!-- Footer -->
+<footer class="page-footer font-small mdb-color pt-4 f-c">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+  
+      <!-- Footer links -->
+      <div class="row text-center text-md-left mt-3 pb-3">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
+          <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+            consectetur
+            adipisicing elit.</p>
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="w-100 clearfix d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+          <p>
+            <a href="#!">MDBootstrap</a>
+          </p>
+          <p>
+            <a href="#!">MDWordPress</a>
+          </p>
+          <p>
+            <a href="#!">BrandFlow</a>
+          </p>
+          <p>
+            <a href="#!">Bootstrap Angular</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="w-100 clearfix d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+          <p>
+            <a href="#!">Your Account</a>
+          </p>
+          <p>
+            <a href="#!">Become an Affiliate</a>
+          </p>
+          <p>
+            <a href="#!">Shipping Rates</a>
+          </p>
+          <p>
+            <a href="#!">Help</a>
+          </p>
+        </div>
+  
+        <!-- Grid column -->
+        <hr class="w-100 clearfix d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+          <p>
+            <i class="fas fa-home mr-3"></i> Delhi,India</p>
+          <p>
+            <i class="fas fa-envelope mr-3"></i> d2d.info@gmail.com</p>
+          <p>
+            <i class="fas fa-phone mr-3"></i> + 91-8955635423</p>
+          <p>
+            <i class="fas fa-print mr-3"></i> + 91-2356789250 </p>
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Footer links -->
+  
+      <hr>
+  
+      <!-- Grid row -->
+      <div class="row d-flex align-items-center">
+  
+        <!-- Grid column -->
+        <div class="col-md-7 col-lg-8">
+  
+          <!--Copyright-->
+          <p class="text-center text-md-left">© 2021 Copyright:
+            <a href="#">
+              <strong> Door2Door.com</strong>
+            </a>
+          </p>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <!-- Grid column -->
+        <div class="col-md-5 col-lg-4 ml-lg-0">
+  
+          <!-- Social buttons -->
+          <div class="text-center text-md-right">
+            <ul class="list-unstyled list-inline">
+              <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-google-plus-g"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+  
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
+  
+    </div>
+    <!-- Footer Links -->
+  
+  </footer>
+  <!-- Footer -->
+
+    <!-- for creating space -->
+    <!-- <section style="width:100%; height:100vh;"></section>
+    <section style="width:100%; height:100vh;"></section> -->
+
+    
+    
+</body>
+</html>

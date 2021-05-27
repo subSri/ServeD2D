@@ -23,7 +23,7 @@ public class OrderDaoImpl implements OrderDao {
             stmt.setInt(1, order.getUserId());
             stmt.setInt(2, order.getServiceId());
             stmt.setInt(3, order.getAdressId());
-			stmt.setDate(4, order.getTimestamp());
+			stmt.setDate(4, (java.sql.Date) order.getTimestamp());
 			stmt.setInt(5, order.getOrderStatus());
 			stmt.setDouble(6, order.getAmount());
 
