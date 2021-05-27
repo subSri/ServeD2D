@@ -4,6 +4,9 @@ function bookingService(){
 
     var bookServiceUrl=baseUrl+'/orders';
 
+    // var token=window.localStorage.getItem('token');
+
+
     var token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYXVyYXYgU2luZ2giLCJpZCI6MjEsImV4cCI6MTYyMjE4MDM0MywiaWF0IjoxNjIyMTIwMzQzfQ.aN5qKwKRTUI66S9FEsc-QAfIOALzUgzu7SAbK59lGZA'
 
    var payload= {
