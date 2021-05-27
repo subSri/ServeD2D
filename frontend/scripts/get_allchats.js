@@ -18,7 +18,7 @@ $(document).ready(function(){
                 for(userid in data["messages"]){
                     //console.log(data["messages"][userid]);
                     $("#message_list").append(
-                        `<div class="row py-2 chat" onclick="location.href='#';"  style="cursor: pointer;">
+                        `<div class="row py-2 chat" onclick="openChat(${data["messages"][userid].user_id})"  style="cursor: pointer;">
                         <div class="col-2 text-center mx-auto"><img class="" src="media/images/icons/default_profile.svg" alt="" width="60"></div>
                         <div class="col-10 mx-auto">
                             <div class="row">
@@ -66,3 +66,9 @@ $(document).ready(function(){
     
     
 });
+
+function openChat(id){
+    location.href= location.href.split("#")[0].split("?")[0]+"?userid="+id+"#Chat" 
+    loadView();
+};
+
