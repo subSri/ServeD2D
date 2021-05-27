@@ -245,16 +245,14 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 
 POST /api/reviews
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
-OrderStatus : 2
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcmVldGFtIiwiaWQiOjIyLCJleHAiOjE2MjIxNzA2MTcsImlhdCI6MTYyMjExMDYxN30.aj2HM3mE0q5yd562k-t5SKpN3GZbX66RQEJPargEldo
 Content-Type: application/json
 
 {
-    "reviewId": 22,
     "userId": 1,
     "serviceId": 1,
     "rating": 5,
-    "comment": "Vey bad product"
+    "comment": "test"
 }
 
 ### CHATS -----------------------------------------------------------------

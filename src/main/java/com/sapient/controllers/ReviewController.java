@@ -28,33 +28,30 @@ import org.springframework.web.bind.annotation.RestController;
 // @Slf4j
 public class ReviewController {
 
+    @Autowired
+    private ReviewDao reviewDao;
 
-	@Autowired
-	private ReviewDao reviewDao;
-	
-	@GetMapping("/{service_id}")
-	public ResponseEntity<?> getSelectedReviews(@PathVariable("service_id") Integer serviceId,
-			@RequestHeader(name = "Authorization", required = false) String authHeader) {
+    @GetMapping("/{service_id}")
+    public ResponseEntity<?> getSelectedReviews(@PathVariable("service_id") Integer serviceId,
+            @RequestHeader(name = "Authorization", required = false) String authHeader) {
 
-		
-		// log.info("authHeader = {}", authHeader);
-		if(authHeader==null) {
-			// Authorization header is missing
-			return ifAuthNull();
-		}
-		
-		try {
-			Integer userId = auth(authHeader);
-			List<Review> reviews =reviewDao.returnSelectedReviews(serviceId);
-			
-			Map<String, Object> map = getResponse(userId);
-			map.put("review", reviews); 
-			return ResponseEntity.ok(map);
-		}
-		catch(Exception ex) {
-			return getCatchResponse(ex);
-		}
-	}
+        // log.info("authHeader = {}", authHeader);
+        if (authHeader == null) {
+            // Authorization header is missing
+            return ifAuthNull();
+        }
+
+        try {
+            Integer userId = auth(authHeader);
+            List<Map<String, String>> reviews = reviewDao.returnSelectedReviews(serviceId);
+
+            Map<String, Object> map = getResponse(userId);
+            map.put("review", reviews);
+            return ResponseEntity.ok(map);
+        } catch (Exception ex) {
+            return getCatchResponse(ex);
+        }
+    }
 
     private Map<String, Object> getResponse(Integer userId) {
         Map<String, Object> map = new HashMap<>();
@@ -75,45 +72,43 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ResponseEntity<?> makeANewReview(
-            @RequestHeader(name = "Authorization", required = false) String authHeader, @RequestBody Review review) {
+    public ResponseEntity<?> makeANewReview(@RequestHeader(name = "Authorization", required = false) String authHeader,
+            @RequestBody Review review) {
 
-        if(authHeader==null) {
+        if (authHeader == null) {
             return ifAuthNull();
         }
-        
+
         try {
             Integer userId = auth(authHeader);
-
+            System.out.println(review);
             Review getReview = reviewDao.addReview(review);
             Map<String, Object> map = getResponse(userId);
-            map.put("review", getReview); 
+            map.put("review", getReview);
             return ResponseEntity.ok(map);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             return getCatchResponse(ex);
         }
     }
 
     private ResponseEntity<?> getCatchResponse(Exception ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authorization token is invalid or " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body("Authorization token is invalid or " + ex.getMessage());
     }
 
     @GetMapping
     public ResponseEntity<?> getAllRatings() {
 
         try {
-            
+
             List<Review> reviews = reviewDao.returnAllReviews();
-            
+
             Map<String, Object> map = new HashMap<>();
             map.put("success", true);
-            map.put("reviews", reviews); 
+            map.put("reviews", reviews);
             return ResponseEntity.ok(map);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         }
     }
 }
-    
