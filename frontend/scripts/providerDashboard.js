@@ -1,14 +1,10 @@
 var baseUrl = 'http://localhost:8080/';
 var url = baseUrl + 'api/orders';
 var tokens = "";
+var tokens = localStorage.getItem('token').split(' ');
 var arrayOfLiveOrders = [];
 window.onload = function () {
-  var baseUrl = 'http://localhost:8080/';
-  var url = baseUrl + 'api/orders';
-  var tokens = localStorage.getItem('token').split(' ');
-  var arrayOfLiveOrders = [];
   $('#name').append(`Hi, ${localStorage.getItem('name')}`);
-  console.log(tokens[1]);
   $("#loading").show();
   $.ajax({
     type: 'GET',
@@ -50,7 +46,7 @@ window.onload = function () {
                         <td> <button class="btn btn-info" id="data.info[i].order.orderId" onclick="ajaxPostAccept(${data.info[i].order.orderId})">
                         Accept </button></td>
                         </tr>`;
-          // arrayOfLiveOrders.push(data.info[i].order.orderId);
+          arrayOfLiveOrders.push(data.info[i].order.orderId);
         } else if (data.info[i].order.orderStatus == '1') {
           console.log(data.info[i].order);
           out2 =
@@ -104,20 +100,18 @@ window.onload = function () {
 };
 
 function ajaxPostAccept(id) {
-  var path = ('/accept/').concat(id.toString());
+  var path = '/accept/'.concat(id);
   $.ajax({
     type: 'POST',
     url: url.concat(path),
     headers: {
-      Authorization: ('Bearer ').concat(tokens[1]),
+      Authorization: 'Bearer '.concat(tokens[1]),
     },
-    data: {
-
-    },
-    success: function () {
+    success: function (result) {
       alert('You have accepted order :' + id.toString());
+      loadView();
     },
-    error: function () {
+    error: function (result) {
       alert('try again!');
     },
   });
@@ -131,11 +125,11 @@ function ajaxPostCancel(id) {
     headers: {
       Authorization: 'Bearer '.concat(tokens[1]),
     },
-    data: {},
-    success: function () {
+    success: function (result) {
       alert('You have cancelled order :' + id.toString());
+      loadView();
     },
-    error: function () {
+    error: function (result) {
       alert('try again!');
     },
   });

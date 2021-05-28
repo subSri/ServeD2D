@@ -110,7 +110,7 @@ public class ServiceController {
 		
 		try {
 			Integer userId = auth(authHeader);
-
+			service.setProviderId(userId);
 			serviceDao.addNewService(service);
 			
 			Map<String, Object> map = new HashMap<>();

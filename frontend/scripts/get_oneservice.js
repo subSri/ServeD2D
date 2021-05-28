@@ -4,14 +4,41 @@ $("#submit_message").hide();
 var baseUrl = "http://localhost:8080/";
 
 var url = baseUrl + "api/services/";
-
+var orderUrl = baseUrl + 'api/orders'
 var par = new URLSearchParams(window.location.search);
-orderid = par.get("serviceid");
-url = url + orderid;
+serviceId = par.get("serviceid");
+url = url + serviceId;
 
-function placeOrder(service) {
+function placeOrder(price) {
   event.preventDefault();
-  console.log("clicked booking");
+  console.log(serviceId);
+  console.log(price);
+  data = {
+    serviceId: serviceId,
+    adressId: 1,
+    timestamp: new Date().toJSON().slice(0, 10),
+    orderStatus: 0,
+    amount: price
+  }
+
+  $.ajax({
+    url: orderUrl,
+    type: 'POST',
+    headers: {
+      Authorization: window.localStorage.getItem('token')
+    },
+    data: JSON.stringify(data),
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    success: function (data, status) {
+      alert("Order Placed");
+      navigateTo('listOrder');
+    },
+    error: function (jq, status, message) {
+      alert('Service creation failed !');
+    },
+  });
+
 }
 
 $(document).ready(function () {
@@ -49,7 +76,7 @@ $(document).ready(function () {
                   <button class="btn btn-primary" onClick="openChat(${data["service"].providerId})"><h5 class="">Contact Provider</h5></button>
                 </div>
                 <div class="col-6 my-2">
-                  <button class="btn btn-success" onClick="placeOrder()"><h5 class="">Book Now</h5></button>
+                  <button class="btn btn-success" onClick="placeOrder(${data["service"].price})"><h5 class="">Book Now</h5></button>
                 </div>
               </div>`
       );
