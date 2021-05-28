@@ -68,7 +68,7 @@ Content-Type: application/json
 
     "serviceId" : 23,
 	"adressId" : 1,
-	"timestamp" : "2013-01-21",
+	"timestamp" : "2013-01-20",
 	"orderStatus" : 2,
 	"amount" : 23.43
 }
@@ -114,19 +114,19 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 
 POST /api/services
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHYXVyYXYiLCJpZCI6MjIsImV4cCI6MTYyMjI3MDUzMSwiaWF0IjoxNjIyMjEwNTMxfQ.PR9bLW8TDTHZzGWfOTOXHJFdk0vvo5FIG9iAxyoSGwI
 Content-Type: application/json
 
-{
-    "serviceId": 23,
-    "providerId": 1,
+{   
+    
     "addressId": 2,
     "isApproved": true,
-    "category": "mattis",
-    "description": "Morbi porttitor lorem id ligula.",
-    "imageUrl": "http://dummyimage.com/122x100.png/ff4444/ffffff",
+    "category": "Minecraft",
+    "description": "Become minecraft bedwar 300+ star",
+    "imageUrl": "http://dummyimage.com/122x100.png/4444ff/ffffff",
     "serviceRadius": 10.0,
     "price": 25.1,
+    "name" : "Bedwar",
     "ratingCount": 1000000,
     "completedOrders": 2222
 }

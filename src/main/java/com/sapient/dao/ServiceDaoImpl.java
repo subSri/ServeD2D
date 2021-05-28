@@ -12,7 +12,7 @@ public class ServiceDaoImpl implements ServiceDao {
 
 	public Boolean addNewService(Service service) throws DaoException {
 //		String sql = "INSERT INTO SERVICE (service_id, provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-		String sql = "INSERT INTO SERVICE (provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO SERVICE (provider_id, address_id, is_approved, category, description, image_url, price, service_radius, rating_count,service_name, completed_orders) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 		try (Connection conn = DbUtil.createConnection(); PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);) {
 //			stmt.setInt(1, service.getServiceId());
 			stmt.setInt(1, service.getProviderId());
@@ -24,7 +24,8 @@ public class ServiceDaoImpl implements ServiceDao {
 			stmt.setDouble(7, service.getPrice());
 			stmt.setDouble(8, service.getServiceRadius());
 			stmt.setInt(9, service.getRatingCount());
-			stmt.setInt(10, service.getCompletedOrders());
+			stmt.setString(10, service.getName());
+			stmt.setInt(11, service.getCompletedOrders());
 
 			stmt.executeUpdate();
 
