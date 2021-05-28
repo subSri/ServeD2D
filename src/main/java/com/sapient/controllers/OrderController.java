@@ -230,7 +230,7 @@ public class OrderController {
 
 		try {
 			Integer userId = auth(authHeader);
-
+			order.setUserId(userId);
 			orderDao.addNewOrder(order);
 
 			Map<String, Object> map = getResponse(userId);
