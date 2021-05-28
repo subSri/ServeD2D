@@ -18,7 +18,7 @@ $(document).ready(function(){
             $("#categories").append(
                 `<div class="col-sm-12 col-md-3 mb-3">
                     <div class="card">
-                    <div class="card-body">
+                    <div class="card-body text-center"  style="text-transform:capitalize;">
                         <h5 class="card-title">${data.categories[cat]} </h5>
                         <button class="btn btn-success" onclick="openCategory('${data.categories[cat]}')">Explore</button>
                     </div>
