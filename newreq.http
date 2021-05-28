@@ -25,10 +25,10 @@ Content-Type: application/json
 
 {
 
-    "name" : "Preetam",
-    "isProvider" : "0",
+    "name" : "Gaurav",
+    "isProvider" : "1",
     "walletBalance" : "1000",
-    "email": "p@gmail.com",
+    "email": "g@gmail.com",
     "password": "1234"
 }
 
@@ -61,15 +61,14 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 
 POST /api/orders
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcmVldGFtIiwiaWQiOjIzLCJleHAiOjE2MjIyNjY0NzksImlhdCI6MTYyMjIwNjQ3OX0.zir7PCkBBpRFMosVJ6znv-UievRoe2nzPlIpZeJJkv8
 Content-Type: application/json
 
 {
-    "orderId" : 22,
-    "userId" : 2,
+
     "serviceId" : 23,
 	"adressId" : 1,
-	"timestamp" : "2013-01-20",
+	"timestamp" : "2013-01-21",
 	"orderStatus" : 2,
 	"amount" : 23.43
 }
@@ -245,23 +244,21 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 
 POST /api/reviews
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
-OrderStatus : 2
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcmVldGFtIiwiaWQiOjIyLCJleHAiOjE2MjIxNzA2MTcsImlhdCI6MTYyMjExMDYxN30.aj2HM3mE0q5yd562k-t5SKpN3GZbX66RQEJPargEldo
 Content-Type: application/json
 
 {
-    "reviewId": 22,
     "userId": 1,
     "serviceId": 1,
     "rating": 5,
-    "comment": "Vey bad product"
+    "comment": "test"
 }
 
 ### CHATS -----------------------------------------------------------------
 
 GET /api/chats/all
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDc4MjA1LCJpYXQiOjE2MjE0MTgyMDV9.sTp4iykhZaXPzs6WYQ8lBAcqt_MRFyRzMhIU4hWZ4s4
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHYXVyYXYiLCJpZCI6MjMsImV4cCI6MTYyMTkzNDI5NCwiaWF0IjoxNjIxODc0Mjk0fQ.eV_6e4iORWd7Stai1Dykvr6wiR4hZsfvv4oMQ7P3TPk
 
 ###
 
@@ -273,14 +270,13 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 
 POST /api/chats
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHYXVyYXYiLCJpZCI6MjMsImV4cCI6MTYyMTkzNDI5NCwiaWF0IjoxNjIxODc0Mjk0fQ.eV_6e4iORWd7Stai1Dykvr6wiR4hZsfvv4oMQ7P3TPk
 Content-Type: application/json
 
 {
-    "messageId": 22,
-    "senderId": 4,
-    "receiverId": 1,
-    "content": "My Message",
+    "senderId": 23,
+    "receiverId": 22,
+    "content": "Is time managed from frontend",
     "timestamp": "2021-04-20"
 }
 

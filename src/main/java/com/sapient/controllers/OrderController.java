@@ -105,12 +105,7 @@ public class OrderController {
 		}
 	}
 
-	private Map<String, Object> getResponse(Integer userId) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("success", true);
-		map.put("user_id", userId);
-		return map;
-	}
+	
 
 	private Integer auth(String authHeader) throws Exception {
 		String token = authHeader.split(" ")[1]; // second element from the header's value
@@ -241,22 +236,34 @@ public class OrderController {
 					.body("Authorization token is invalid or " + ex.getMessage());
 		}
 	}
-
+	
+	private Map<String, Object> getResponse(Integer userId) {
+		Map<String, Object> map = new HashMap<>();
+		System.out.println("sending response map");
+		map.put("success", true);
+		map.put("user_id", userId);
+		return map;
+	}
+	
 	@PostMapping("/accept/{order_id}")
 	public ResponseEntity<?> acceptOrderStatus(
 			@RequestHeader(name = "Authorization", required = false) String authHeader,
 			@PathVariable("order_id") Integer orderId) {
+		System.out.println("here" + authHeader);
 		if (authHeader == null) {
+			System.out.println("its null");
 			return ifAuthNull();
 		}
 
 		try {
-			System.out.println("this is called");
+			
 			Integer userId = auth(authHeader);
 			orderDao.acceptOrder(orderId);
 			Map<String, Object> map = getResponse(userId);
 			map.put("order", orderId);
 			map.put("orderStatus", 1);
+			System.out.println("this is called");
+			System.out.println(map);
 			return ResponseEntity.ok(map);
 		} catch (Exception ex) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -273,9 +280,28 @@ public class OrderController {
 		}
 
 		try {
-			System.out.println("this is called");
 			Integer userId = auth(authHeader);
 			orderDao.cancelOrder(orderId);
+			Map<String, Object> map = getResponse(userId);
+			map.put("order", orderId);
+			map.put("orderStatus", 1);
+			return ResponseEntity.ok(map);
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.body("Authorization token is invalid or " + ex.getMessage());
+		}
+	}
+	@PostMapping("/complete/{order_id}")
+	public ResponseEntity<?> completeOrderStatus(
+			@RequestHeader(name = "Authorization", required = false) String authHeader,
+			@PathVariable("order_id") Integer orderId) {
+		if (authHeader == null) {
+			return ifAuthNull();
+		}
+
+		try {
+			Integer userId = auth(authHeader);
+			orderDao.completeOrder(orderId);
 			Map<String, Object> map = getResponse(userId);
 			map.put("order", orderId);
 			map.put("orderStatus", 1);
