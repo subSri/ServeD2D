@@ -2,7 +2,7 @@ var baseUrl = 'http://localhost:8080/';
 var url = baseUrl + 'api/orders';
 var tokens = "";
 var tokens = localStorage.getItem('token').split(' ');
-var arrayOfLiveOrders = [];
+
 window.onload = function () {
   $('#name').append(`Hi, ${localStorage.getItem('name')}`);
   $("#loading").show();
@@ -45,8 +45,10 @@ window.onload = function () {
                         <td>${data.info[i].order.timestamp}</td>
                         <td> <button class="btn btn-info" id="data.info[i].order.orderId" onclick="ajaxPostAccept(${data.info[i].order.orderId})">
                         Accept </button></td>
+                        <td> <button class="btn btn-warning" id="data.info[i].order.orderId" onclick="ajaxPostCancel(${data.info[i].order.orderId})">
+                        Decline </button></td>
                         </tr>`;
-          arrayOfLiveOrders.push(data.info[i].order.orderId);
+          
         } else if (data.info[i].order.orderStatus == '1') {
           console.log(data.info[i].order);
           out2 =
@@ -58,8 +60,8 @@ window.onload = function () {
                         <td>Rs ${data.info[i].order.amount}</td>
                         <td>${data.info[i].address_of_consumer.lat}, ${data.info[i].address_of_consumer.longi}</td>
                         <td>${data.info[i].order.timestamp}</td>
-                        <td> <button class="btn btn-warning" id="data.info[i].order.orderId" onclick="ajaxPostCancel(${data.info[i].order.orderId})">
-                        Cancel </button></td>
+                        <td> <button class="btn btn-info" id="data.info[i].order.orderId" onclick="ajaxPostCompleted(${data.info[i].order.orderId})">
+                        complete </button></td>
                         </tr>`;
         } else if (data.info[i].order.orderStatus == '2') {
           console.log(data.info[i].order);
@@ -107,11 +109,11 @@ function ajaxPostAccept(id) {
     headers: {
       Authorization: 'Bearer '.concat(tokens[1]),
     },
-    success: function (result) {
+    success: function () {
       alert('You have accepted order :' + id.toString());
       loadView();
     },
-    error: function (result) {
+    error: function () {
       alert('try again!');
     },
   });
@@ -125,11 +127,29 @@ function ajaxPostCancel(id) {
     headers: {
       Authorization: 'Bearer '.concat(tokens[1]),
     },
-    success: function (result) {
+    success: function () {
       alert('You have cancelled order :' + id.toString());
       loadView();
     },
-    error: function (result) {
+    error: function () {
+      alert('try again!');
+    },
+  });
+}
+
+function ajaxPostCompleted(id) {
+  var path = '/complete/'.concat(id.toString());
+  $.ajax({
+    type: 'POST',
+    url: url.concat(path),
+    headers: {
+      Authorization: 'Bearer '.concat(tokens[1]),
+    },
+    success: function () {
+      alert('You have marked this order '+ id.toString() + ' as complete, Cheers!' );
+      loadView();
+    },
+    error: function () {
       alert('try again!');
     },
   });

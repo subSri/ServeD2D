@@ -280,9 +280,28 @@ public class OrderController {
 		}
 
 		try {
-			System.out.println("this is called");
 			Integer userId = auth(authHeader);
 			orderDao.cancelOrder(orderId);
+			Map<String, Object> map = getResponse(userId);
+			map.put("order", orderId);
+			map.put("orderStatus", 1);
+			return ResponseEntity.ok(map);
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+					.body("Authorization token is invalid or " + ex.getMessage());
+		}
+	}
+	@PostMapping("/complete/{order_id}")
+	public ResponseEntity<?> completeOrderStatus(
+			@RequestHeader(name = "Authorization", required = false) String authHeader,
+			@PathVariable("order_id") Integer orderId) {
+		if (authHeader == null) {
+			return ifAuthNull();
+		}
+
+		try {
+			Integer userId = auth(authHeader);
+			orderDao.completeOrder(orderId);
 			Map<String, Object> map = getResponse(userId);
 			map.put("order", orderId);
 			map.put("orderStatus", 1);
