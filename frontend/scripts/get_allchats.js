@@ -24,11 +24,11 @@ $(document).ready(function(){
                         <div class="col-2 text-center mx-auto"><img class="" src="media/images/icons/default_profile.svg" alt="" width="60"></div>
                         <div class="col-10 mx-auto">
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-8"  style="text-transform:capitalize;">
                                     <h2>${data["messages"][userid].name}</h2>
                                 </div>
                                 <div class="col-4  text-end">
-                                    <h5>${data["messages"][userid].timestamp}</h5>>>>>>>> master
+                                    <h5>${data["messages"][userid].timestamp}</h5>
                                 </div>
                             </div>
                             <div class="row">
