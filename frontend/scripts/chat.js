@@ -17,7 +17,6 @@ $("form").on("submit", function(event) {
             Authorization: localStorage.getItem("token")
         },
         data: JSON.stringify({
-            "senderId": "21",
             "receiverId": par.get("userid"),
             "content": msg,
             "timestamp": new Date(),
