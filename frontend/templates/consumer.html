@@ -1,5 +1,6 @@
 <script src="./scripts/jquery-3.6.0.js"></script>
 <script src="./scripts/consumer.js"></script>
+<script src="./scripts/get_categories.js"></script>
 
 <!-- Path is relative to index.html i.e. not ../script but ./script   Consider loginpage for interface-->
 <link rel="stylesheet" href=".\css\bootstrap.min.css" />
@@ -42,7 +43,7 @@
       </div>
       <div class="d-flex">
         <button
-          class="btn btn-lg btn-primary"
+          class="btn btn-lg btn-warning"
           onclick="logout()"
         >
           Logout
@@ -61,6 +62,19 @@
     <div class="container ">
       <div class="row ">
         <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="getCat" class="btn btn-success h-100 w-100">
+            <div class="title">
+              <h4>Find Services</h4>
+            </div>
+
+            <div class="text">
+              <span>Order a Services</span>
+            </div>
+          </button>
+        </div>
+
+        
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
           <button id="orderButton" class="btn btn-success h-100 w-100" onclick="navigateTo('listOrder')">
             <div class="title">
               <h4>Your Orders</h4>
@@ -72,17 +86,7 @@
           </button>
         </div>
 
-        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
-          <button id="loginDetailsButton" class="btn btn-success h-100 w-100">
-            <div class="title">
-              <h4>Login & Security</h4>
-            </div>
-
-            <div class="text">
-              <span>Edit login details</span>
-            </div>
-          </button>
-        </div>
+        
 
         <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
           <button id="addressesButton" class="btn btn-success h-100 w-100">
@@ -119,27 +123,30 @@
 
         <div id="resultArea" class="row"></div>
         <br />
-        <p id="resultPara">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Et
-          sollicitudin ac orci phasellus. Quam adipiscing vitae proin sagittis
-          nisl rhoncus mattis. Est placerat in egestas erat imperdiet sed
-          euismod nisi porta. Eget lorem dolor sed viverra ipsum. Congue eu
-          consequat ac felis donec et odio pellentesque diam. Nunc faucibus a
-          pellentesque sit amet porttitor eget dolor morbi. Quisque id diam vel
-          quam elementum pulvinar etiam non. Vel facilisis volutpat est velit
-          egestas dui id ornare arcu. Commodo quis imperdiet massa tincidunt
-          nunc pulvinar sapien et. Ipsum consequat nisl vel pretium lectus quam
-          id leo in. Metus aliquam eleifend mi in. Netus et malesuada fames ac
-          turpis egestas integer. Et malesuada fames ac turpis egestas sed
-          tempus urna et. Sem nulla pharetra diam sit amet nisl suscipit
-          adipiscing bibendum. Ac auctor augue mauris augue neque gravida in.
-          Sodales neque sodales ut etiam sit amet nisl purus in. Risus in
-          hendrerit gravida rutrum quisque. Vitae ultricies leo integer
-          malesuada nunc vel risus commodo viverra. Viverra tellus in hac
-          habitasse. Iaculis eu non diam phasellus vestibulum. Orci sagittis eu
-          volutpat odio facilisis mauris sit amet.
-        </p>
+        <section class="m-5">
+          <div class="container-lg">
+            <div class="row flex-center">
+              <div class="d-flex justify-content-center">
+              </div>
+              <div class="col-12 col-lg-12">
+                <div
+                  class="bg-holder"
+                  style="
+                    background-image: url(./media/images/door.png);
+                    background-position: top left;
+                    background-size: 120px 83px;
+                  "
+                ></div>
+                <!--/.bg-holder-->
+                <h6
+                  id="server_msg"
+                  class="fs-2 fs-lg-5 fw-bold lh-sm text-center"
+                ></h6>
+              </div>
+              <div class="row mt-5" id="categories"></div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>

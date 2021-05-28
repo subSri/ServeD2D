@@ -1,67 +1,97 @@
+<div class="container">
+  <!-- NavBar -->
+  <nav
+    class="navbar navbar-expand-lg navbar-light fixed-top mb-5 opacity-85 shadow-transition"
+    data-navbar-on-scroll="data-navbar-on-scroll"
+    style="
+      background-image: none;
+      transition: none 0s ease 0s;
+      background-color: rgb(249, 250, 253);
+    "
+  >
     <div class="container">
-       <!-- NavBar -->
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5 opacity-85 shadow-transition" data-navbar-on-scroll="data-navbar-on-scroll" style="background-image: none; transition: none 0s ease 0s; background-color: rgb(249, 250, 253);">
-        <div class="container"><a class="navbar-brand" href="index.html"><img class="d-inline-block align-top img-fluid" src="media/images/icons/logo.svg" alt="" width="50"><span class="text-theme font-monospace fs-4 ps-2">Serve-D2D</span></a><button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="navbar-collapse border-lg-0 mt-4 mt-lg-0 collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page" href="#header">Home</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-medium" href="#about">About</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-medium" href="#categories">Categories</a></li>
-              <!-- <li class="nav-item px-2"><a class="nav-link fw-medium" href="#invest">Invest</a></li>
-              <li class="nav-item px-2"><a class="nav-link fw-medium" href="#contact">Contact </a></li> -->
-            </ul>
-            <form class="d-flex"><button class="btn btn-lg btn-dark bg-gradient order-0" type="submit">Sign Up</button></form>
-          </div>
-        </div>
-      </nav>
-
-
-    <section class="py-0 mb-1" id="header">
-      <div class="container">
-        <div class="row">
-            <div class="mx-auto"><h1 class=""><b>Service Info</b> </h1></div>
-            
+      <a class="navbar-brand" href="index.html"
+        ><img
+          class="d-inline-block align-top img-fluid"
+          src="./media/images/icons/logo.svg"
+          alt=""
+          width="50"
+        /><span class="text-theme font-monospace fs-4 ps-2">Serve-D2D</span></a
+      ><button
+        class="navbar-toggler collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="navbar-collapse border-lg-0 mt-4 mt-lg-0 collapse"
+        id="navbarSupportedContent"
+      >
+        <div class="d-inline-block">
+          <button class="btn btn-success" onclick="back()">Back</button>
         </div>
       </div>
-    </section>
-    <hr>
-
-    <!--Service -->
-    <section class = "m-0 vh-90" id="orders">
-        <div class="container" id="order_list">
-          <div class="row justify-content-center">
-            <div
-              class="spinner-grow text-success"
-              style="width: 3rem; height: 3rem"
-              role="status"
-              id="loading"
-            >
-              <!-- <span class="sr-only">Loading...</span> -->
-            </div>
-          </div>
-          <div class="card" id="service_card">
-            <div class="card-header py-3">
-              <h3 class="text-light font-monospace" id="service_title"></h3>
-            </div>
-            <div class="card-body" id="service_body">
-            
-            </div>
-          </div>
-          <div class="card text-light" id="error_card">
-            <div class="card-header">
-              <h3 class="text-light font-monospace" >Error</h3>
-            </div>
-            <div class="card-body" >
-              <h5 class="font-monospace">Error occured while retrieving Service.Please Try Again.</h5>
-            </div>
-          </div>
-        </div>   
-    </section>
-    <hr>
-    <section class = "" id="review_section">
-
-    </section>
-
+      <div class="d-flex">
+        <button
+          class="btn btn-lg btn-warning"
+          style="float: right"
+          onclick="logout()"
+        >
+          Logout
+        </button>
+      </div>
     </div>
- 
+  </nav>
+
+  <section class="py-0 mb-1" id="header">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto">
+          <h1 class=""><b>Service Info</b></h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+
+  <!--Service -->
+  <section class="m-0 vh-90" id="orders">
+    <div class="container" id="order_list">
+      <div class="row justify-content-center">
+        <div
+          class="spinner-grow text-success"
+          style="width: 3rem; height: 3rem"
+          role="status"
+          id="loading"
+        >
+          <!-- <span class="sr-only">Loading...</span> -->
+        </div>
+      </div>
+      <div class="card" id="service_card">
+        <div class="card-header py-3">
+          <h3 class="text-light font-monospace" id="service_title"></h3>
+        </div>
+        <div class="card-body" id="service_body"></div>
+      </div>
+      <div class="card text-light" id="error_card">
+        <div class="card-header">
+          <h3 class="text-light font-monospace">Error</h3>
+        </div>
+        <div class="card-body">
+          <h5 class="font-monospace">
+            Error occured while retrieving Service.Please Try Again.
+          </h5>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+  <section class="" id="review_section"></section>
+</div>
+
 <script src="scripts\get_oneservice.js"></script>

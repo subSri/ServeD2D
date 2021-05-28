@@ -4,15 +4,25 @@ function logout() {
   loadView();
 }
 
+function back() {
+  if (window.localStorage.getItem('token')) {
+    if (window.localStorage.getItem('provider') === 'true') {
+      navigateTo('provider');
+    } else {
+      navigateTo('consumer');
+    }
+  }
+}
+
 function navigateTo(path) {
   location.href = `./#${path}`;
   loadView();
 }
 
 function checkForLoggedInStatus() {
-  var fullname = localStorage.getItem('fullname');
+  var fullname = localStorage.getItem('token');
   if (!fullname) {
-    location.href = './#login';
+    navigateTo('login');
     loadView();
     return false;
   }

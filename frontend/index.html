@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href=".\css\bootstrap.min.css" />
 
-    <link rel="stylesheet" href="./css/bootswatch-solar.css">
+    <link rel="stylesheet" href="./css/bootswatch-solar.css" />
     <script src="./scripts/jquery-3.6.0.js"></script>
     <script src="./scripts/site.js"></script>
     <script src="./scripts/get_categories.js"></script>
@@ -74,19 +74,22 @@
                 <!-- <li class="nav-item px-2"><a class="nav-link fw-medium" href="#invest">Invest</a></li>
             <li class="nav-item px-2"><a class="nav-link fw-medium" href="#contact">Contact </a></li> -->
               </ul>
+              <div class="">
               <button
-                class="btn btn-lg btn-dark bg-gradient order-0"
+                class="btn btn-lg btn-dark "
                 type="submit"
                 onclick="navigateTo('login')"
               >
                 Login
               </button>
               <button
-                class="btn btn-lg btn-dark bg-gradient order-0"
+                class="btn btn-lg btn-dark "
                 type="submit"
+                onclick="navigateTo('signup')""
               >
                 Sign Up
               </button>
+            </div>
             </div>
           </div>
         </nav>
@@ -115,7 +118,6 @@
               <div
                 class="col-md-7 col-lg-6 col-xxl-5 py-6 text-sm-start text-center"
               >
-                view
                 <h1 class="mt-6 mb-sm-4">
                   <b
                     >Getting work done <br class="d-block d-lg-block" />Never
@@ -126,9 +128,9 @@
                   Any work you want ot get done in your day to day life,
                   ServeD2D can provide you the exact door to door service
                 </p>
-                <a class="btn btn-lg btn-success" href="#" role="button"
-                  >Our Services</a
-                >
+                <button class="btn btn-lg btn-success" id="getCat">
+                  Our Services
+                </button>
               </div>
             </div>
           </div>
@@ -260,26 +262,7 @@
                   class="fs-2 fs-lg-5 fw-bold lh-sm text-center"
                 ></h6>
               </div>
-              <div class="row mt-5" id="categories">
-                <!-- <div class="col-sm-3">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special </h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-success">Explore</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Appliances</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-success">Explore</a>
-                </div>
-              </div>
-            </div> -->
-              </div>
+              <div class="row mt-5" id="categories"></div>
             </div>
           </div>
         </section>
