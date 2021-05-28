@@ -19,11 +19,11 @@ $(document).ready(function(){
         },
         success: function(data){
           console.log(data);
-            $("#service_title").append(`<img class="mx-4" src=${data["service"].imageUrl} alt="No image" width="80" height="80"><b>${data["service"].name}</b>`);
+            $("#service_title").append(`<img class="mx-4" src=${data["service"].imageUrl} alt="No image" width="80" height="80"><b  style="text-transform:capitalize;">${data["service"].name}</b>`);
             $("#service_body").append(
                 `<div class="row text-white">
                 <div class="col-6 py-1">
-                  <h5 class="  "><b>Category : </b>${data["service"].category}</h5>
+                  <h5 class="  "  style="text-transform:capitalize;"><b>Category : </b>${data["service"].category}</h5>
                 </div>
                 <div class="col-6 py-1">
                   <h5 class="  "><b>Price :</b>Rs. ${data["service"].price}</h5>

@@ -46,7 +46,7 @@ $(document).ready(function(){
                                           <h3 class="text-light font-monospace "><b>Order ID # ${data["orders"][i].order_id}</b></h3>
                                         </div>
                                         <div class="col-6" style="padding: 0;margin: 0;">
-                                          <h5 class=" ">Service : ${data["orders"][i].service_name}</h5>
+                                          <h5 class=" "  style="text-transform:capitalize;">Service : ${data["orders"][i].service_name}</h5>
                                         </div>
                                         <div class="col-6" style="padding: 0;margin: 0;">
                                           <h5 class="">Date : ${data["orders"][i].timestamp}</h5>

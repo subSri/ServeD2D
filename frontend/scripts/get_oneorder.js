@@ -22,7 +22,7 @@ $(document).ready(function(){
             $("#order_body").append(
                 `<div class="row text-white">
                 <div class="col-6 py-1">
-                  <h5 class=" font-monospace ">Service : ${data["order"].service_name}</h5>
+                  <h5 class=" font-monospace "  style="text-transform:capitalize;">Service : ${data["order"].service_name}</h5>
                 </div>
                 <div class="col-6 py-1">
                   <h5 class=" font-monospace ">Order Date : ${data["order"].timestamp}</h5>
