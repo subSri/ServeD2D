@@ -41,6 +41,7 @@ public class MessageController {
         try {
             Integer userId = auth(authHeader);
 
+            message.setSenderId(userId);
             Boolean done = messageDao.liveMessage(message, userId);
             if (done == true) {
                 Map<String, Object> map = getResponse(userId);
