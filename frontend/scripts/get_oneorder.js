@@ -3,24 +3,59 @@ $("#error_card").hide();
 $("#submit_message").hide();
 var baseUrl = "http://localhost:8080/";
 
-var url = baseUrl+"api/orders/";
+var url = baseUrl + "api/orders/";
 
- var par=new URLSearchParams(window.location.search);
- orderid=par.get("orderid");
- url=url+orderid;
+var par = new URLSearchParams(window.location.search);
+orderid = par.get("orderid");
+url = url + orderid;
 
-$(document).ready(function(){
-    token=localStorage.getItem('token');
+function completePayment(orderId, serviceId, amount, processStatus) {
+  event.preventDefault();
+  console.log(processStatus);
+  data = {
+    orderId: orderId,
+    serviceId: serviceId,
+    adressId: 1,
+    timestamp: new Date().toJSON().slice(0, 10),
+    orderStatus: 3,
+    amount: amount
+  }
+  if (processStatus) {
     $.ajax({
-        type: "GET",
-        url: url,
-        headers: {
-            "Authorization": token
-        },
-        success: function(data){
-            $("#order_title").append(`<b>Order ID # ${data["order"].order_id}</b>`);
-            $("#order_body").append(
-                `<div class="row text-white">
+      url: baseUrl + 'api/wallet/balance/payment',
+      type: 'POST',
+      headers: {
+        Authorization: window.localStorage.getItem('token')
+      },
+      data: JSON.stringify(data),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      success: function (data, status) {
+        alert("Payment Sucessful");
+        navigateTo('wallet');
+      },
+      error: function (jq, status, message) {
+        alert('Payment failed !');
+      },
+    });
+  } else {
+    alert('Pay after completion');
+  }
+}
+
+
+$(document).ready(function () {
+  token = localStorage.getItem('token');
+  $.ajax({
+    type: "GET",
+    url: url,
+    headers: {
+      "Authorization": token
+    },
+    success: function (data) {
+      $("#order_title").append(`<b>Order ID # ${data["order"].order_id}</b>`);
+      $("#order_body").append(
+        `<div class="row text-white">
                 <div class="col-6 py-1">
                   <h5 class=" font-monospace "  style="text-transform:capitalize;">Service : ${data["order"].service_name}</h5>
                 </div>
@@ -43,14 +78,18 @@ $(document).ready(function(){
                   <h5 class=" font-monospace ">Provider : ${data["order"].provider_name}</h5>
                 </div>
                 <div class="col-6 py-1">
+                  <button class="btn btn-primary" onClick="completePayment(${data["order"].order_id},${data["order"].service_id},${data["order"].amount},${data["order"].status == "COMPLETED"})"><h5 class=" font-monospace "> Pay from wallet</h5></button>
+                </div>
+                <div class="col-6 py-1">
                   <button class="btn btn-success" onClick="openChat(${data["order"].provider_id})"><h5 class=" font-monospace ">Contact Provider</h5></button>
                 </div>
+                
               </div>`
-                );
-            $("#loading").hide();
-            $("#order_card").show();
-            $("#review").append(
-              `<form onsubmit="event.preventDefault();return submitRating(${data["order"].user_id},${data["order"].service_id});"id="review_form"> 
+      );
+      $("#loading").hide();
+      $("#order_card").show();
+      $("#review").append(
+        `<form onsubmit="event.preventDefault();return submitRating(${data["order"].user_id},${data["order"].service_id});"id="review_form"> 
                 <div class="row">
                 <div class="col-12 form-group">
                   <textarea class="form-control" id="comment" name="comment" placeholder="Rate your experience with this Service" rows="3"></textarea>  
@@ -79,27 +118,27 @@ $(document).ready(function(){
                 </div>
               </div>
               </form>`
-              );
-        },
-        error: function(){
-            $("#loading").hide();
-            $("#error_card").show();
-        }
-    });
-    
+      );
+    },
+    error: function () {
+      $("#loading").hide();
+      $("#error_card").show();
+    }
+  });
+
 });
 
-function openChat(id){
-    location.href= location.href.split("#")[0].split("?")[0]+"?userid="+id+"#chat" 
-    loadView();
+function openChat(id) {
+  location.href = location.href.split("#")[0].split("?")[0] + "?userid=" + id + "#chat"
+  loadView();
 };
 
-function submitRating(userid,serviceid){
-  var review_url=baseUrl+"api/reviews"
-  var form=document.getElementById("review_form")
-  var rating=form.elements["rating"].value
-  var comment=form.elements["comment"].value
-  token=localStorage.getItem('token');
+function submitRating(userid, serviceid) {
+  var review_url = baseUrl + "api/reviews"
+  var form = document.getElementById("review_form")
+  var rating = form.elements["rating"].value
+  var comment = form.elements["comment"].value
+  token = localStorage.getItem('token');
   $.ajax({
     url: review_url,
     type: 'POST',
@@ -107,10 +146,10 @@ function submitRating(userid,serviceid){
       "Authorization": token
     },
     data: JSON.stringify({
-      userId : userid,
-      serviceId : serviceid,
-      rating : rating,
-      comment : comment,
+      userId: userid,
+      serviceId: serviceid,
+      rating: rating,
+      comment: comment,
     }),
     contentType: 'application/json; charset=utf-8',
     dataType: 'json',
