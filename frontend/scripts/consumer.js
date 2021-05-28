@@ -1,9 +1,8 @@
 
-headerParams={"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04"}
+headerParams = { "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04" }
 
 $(document).ready(function () {
-    
-
+    checkForLoggedInStatus();
     $("#loading").hide();
     $("#welcome_head").append(`<h1>Welcome,${localStorage.getItem('name')}</h1>`);
     // $("#orderButton").click(function (e) {
@@ -32,7 +31,7 @@ $(document).ready(function () {
     //     });
     // });
 
-    // $("#addressesButton").click(function (e) {
+    // $("#addressescheckForLoggedInStatus()Button").click(function (e) {
     //     $.ajax({
     //         method: 'GET',
     //         url:  "http://localhost:8080/api/address",
@@ -43,7 +42,7 @@ $(document).ready(function () {
     //             document.body = output;
     //         }
 
-            
+
     //     });
     // });
 
@@ -67,7 +66,7 @@ $(document).ready(function () {
     //         url:  "http://localhost:8080/api/reviews",
     //         headers: headerParams,
     //         success:function(data){
-                
+
     //             console.log(data);
     //             $.each( data.reviews, function( rev ) {
     //                 $("#resultArea").append(
@@ -81,14 +80,14 @@ $(document).ready(function () {
     //                         </div>
     //                     </div>`
     //                 );
-        
-                    
+
+
     //             });
     //             $("#loading").hide();
     //             $("resultPara").html = data;
-                
+
     //         }
     //     });
     // });
 });
-  
+
