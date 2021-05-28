@@ -50,7 +50,7 @@ window.onload = function () {
                         <td> <button class="btn btn-info" id="data.info[i].order.orderId" onclick="ajaxPostAccept(${data.info[i].order.orderId})">
                         Accept </button></td>
                         </tr>`;
-          arrayOfLiveOrders.push(data.info[i].order.orderId);
+          // arrayOfLiveOrders.push(data.info[i].order.orderId);
         } else if (data.info[i].order.orderStatus == '1') {
           console.log(data.info[i].order);
           out2 =
@@ -104,18 +104,20 @@ window.onload = function () {
 };
 
 function ajaxPostAccept(id) {
-  var path = '/accept/'.concat(id.toString());
+  var path = ('/accept/').concat(id.toString());
   $.ajax({
     type: 'POST',
     url: url.concat(path),
     headers: {
-      Authorization: 'Bearer '.concat(tokens[1]),
+      Authorization: ('Bearer ').concat(tokens[1]),
     },
-    data: {},
-    success: function (result) {
+    data: {
+
+    },
+    success: function () {
       alert('You have accepted order :' + id.toString());
     },
-    error: function (result) {
+    error: function () {
       alert('try again!');
     },
   });
@@ -130,10 +132,10 @@ function ajaxPostCancel(id) {
       Authorization: 'Bearer '.concat(tokens[1]),
     },
     data: {},
-    success: function (result) {
+    success: function () {
       alert('You have cancelled order :' + id.toString());
     },
-    error: function (result) {
+    error: function () {
       alert('try again!');
     },
   });
