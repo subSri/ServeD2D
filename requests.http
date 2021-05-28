@@ -36,7 +36,7 @@ Content-Type: application/json
 
 GET /api/orders
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcmVldGFtIiwiaWQiOjIzLCJleHAiOjE2MjIyODQzODMsImlhdCI6MTYyMjIyNDM4M30.-aOeRvjmkyIF5Cf3pLBqUmvp7QaRAwNDRtp05pWN8Zs
 ###
 
 GET /api/orders/1
@@ -61,17 +61,28 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNv
 
 POST /api/orders
 Host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcmVldGFtIiwiaWQiOjIzLCJleHAiOjE2MjIyNjY0NzksImlhdCI6MTYyMjIwNjQ3OX0.zir7PCkBBpRFMosVJ6znv-UievRoe2nzPlIpZeJJkv8
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcmVldGFtIiwiaWQiOjIzLCJleHAiOjE2MjIyODQzODMsImlhdCI6MTYyMjIyNDM4M30.-aOeRvjmkyIF5Cf3pLBqUmvp7QaRAwNDRtp05pWN8Zs
 Content-Type: application/json
 
 {
 
-    "serviceId" : 23,
+    "serviceId" : 34,
 	"adressId" : 1,
-	"timestamp" : "2013-01-20",
-	"orderStatus" : 2,
+	"timestamp" : "2021-05-28",
+	"orderStatus" : 0,
 	"amount" : 23.43
 }
+
+###
+
+POST /api/orders/accept/36
+Host: localhost:8080
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJHYXVyYXYiLCJpZCI6MjIsImV4cCI6MTYyMjI4NjIxMywiaWF0IjoxNjIyMjI2MjEzfQ.ejXITSs6urfaDi_Ksqxj6GfPtX5tpCKUAnYy0ZJAQCA
+Content-Type: application/json
+
+{
+}
+
 
 ###
 
