@@ -1,92 +1,148 @@
-<nav
-  class="navbar navbar-expand-lg navbar-light fixed-top mb-5 opacity-85 shadow-transition mr-auto"
-  data-navbar-on-scroll="data-navbar-on-scroll"
-  style="
-    background-image: none;
-    transition: none 0s ease 0s;
-    background-color: rgb(249, 250, 253);
-  "
->
-  <div class="container">
+<script src="./scripts/jquery-3.6.0.js"></script>
+<script src="./scripts/provider.js"></script>
+<!-- Path is relative to index.html i.e. not ../script but ./script   Consider loginpage for interface-->
+<link rel="stylesheet" href=".\css\bootstrap.min.css" />
+<link rel="stylesheet" href=".\css\consumer.css" />
 
-    <a class="navbar-brand " href="index.html">
-      <img
-        class="d-inline-block align-top img-fluid"
-        src="./media/images/icons/logo.svg"
-        alt=""
-        width="50"
-      />
-      <span class="text-theme font-monospace fs-4 ps-2">Serve-D2D</span>
-    </a> 
 
-    <button
-      class="navbar-toggler collapsed"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-   <span class="navbar-toggler-icon"></span>
-    </button>
-    <div
-      class="navbar-collapse border-lg-0 mt-4 mt-lg-0 collapse"
-      id="navbarSupportedContent"
-    > 
-    <div class="d-inline-block">
-      <button class="btn btn-success" onclick="navigateTo('wallet')" >Wallet</button>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5 opacity-85 shadow-transition"
+  data-navbar-on-scroll="data-navbar-on-scroll" style="
+      background-image: none;
+      transition: none 0s ease 0s;
+      background-color: rgb(249, 250, 253);
+    "
+  >
+    <div class="container">
+      <a class="navbar-brand" href="index.html"
+        ><img
+          class="d-inline-block align-top img-fluid"
+          src="./media/images/icons/logo.svg"
+          alt=""
+          width="50"
+        /><span class="text-theme font-monospace fs-4 ps-2">Serve-D2D</span></a
+      ><button
+        class="navbar-toggler collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="navbar-collapse border-lg-0 mt-4 mt-lg-0 collapse"
+        id="navbarSupportedContent"
+      >
+      </div>
+      <div class="d-flex">
+        <button
+          class="btn btn-lg btn-warning"
+          onclick="logout()"
+        >
+          Logout
+        </button>
+      </div>
     </div>
-  
-  </div>
-  <div class="d-flex">
-    <button
-      class="btn btn-lg btn-warning"
-      style="float: right"
-      onclick="logout()"
-    >
-      Logout
-    </button>
+    
+  </nav>
+
+<div class="container">
+  <div class="text-center rounded" id="welcome_head">
+
   </div>
 
-</nav>
+  <div class="box">
+    <div class="container ">
+      <div class="row ">
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="getCat" class="btn btn-success h-100 w-100" onclick="navigateTo('createService')">
+            <div class="title">
+              <h4>Provide Service</h4>
+            </div>
+
+            <div class="text">
+              <span>Create a new Service</span>
+            </div>
+          </button>
+        </div>
+
+        
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="orderButton" class="btn btn-success h-100 w-100" onclick="navigateTo('providerOrders')">
+            <div class="title">
+              <h4>Service Requests</h4>
+            </div>
+
+            <div class="text">
+              <span>Track orders</span>
+            </div>
+          </button>
+        </div>
+
+        
+
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="addressesButton" class="btn btn-success h-100 w-100" onclick="navigateTo('wallet')" >
+            <div class="title">
+              <h4>Wallet</h4>
+            </div>
+
+            <div class="text">
+
+              <span>Check Your Balance</span>
+            </div>
+          </button>
+          <!-- navigateTo('consumer'); -->
+        </div>
 
 
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="chatButton" class="btn btn-success h-100 w-100" onclick="navigateTo('listChat')">
+            <div class="title">
+              <h4>Chats</h4>
+            </div>
 
-<div >
-  <div>
-    <span style="color:rgb(223, 229, 236); font-size:20px ;"  id="name"> Hi </span>
+            <div class="text">
+              <span>Chats</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div style="justify-content: center">
+          <div class="spinner-grow text-success" style="width: 3rem; height: 3rem" role="status" id="loading"></div>
+        </div>
+
+        <div id="resultArea" class="row"></div>
+        <br />
+        <section class="m-5">
+          <div class="container-lg">
+            <div class="row flex-center">
+              <div class="d-flex justify-content-center">
+              </div>
+              <div class="col-12 col-lg-12">
+                <div
+                  class="bg-holder"
+                  style="
+                    background-image: url(./media/images/door.png);
+                    background-position: top left;
+                    background-size: 120px 83px;
+                  "
+                ></div>
+                <!--/.bg-holder-->
+                <h6
+                  id="server_msg"
+                  class="fs-2 fs-lg-5 fw-bold lh-sm text-center"
+                ></h6>
+              </div>
+              <div class="row mt-5" id="categories"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
-  
-  <h3 style="color:rgb(223, 229, 236);">Here are your orders</h3> 
 </div>
-
-<div class="message" >
-  <br>
-  <p align="right">Want to connect to customer? <button class="btn btn-success" onclick="navigateTo('listChat')" >Message</button></p>
-</div>
-<p align="right">
-  
-</p>
-
-<div class="card">
-  <div class="card-body">
-    <h3>Live orders</h3>
-    <div id="liveOrders"></div>
-  </div>
-</div>
-<div class="card">
-  <div class="card-body">
-    <h3>Current orders</h3>
-    <div id="currentOrders"></div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-body">
-    <h3>Completed orders</h3>
-    <div id="completedOrders"></div>
-  </div>
-</div>
-<script src="./scripts/providerDashboard.js"></script>
-<!-- Script is relative to index.html -->
