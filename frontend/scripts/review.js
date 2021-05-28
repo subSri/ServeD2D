@@ -1,6 +1,9 @@
 var baseUrl = "http://localhost:8080/";
 
-var url = baseUrl+"api/reviews/1";
+var url = baseUrl+"api/reviews/";
+var par=new URLSearchParams(window.location.search);
+serviceid=par.get("serviceid");
+url=url+serviceid;
 
 $(document).ready(function(){
     token=localStorage.getItem('token');
@@ -44,7 +47,7 @@ $(document).ready(function(){
                     );
             }
             
-            $("#loading").hide();
+            $("#rloading").hide();
         },
         error: function(){
             $("#review_list").append(
@@ -52,7 +55,7 @@ $(document).ready(function(){
                     <h3>Error retrieving reviews.</h3>
                 </div>`
                 );
-            $("#loading").hide();
+            $("#rloading").hide();
         }
     });
     

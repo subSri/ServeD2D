@@ -25,7 +25,7 @@ $(document).ready(function(){
                                 </div>
                                 <div>
                                     <button id="message_btn" class="btn btn-success" style="margin-left:30px;width:100px">Message</button>
-                                    <button id="book_btn" class="btn btn-success" style="margin-left:30px;width:100px">Book</button>
+                                    <button id="book_btn" class="btn btn-success" onclick="openService('${data.services[service]['serviceId']}')" style="margin-left:30px;width:100px">Book</button>
                                 </div>
                             </h5>
                         </div>
@@ -34,3 +34,8 @@ $(document).ready(function(){
             });
         });
 });
+
+function openService(id){
+    location.href= location.href.split("#")[0].split("?")[0]+"?serviceid="+id+"#service" 
+    loadView();
+};

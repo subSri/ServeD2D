@@ -194,7 +194,7 @@ public class OrderController {
 
 		try {
 			Integer userId = auth(authHeader);
-			Order mod_order = new Order();
+			
 
 			Integer status = order.getOrderStatus();
 
@@ -207,7 +207,7 @@ public class OrderController {
 			} else if (status == OrderStatus.CONFIRMED.ordinal()) {
 				orderDao.acceptOrder(orderId);
 			}
-			mod_order = orderDao.returnSpecificOrder(orderId, userId);
+			Map<String, String> mod_order = orderDao.returnSpecificOrder(orderId, userId);
 			Map<String, Object> map = getResponse(userId);
 			map.put("order_id", orderId);
 			map.put("order_details", mod_order);
