@@ -1,9 +1,9 @@
-<script src="../scripts/jquery-3.6.0.js"></script>
-<script src="../scripts/consumer.js"></script>
+<script src="./scripts/jquery-3.6.0.js"></script>
+<script src="./scripts/consumer.js"></script>
 
 <!-- Path is relative to index.html i.e. not ../script but ./script   Consider loginpage for interface-->
-<link rel="stylesheet" href="..\css\bootstrap.min.css" />
-<link rel="stylesheet" href="..\css\consumer.css" />
+<link rel="stylesheet" href=".\css\bootstrap.min.css" />
+<link rel="stylesheet" href=".\css\consumer.css" />
 
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5 opacity-85 shadow-transition"
@@ -11,20 +11,6 @@
       background-image: none;
       transition: none 0s ease 0s;
       background-color: rgb(249, 250, 253);
-<<<<<<< HEAD
-    ">
-  <div class="container">
-    <a class="navbar-brand" href="index.html"><img class="d-inline-block align-top img-fluid"
-        src="./media/images/icons/logo.svg" alt="" width="50" /><span
-        class="text-theme font-monospace fs-4 ps-2">Serve-D2D</span></a><button class="navbar-toggler collapsed"
-      type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse border-lg-0 mt-4 mt-lg-0 collapse" id="navbarSupportedContent">
-      <div>
-        <button class="btn btn-lg btn-dark bg-gradient order-0" onclick="logout()">
-=======
     "
   >
     <div class="container">
@@ -59,29 +45,23 @@
           class="btn btn-lg btn-primary"
           onclick="logout()"
         >
->>>>>>> 659c0bf1ebc63c578f6b01b0a4854c8c1e67377b
           Logout
         </button>
       </div>
     </div>
-<<<<<<< HEAD
-  </div>
-</nav>
-=======
     
   </nav>
->>>>>>> 659c0bf1ebc63c578f6b01b0a4854c8c1e67377b
 
 <div class="container">
-  <div class="welcomeHeading text-center rounded">
-    <h1>Welcome, John</h1>
+  <div class="text-center rounded" id="welcome_head">
+
   </div>
 
   <div class="box">
-    <div class="container">
-      <div class="row">
-        <div class="myhover col-lg-2 col-md-4 col-sm-4 col-xs-12">
-          <div id="orderButton" class="box-part text-center rounded">
+    <div class="container ">
+      <div class="row ">
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="orderButton" class="btn btn-success h-100 w-100" onclick="navigateTo('listOrder')">
             <div class="title">
               <h4>Your Orders</h4>
             </div>
@@ -89,11 +69,11 @@
             <div class="text">
               <span>Track Orders</span>
             </div>
-          </div>
+          </button>
         </div>
 
-        <div class="myhover col-lg-2 col-md-4 col-sm-4 col-xs-12">
-          <div id="loginDetailsButton" class="box-part text-center rounded">
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="loginDetailsButton" class="btn btn-success h-100 w-100">
             <div class="title">
               <h4>Login & Security</h4>
             </div>
@@ -101,11 +81,11 @@
             <div class="text">
               <span>Edit login details</span>
             </div>
-          </div>
+          </button>
         </div>
 
-        <div class="myhover col-lg-2 col-md-4 col-sm-4 col-xs-12">
-          <div id="addressesButton" class="box-part text-center rounded">
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="addressesButton" class="btn btn-success h-100 w-100">
             <div class="title">
               <h4>Your Addresses</h4>
             </div>
@@ -114,13 +94,13 @@
 
               <span>Maintain your addresses</span>
             </div>
-          </div>
+          </button>
           <!-- navigateTo('consumer'); -->
         </div>
 
 
-        <div class="myhover col-lg-2 col-md-4 col-sm-4 col-xs-12">
-          <div id="chatButton" class="box-part text-center rounded">
+        <div class="myhover col-lg-3 col-md-4 col-sm-4 col-xs-12 my-2">
+          <button id="chatButton" class="btn btn-success h-100 w-100" onclick="navigateTo('listChat')">
             <div class="title">
               <h4>Chats</h4>
             </div>
