@@ -191,13 +191,12 @@ Amount : 10
 
 POST /api/wallet/balance/payment
 host: localhost:8080
-Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaHlsbHlzIFNvd3RlcmUiLCJpZCI6MSwiZXhwIjoxNjIxNDk3MjE3LCJpYXQiOjE2MjE0MzcyMTd9.dC-HKtntF2kVLgr2Nxtbz9OZbgisplZ9Bx8nkz0RM04
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQcmVldGFtIiwiaWQiOjIzLCJleHAiOjE2MjIyOTA2MzEsImlhdCI6MTYyMjIzMDYzMX0.mIYJD37iE7HBLWG6vfL6WC9exCnH3rR0bgddiJ1AmoI
 Content-Type: application/json
 
 {
-    "orderId" : 1,
-    "userId" : 1,
-    "serviceId" : 2,
+    "orderId" : 29,
+    "serviceId" : 24,
 	"adressId" : 1,
 	"timestamp" : "2013-01-20",
 	"orderStatus" : 3,
